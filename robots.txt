@@ -1,7 +1,7 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
 
 User-agent: Googlebot-Image
 Allow: /
 
-Sitemap: https://yourwebsite.com/sitemap.xml
+Sitemap: https://pmeena9098610-dot.github.io/HinduGodsGallery/sitemap.xml
