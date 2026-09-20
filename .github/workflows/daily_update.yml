@@ -1,4 +1,4 @@
-﻿name: 🕉️ Daily Auto AI Image Generator & Deploy
+name: 🕉️ Daily Auto AI Image Generator & Deploy
 
 on:
   schedule:
@@ -22,6 +22,10 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: 📦 Install Python Dependencies
+        run: |
+          pip install pillow requests
+
       - name: 🎨 Run Auto AI Image Generator & SEO Updater
         run: |
           python auto_update.py
@@ -29,6 +33,6 @@ jobs:
       - name: 🚀 Commit and Push Updated Gallery
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "🕉️ Auto-generated 10 new cute divine god images for today [skip ci]"
+          commit_message: "🕉️ Auto-generated daily divine god images and updated gallery [skip ci]"
           branch: main
-          file_pattern: "images_data.json sitemap.xml images/* auto_update.log"
+          file_pattern: "images_data.json sitemap.xml images/* auto_update.log *.html sw.js"

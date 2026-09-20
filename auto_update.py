@@ -24,7 +24,7 @@ IMAGES_DIR = os.path.join(SCRIPT_DIR, "images")
 DATA_FILE = os.path.join(SCRIPT_DIR, "images_data.json")
 SITEMAP_FILE = os.path.join(SCRIPT_DIR, "sitemap.xml")
 LOG_FILE = os.path.join(SCRIPT_DIR, "auto_update.log")
-WEBSITE_URL = "https://hindugodsgallery.com"  # अपनी वेबसाइट का URL यहाँ डालें
+WEBSITE_URL = "https://pmeena9098610-dot.github.io/HinduGodsGallery"
 
 os.makedirs(IMAGES_DIR, exist_ok=True)
 
@@ -289,6 +289,16 @@ def main():
     entries = generate_daily_batch(today_str, num_entries=10)
     all_data = update_database(entries, today_str)
     update_sitemap(all_data)
+
+    # Rebuild static site pages with latest assets
+    try:
+        gen_script = os.path.join(SCRIPT_DIR, "generate_site.py")
+        if os.path.exists(gen_script):
+            import subprocess
+            subprocess.run([sys.executable, gen_script], check=True)
+            logging.info("Successfully rebuilt all HTML gallery pages and sitemap!")
+    except Exception as e:
+        logging.warning(f"Notice on rebuild: {e}")
 
     total_images = sum(len(items) for items in all_data.values())
     logging.info(f"🎉 Complete! Total images in gallery database: {total_images}")
