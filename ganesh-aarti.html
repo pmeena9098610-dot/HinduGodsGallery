@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="hi" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>श्री गणेश आरती जय गणेश देवा | Shri Ganesh Aarti Lyrics in Hindi & 4K Wallpaper</title>
+    <meta name="description" content="विघ्नहर्ता भगवान श्री गणेश जी की प्रसिद्ध आरती 'जय गणेश जय गणेश देवा' हिंदी में। पूजा, गणेश चतुर्थी एवं शुभ कार्य हेतु आरती व 4K गणपति फोटो।">
+    <link rel="canonical" href="https://pmeena9098610-dot.github.io/HinduGodsGallery/ganesh-aarti.html">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #FFF8F0; color: #2B1810; margin:0; line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #B71C1C, #D84315, #FFB300); padding: 24px; text-align: center; color: #FFF; }
+        .header h1 { font-family: 'Rozha One', serif; margin:0; font-size: 2rem; color: #FFD700; }
+        .nav { background: white; padding: 10px; text-align: center; border-bottom: 2px solid #FFD700; }
+        .nav a { margin: 0 10px; color: #B71C1C; text-decoration: none; font-weight: 600; }
+        .container { max-width: 850px; margin: 20px auto; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); text-align: center; }
+        .action-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0; }
+        .btn { padding: 10px 20px; border-radius: 25px; border:none; color:white; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items:center; gap: 6px; }
+        .btn-bell { background: #FF7700; }
+        .btn-shankh { background: #B71C1C; }
+        .btn-wa { background: #25D366; }
+        .aarti-text { font-size: 1.1rem; line-height: 2.3; color: #333; }
+        .footer { background: #B71C1C; color: #FFF099; text-align: center; padding: 20px; margin-top: 40px; }
+        .footer a { color: #FFD700; text-decoration: none; margin: 0 8px; }
+        #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #B71C1C; color: #FFD700; padding: 10px 20px; border-radius: 25px; opacity: 0; transition: 0.3s; z-index: 9999; }
+        #toast.show { opacity: 1; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>🐘 श्री गणेश जी की आरती 🐘</h1>
+    <p>॥ जय गणेश जय गणेश जय गणेश देवा, माता जाकी पार्वती पिता महादेवा ॥</p>
+</div>
+<div class="nav">
+    <a href="index.html">Home</a> |
+    <a href="category-ganesha.html">गणेश वॉलपेपर 4K</a> |
+    <a href="hanuman-chalisa.html">हनुमान चालीसा</a> |
+    <a href="shiv-aarti.html">शिव आरती</a>
+</div>
+<div class="container">
+    <img src="images/lord_ganesha_1789315549643.webp" alt="Lord Ganesha 4K" style="max-width:320px; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,0.15);" width="320" height="427">
+    <div class="action-bar">
+        <button class="btn btn-bell" onclick="playTempleBell()">🔔 मंदिर घंटी बजाएं</button>
+        <button class="btn btn-shankh" onclick="playShankh()">🐚 शंख नाद करें</button>
+        <a href="https://api.whatsapp.com/send?text=🐘 श्री गणेश जी की आरती: https://pmeena9098610-dot.github.io/HinduGodsGallery/ganesh-aarti.html" target="_blank" class="btn btn-wa">📱 WhatsApp शेयर</a>
+    </div>
+    <div class="aarti-text">
+        जय गणेश, जय गणेश, जय गणेश देवा ।<br>
+        माता जाकी पार्वती, पिता महादेवा ॥ जय गणेश, जय गणेश... ॥<br><br>
+        एकदन्त, दयावन्त, चारभुजाधारी ।<br>
+        माथे पर तिलक सोहे, मूसे की सवारी ॥<br>
+        पान चढ़े, फूल चढ़े और चढ़े मेवा ।<br>
+        लड्डुअन का भोग लगे, सन्त करें सेवा ॥ जय गणेश, जय गणेश... ॥<br><br>
+        अन्धन को आँख देत, कोढ़िन को काया ।<br>
+        बांझन को पुत्र देत, निर्धन को माया ॥<br>
+        'सूर' श्याम शरण आए, सफल कीजे सेवा ।<br>
+        माता जाकी पार्वती, पिता महादेवा ॥ जय गणेश, जय गणेश... ॥
+    </div>
+</div>
+<div class="footer">
+    <p>&copy; 2026 Hindu Gods Daily Gallery | <a href="index.html">Home</a> | <a href="sitemap.xml">Sitemap</a></p>
+</div>
+<div id="toast"></div>
+
+<script>
+// Web Audio API synthesized Temple Bell & Shankh
+var audioCtx = null;
+function getAudioContext() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioCtx;
+}
+
+function playTempleBell() {
+    var ctx = getAudioContext();
+    if (ctx.state === 'suspended') ctx.resume();
+    
+    var now = ctx.currentTime;
+    var freqs = [587.33, 880, 1174.66, 1760]; // D5, A5, D6, A6 bell harmonics
+    
+    freqs.forEach(function(f, i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now);
+        
+        var vol = 0.3 / (i + 1);
+        gain.gain.setValueAtTime(vol, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.5);
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 3.5);
+    });
+    
+    showToast('🔔 ॐ नमः शिवाय! घंटी बजी 🙏');
+    createFlowerBurst();
+}
+
+function playShankh() {
+    var ctx = getAudioContext();
+    if (ctx.state === 'suspended') ctx.resume();
+    var now = ctx.currentTime;
+    
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.linearRampToValueAtTime(246.94, now + 0.5);
+    osc.frequency.linearRampToValueAtTime(261.63, now + 1.2);
+    osc.frequency.linearRampToValueAtTime(246.94, now + 2.0);
+    
+    gain.gain.setValueAtTime(0.01, now);
+    gain.gain.linearRampToValueAtTime(0.4, now + 0.4);
+    gain.gain.linearRampToValueAtTime(0.3, now + 1.8);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.6);
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 2.6);
+    
+    showToast('🐚 पावन शंख नाद! जय श्री राम 🙏');
+    createFlowerBurst();
+}
+
+function createFlowerBurst() {
+    var icons = ['🌸', '🌺', '🌼', '🪷', '✨'];
+    for (var i = 0; i < 16; i++) {
+        var f = document.createElement('div');
+        f.textContent = icons[Math.floor(Math.random() * icons.length)];
+        f.style.position = 'fixed';
+        f.style.left = (20 + Math.random() * 60) + 'vw';
+        f.style.top = (40 + Math.random() * 30) + 'vh';
+        f.style.fontSize = (20 + Math.random() * 24) + 'px';
+        f.style.pointerEvents = 'none';
+        f.style.zIndex = '99999';
+        f.style.transition = 'all 1.8s ease-out';
+        f.style.transform = 'translateY(0) scale(1)';
+        f.style.opacity = '1';
+        document.body.appendChild(f);
+        
+        (function(el) {
+            setTimeout(function() {
+                el.style.transform = 'translate(' + ((Math.random() - 0.5) * 200) + 'px, -' + (100 + Math.random() * 150) + 'px) scale(1.4)';
+                el.style.opacity = '0';
+            }, 50);
+            setTimeout(function() {
+                el.remove();
+            }, 1900);
+        })(f);
+    }
+}
+</script>
+
+<script>
+function showToast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');}, 2500); }
+</script>
+</body>
+</html>

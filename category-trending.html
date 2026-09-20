@@ -617,6 +617,9 @@
         <a href="category-cute.html">Cute Gallery</a> |
         <a href="category-trending.html">Trending Gods</a> |
         <a href="category-festival.html">Festival Special</a> |
+        <a href="hanuman-chalisa.html" style="color:#FFD700; font-weight:700;">🚩 हनुमान चालीसा</a> |
+        <a href="shiv-aarti.html" style="color:#FFD700; font-weight:700;">🔱 शिव आरती</a> |
+        <a href="ganesh-aarti.html" style="color:#FFD700; font-weight:700;">🐘 गणेश आरती</a> |
         <a href="sitemap.xml">Sitemap (XML)</a> |
         <a href="robots.txt">Robots</a>
     </p>
@@ -636,6 +639,84 @@ function copyText(text, successMsg) {
     }).catch(function() {
         showToast('कॉपी नहीं हो सका');
     });
+}
+// Web Audio API synthesized Temple Bell & Shankh
+var audioCtx = null;
+function getAudioContext() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioCtx;
+}
+
+function playTempleBell() {
+    var ctx = getAudioContext();
+    if (ctx.state === 'suspended') ctx.resume();
+    var now = ctx.currentTime;
+    var freqs = [587.33, 880, 1174.66, 1760];
+    freqs.forEach(function(f, i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now);
+        var vol = 0.3 / (i + 1);
+        gain.gain.setValueAtTime(vol, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 3.5);
+    });
+    showToast('🔔 ॐ नमः शिवाय! घंटी बजी 🙏');
+    createFlowerBurst();
+}
+
+function playShankh() {
+    var ctx = getAudioContext();
+    if (ctx.state === 'suspended') ctx.resume();
+    var now = ctx.currentTime;
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.linearRampToValueAtTime(246.94, now + 0.5);
+    osc.frequency.linearRampToValueAtTime(261.63, now + 1.2);
+    osc.frequency.linearRampToValueAtTime(246.94, now + 2.0);
+    gain.gain.setValueAtTime(0.01, now);
+    gain.gain.linearRampToValueAtTime(0.4, now + 0.4);
+    gain.gain.linearRampToValueAtTime(0.3, now + 1.8);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.6);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 2.6);
+    showToast('🐚 पावन शंख नाद! जय श्री राम 🙏');
+    createFlowerBurst();
+}
+
+function createFlowerBurst() {
+    var icons = ['🌸', '🌺', '🌼', '🪷', '✨'];
+    for (var i = 0; i < 16; i++) {
+        var f = document.createElement('div');
+        f.textContent = icons[Math.floor(Math.random() * icons.length)];
+        f.style.position = 'fixed';
+        f.style.left = (20 + Math.random() * 60) + 'vw';
+        f.style.top = (40 + Math.random() * 30) + 'vh';
+        f.style.fontSize = (20 + Math.random() * 24) + 'px';
+        f.style.pointerEvents = 'none';
+        f.style.zIndex = '99999';
+        f.style.transition = 'all 1.8s ease-out';
+        f.style.transform = 'translateY(0) scale(1)';
+        f.style.opacity = '1';
+        document.body.appendChild(f);
+        (function(el) {
+            setTimeout(function() {
+                el.style.transform = 'translate(' + ((Math.random() - 0.5) * 200) + 'px, -' + (100 + Math.random() * 150) + 'px) scale(1.4)';
+                el.style.opacity = '0';
+            }, 50);
+            setTimeout(function() { el.remove(); }, 1900);
+        })(f);
+    }
 }
 </script>
 
