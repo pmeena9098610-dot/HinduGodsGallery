@@ -8,6 +8,38 @@
     <meta name="keywords" content="hanuman chalisa hindi, shree hanuman chalisa lyrics, hanuman chalisa doha chaupai, bajrangbali photo 4k, hanuman ji status">
     <link rel="canonical" href="https://pmeena9098610-dot.github.io/HinduGodsGallery/hanuman-chalisa.html">
     <link rel="icon" type="image/png" href="favicon.png">
+    
+    <meta property="og:site_name" content="Hindu Gods Daily Gallery">
+    <meta property="og:title" content="संपूर्ण श्री हनुमान चालीसा हिंदी में | Shri Hanuman Chalisa">
+    <meta property="og:description" content="पवनपुत्र संकटमोचन हनुमान जी की कृपा प्राप्ति हेतु नित्य हनुमान चालीसा पाठ व 4K वॉलपेपर।">
+    <meta property="og:image" content="https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_hanuman_1789315589634.jpg">
+    <meta property="og:url" content="https://pmeena9098610-dot.github.io/HinduGodsGallery/hanuman-chalisa.html">
+    <meta property="og:type" content="article">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "headline": "संपूर्ण श्री हनुमान चालीसा हिंदी में अर्थ सहित",
+          "description": "गोस्वामी तुलसीदास कृत संपूर्ण श्री हनुमान चालीसा पाठ दोहा एवं चौपाई सहित।",
+          "image": "https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_hanuman_1789315589634.jpg",
+          "author": { "@type": "Person", "name": "Goswami Tulsidas" },
+          "publisher": { "@type": "Organization", "name": "Hindu Gods Daily Gallery" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pmeena9098610-dot.github.io/HinduGodsGallery/" },
+            { "@type": "ListItem", "position": 2, "name": "हनुमान जी", "item": "https://pmeena9098610-dot.github.io/HinduGodsGallery/category-hanuman.html" },
+            { "@type": "ListItem", "position": 3, "name": "हनुमान चालीसा", "item": "https://pmeena9098610-dot.github.io/HinduGodsGallery/hanuman-chalisa.html" }
+          ]
+        }
+      ]
+    }
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Poppins:wght@400;600;700&family=Rozha+One&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Poppins', sans-serif; background: #FFF8F0; color: #2B1810; margin:0; line-height: 1.8; }
@@ -110,7 +142,6 @@
 <div id="toast"></div>
 
 <script>
-// Web Audio API synthesized Temple Bell & Shankh
 var audioCtx = null;
 function getAudioContext() {
     if (!audioCtx) {
@@ -122,26 +153,21 @@ function getAudioContext() {
 function playTempleBell() {
     var ctx = getAudioContext();
     if (ctx.state === 'suspended') ctx.resume();
-    
     var now = ctx.currentTime;
-    var freqs = [587.33, 880, 1174.66, 1760]; // D5, A5, D6, A6 bell harmonics
-    
+    var freqs = [587.33, 880, 1174.66, 1760];
     freqs.forEach(function(f, i) {
         var osc = ctx.createOscillator();
         var gain = ctx.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(f, now);
-        
         var vol = 0.3 / (i + 1);
         gain.gain.setValueAtTime(vol, now);
         gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.5);
-        
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(now);
         osc.stop(now + 3.5);
     });
-    
     showToast('🔔 ॐ नमः शिवाय! घंटी बजी 🙏');
     createFlowerBurst();
 }
@@ -150,7 +176,6 @@ function playShankh() {
     var ctx = getAudioContext();
     if (ctx.state === 'suspended') ctx.resume();
     var now = ctx.currentTime;
-    
     var osc = ctx.createOscillator();
     var gain = ctx.createGain();
     osc.type = 'triangle';
@@ -158,17 +183,14 @@ function playShankh() {
     osc.frequency.linearRampToValueAtTime(246.94, now + 0.5);
     osc.frequency.linearRampToValueAtTime(261.63, now + 1.2);
     osc.frequency.linearRampToValueAtTime(246.94, now + 2.0);
-    
     gain.gain.setValueAtTime(0.01, now);
     gain.gain.linearRampToValueAtTime(0.4, now + 0.4);
     gain.gain.linearRampToValueAtTime(0.3, now + 1.8);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.6);
-    
     osc.connect(gain);
     gain.connect(ctx.destination);
     osc.start(now);
     osc.stop(now + 2.6);
-    
     showToast('🐚 पावन शंख नाद! जय श्री राम 🙏');
     createFlowerBurst();
 }
@@ -188,15 +210,12 @@ function createFlowerBurst() {
         f.style.transform = 'translateY(0) scale(1)';
         f.style.opacity = '1';
         document.body.appendChild(f);
-        
         (function(el) {
             setTimeout(function() {
                 el.style.transform = 'translate(' + ((Math.random() - 0.5) * 200) + 'px, -' + (100 + Math.random() * 150) + 'px) scale(1.4)';
                 el.style.opacity = '0';
             }, 50);
-            setTimeout(function() {
-                el.remove();
-            }, 1900);
+            setTimeout(function() { el.remove(); }, 1900);
         })(f);
     }
 }
