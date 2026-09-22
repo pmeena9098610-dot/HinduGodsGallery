@@ -74,9 +74,20 @@
     <div class="action-bar">
         <button class="btn btn-bell" onclick="playTempleBell()">🔔 मंदिर घंटी बजाएं</button>
         <button class="btn btn-shankh" onclick="playShankh()">🐚 शंख नाद करें</button>
+        <button class="btn" style="background:#FF9933; color:#B71C1C;" onclick="copyFullAarti()">📋 आरती कॉपी करें</button>
         <a href="https://api.whatsapp.com/send?text=🐘 श्री गणेश जी की आरती: https://pmeena9098610-dot.github.io/HinduGodsGallery/ganesh-aarti.html" target="_blank" class="btn btn-wa">📱 WhatsApp शेयर</a>
     </div>
-    <div class="aarti-text">
+
+    <!-- FONT CONTROLS & AUTO-SCROLL FOR ELDERS -->
+    <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin: 14px 0; flex-wrap:wrap;">
+        <span style="font-size:0.85rem; color:#666; font-weight:600;">अक्षर आकार (Font Size):</span>
+        <button onclick="changeFontSize(-1)" style="padding:4px 12px; border-radius:15px; border:1px solid #B71C1C; background:#FFF; cursor:pointer; font-weight:700;">A-</button>
+        <button onclick="changeFontSize(0)" style="padding:4px 12px; border-radius:15px; border:1px solid #B71C1C; background:#FFF; cursor:pointer; font-weight:700;">A</button>
+        <button onclick="changeFontSize(1)" style="padding:4px 12px; border-radius:15px; border:1px solid #B71C1C; background:#FFF; cursor:pointer; font-weight:700;">A+</button>
+        <button id="autoScrollBtn" onclick="toggleAutoScroll()" style="padding:4px 14px; border-radius:15px; border:1px solid #FF7700; background:#FFF3E0; color:#B71C1C; cursor:pointer; font-weight:700; margin-left:8px;">▶️ ऑटो-स्क्रॉल (हौले-हौले पढ़ें)</button>
+    </div>
+
+    <div class="aarti-text" id="aartiTextSection">
         जय गणेश, जय गणेश, जय गणेश देवा ।<br>
         माता जाकी पार्वती, पिता महादेवा ॥ जय गणेश, जय गणेश... ॥<br><br>
         एकदन्त, दयावन्त, चारभुजाधारी ।<br>
@@ -89,8 +100,18 @@
         माता जाकी पार्वती, पिता महादेवा ॥ जय गणेश, जय गणेश... ॥
     </div>
 </div>
-<div class="footer">
-    <p>&copy; 2026 Hindu Gods Daily Gallery | <a href="index.html">Home</a> | <a href="sitemap.xml">Sitemap</a></p>
+<div class="footer" style="padding:30px 16px 80px; text-align:center;">
+    <p style="font-size:1.1rem; color:#FFD700; font-family:'Rozha One', serif;">ॐ दैनिक हिन्दू भगवान दर्शन | सम्पूर्ण देव दर्शन एवं आरती</p>
+    <p style="margin:10px 0;">
+        <a href="index.html">Home</a> | 
+        <a href="category-cute.html">क्यूट गैलरी</a> | 
+        <a href="category-trending.html">ट्रेंडिंग 4K</a> | 
+        <a href="category-ganesha.html">गणेश जी 4K</a> | 
+        <a href="hanuman-chalisa.html">हनुमान चालीसा</a> | 
+        <a href="shiv-aarti.html">शिव आरती</a> | 
+        <a href="sitemap.xml">Sitemap (XML)</a>
+    </p>
+    <p style="font-size:0.8rem; opacity:0.8;">&copy; 2026 Hindu Gods Daily Gallery</p>
 </div>
 <div id="toast"></div>
 
@@ -175,7 +196,49 @@ function createFlowerBurst() {
 </script>
 
 <script>
-function showToast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');}, 2500); }
+function showToast(m){ var t=document.getElementById('toast'); if(t){t.textContent=m; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');}, 2500);} }
+
+var currentFontSize = 1.1;
+function changeFontSize(delta) {
+    if (delta === 0) currentFontSize = 1.1;
+    else currentFontSize = Math.max(0.85, Math.min(1.5, currentFontSize + delta * 0.15));
+    var el = document.getElementById('aartiTextSection');
+    if (el) el.style.fontSize = currentFontSize + 'rem';
+    showToast('अक्षर आकार: ' + Math.round(currentFontSize * 100 / 1.1) + '%');
+}
+
+var scrollTimer = null;
+function toggleAutoScroll() {
+    var btn = document.getElementById('autoScrollBtn');
+    if (scrollTimer) {
+        clearInterval(scrollTimer);
+        scrollTimer = null;
+        if (btn) btn.innerHTML = '▶️ ऑटो-स्क्रॉल (हौले-हौले पढ़ें)';
+        showToast('स्क्रॉल रोका गया');
+    } else {
+        scrollTimer = setInterval(function() {
+            window.scrollBy(0, 1.5);
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+                clearInterval(scrollTimer);
+                scrollTimer = null;
+                if (btn) btn.innerHTML = '▶️ ऑटो-स्क्रॉल';
+            }
+        }, 30);
+        if (btn) btn.innerHTML = '⏸️ रोकें (Auto-Scroll Paused)';
+        showToast('हौले-हौले ऑटो-स्क्रॉल आरंभ हुआ');
+    }
+}
+
+function copyFullAarti() {
+    var sec = document.getElementById('aartiTextSection');
+    if (sec) {
+        navigator.clipboard.writeText(sec.innerText).then(function() {
+            showToast('🐘 संपूर्ण गणेश आरती कॉपी हो गई! गणपति बाप्पा मोरया 🙏');
+        }).catch(function() {
+            showToast('कॉपी नहीं हो सकी');
+        });
+    }
+}
 </script>
 
 <div class="mobile-bottom-nav" style="display:flex; position:fixed; bottom:0; left:0; right:0; background:rgba(74, 0, 14, 0.98); border-top:2px solid #FFD700; padding:8px 12px; justify-content:space-around; align-items:center; z-index:100000; box-shadow:0 -4px 15px rgba(0,0,0,0.25);">

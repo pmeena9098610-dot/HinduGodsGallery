@@ -183,8 +183,19 @@ def generate_daily_batch(target_date_str=None, num_entries=10):
         local_rel_url = f"images/{target_date_str}/{local_filename}"
 
         # Try to download locally for offline/lightning-fast speed
-        download_success = download_image_file(ai_url, local_abs_path, timeout=12)
+        download_success = download_image_file(ai_url, local_abs_path, timeout=15)
         final_image_url = local_rel_url if download_success else ai_url
+
+        # Convert to WebP for modern performance & Core Web Vitals
+        if download_success:
+            try:
+                from PIL import Image
+                webp_path = os.path.splitext(local_abs_path)[0] + ".webp"
+                with Image.open(local_abs_path) as im:
+                    im.save(webp_path, "WEBP", quality=85)
+                logging.info(f"✨ Converted to WebP: {os.path.basename(webp_path)}")
+            except Exception as we:
+                logging.warning(f"WebP conversion notice: {we}")
 
         entry = {
             "id": entry_id,
@@ -288,17 +299,26 @@ def main():
     # Generate 10 new divine cute AI images
     entries = generate_daily_batch(today_str, num_entries=10)
     all_data = update_database(entries, today_str)
-    update_sitemap(all_data)
 
-    # Rebuild static site pages with latest assets
+    # Rebuild all static site pages, rich sitemap.xml & feed.xml
     try:
         gen_script = os.path.join(SCRIPT_DIR, "generate_site.py")
         if os.path.exists(gen_script):
             import subprocess
             subprocess.run([sys.executable, gen_script], check=True)
-            logging.info("Successfully rebuilt all HTML gallery pages and sitemap!")
+            logging.info("✅ Successfully rebuilt all HTML gallery pages, rich sitemap, and feed!")
     except Exception as e:
         logging.warning(f"Notice on rebuild: {e}")
+
+    # Ping search engines (Google lastmod, IndexNow API for Bing/Yandex)
+    try:
+        ping_script = os.path.join(SCRIPT_DIR, "ping_search_engines.py")
+        if os.path.exists(ping_script):
+            import subprocess
+            subprocess.run([sys.executable, ping_script], check=True)
+            logging.info("✅ Successfully pinged search engines via IndexNow!")
+    except Exception as pe:
+        logging.warning(f"Notice on pinging search engines: {pe}")
 
     total_images = sum(len(items) for items in all_data.values())
     logging.info(f"🎉 Complete! Total images in gallery database: {total_images}")

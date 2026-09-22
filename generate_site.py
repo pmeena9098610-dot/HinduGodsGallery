@@ -1,13 +1,74 @@
 import os, sys, json
+from datetime import datetime, date
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
-from generator_data import ITEMS, CATEGORIES, BASE_URL
+from generator_data import ITEMS as BASE_ITEMS, CATEGORIES, BASE_URL
 
 DIRS = [SCRIPT_DIR]
 for extra in [r"C:\Users\Bappa official\OneDrive\Desktop\HinduGodsGallery", r"C:\Users\Bappa official\HinduGodsGallery", r"c:\Users\Bappa official\.gemini\antigravity\playground\primordial-chromosphere"]:
     if os.path.exists(extra) and extra not in DIRS:
         DIRS.append(extra)
+
+def load_fused_items():
+    """Fuses curated items with any newly generated items from images_data.json"""
+    import copy
+    all_items = copy.deepcopy(BASE_ITEMS)
+    existing_ids = {it["id"] for it in all_items}
+
+    json_path = os.path.join(SCRIPT_DIR, "images_data.json")
+    if os.path.exists(json_path):
+        try:
+            with open(json_path, "r", encoding="utf-8-sig") as fp:
+                data = json.load(fp)
+            
+            entries = []
+            if isinstance(data, dict):
+                for d_key, d_list in data.items():
+                    if isinstance(d_list, list):
+                        entries.extend(d_list)
+            elif isinstance(data, list):
+                entries.extend(data)
+
+            for entry in entries:
+                eid = entry.get("id")
+                if eid and eid not in existing_ids:
+                    img_raw = entry.get("image") or entry.get("image_url", "")
+                    if img_raw.endswith(".jpg") or img_raw.endswith(".webp"):
+                        img_base = os.path.splitext(img_raw)[0]
+                    else:
+                        img_base = img_raw
+
+                    title = entry.get("title") or entry.get("name_en", "Daily Hindu God 4K Wallpaper")
+                    titleHi = entry.get("titleHi") or entry.get("name_hi", "दैनिक हिन्दू भगवान 4K फोटो")
+                    cat = (entry.get("category") or "cute").split(",")[0].lower()
+                    
+                    new_item = {
+                        "id": eid,
+                        "slug": f"photo-{eid}.html",
+                        "title": title,
+                        "titleHi": titleHi,
+                        "category": cat,
+                        "categoryName": cat.capitalize() + " Gallery",
+                        "categorySlug": f"category-{cat}.html",
+                        "god": cat,
+                        "img": img_base,
+                        "badge": "Daily Divine 4K",
+                        "shortDesc": entry.get("description_hi") or f"{titleHi} का मनमोहक और पावन 4K स्वरूप। दैनिक दर्शन एवं वॉलपेपर।",
+                        "mantra": "ॐ नमो भगवते वासुदेवाय नमः ।\nसर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥",
+                        "mantraMeaning": "सभी सुखी हों, सभी निरोगी रहें, सभी का कल्याण हो।",
+                        "article": f"{titleHi} के पावन दर्शन मात्र से जीवन में सुख, शांति और सकारात्मक ऊर्जा का संचार होता है। इस 4K वॉलपेपर को अपने मोबाइल स्क्रीन पर लगाएं या व्हाट्सएप स्टेटस पर शेयर करें।",
+                        "tags": entry.get("tags") or [title.lower(), "hindu god 4k", "whatsapp status god photo"]
+                    }
+                    all_items.append(new_item)
+                    existing_ids.add(eid)
+        except Exception as e:
+            print(f"Notice during images_data.json merge: {e}")
+
+    return all_items
+
+ITEMS = load_fused_items()
+print(f"Loaded {len(ITEMS)} total deity items (fused data pipeline active).")
 
 COMMON_HEAD = """
     <meta charset="UTF-8">
@@ -16,6 +77,8 @@ COMMON_HEAD = """
     <link rel="apple-touch-icon" href="favicon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#780016">
+    <meta name="google-site-verification" content="VN51R5hg-j81ctWmVxSAeWN3DiGhaUM8K-OzI_uXFCY" />
+    <meta name="google-site-verification" content="AecstdStcn1JHOXM253jV6q4g3rar75-4VXU9b7Fyjw" />
     <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,6 +117,7 @@ COMMON_STYLE = """
         text-align: center;
         color: var(--gold);
         box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        position: relative;
     }
     .site-header h1 {
         font-family: 'Rozha One', serif;
@@ -67,6 +131,28 @@ COMMON_STYLE = """
         font-size: clamp(0.85rem, 2.5vw, 1.15rem);
         margin-top: 4px;
     }
+    .header-audio-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 215, 0, 0.2);
+        border: 1px solid var(--gold);
+        color: var(--gold-light);
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.3s;
+    }
+    .header-audio-btn:hover, .header-audio-btn.playing {
+        background: var(--gold);
+        color: var(--maroon-dark);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        transform: scale(1.05);
+    }
+
     /* NAV BAR */
     .top-nav {
         background: white;
@@ -112,6 +198,7 @@ COMMON_STYLE = """
     }
     .breadcrumb a { color: var(--maroon); text-decoration: none; font-weight: 500; }
     .breadcrumb a:hover { text-decoration: underline; color: var(--saffron); }
+
     /* CARD GRID */
     .gallery-grid {
         display: grid;
@@ -264,17 +351,17 @@ COMMON_STYLE = """
         color: var(--maroon-dark);
         font-size: 1.05rem;
         line-height: 1.6;
-        white-space: pre-line;
     }
     .mantra-meaning {
-        font-size: 0.82rem;
+        font-size: 0.85rem;
         color: #555;
         margin-top: 8px;
-        font-style: italic;
+        border-top: 1px dotted #e0c890;
+        padding-top: 6px;
     }
     .btn-copy-mantra {
-        background: var(--maroon);
-        color: var(--gold);
+        background: var(--saffron);
+        color: white;
         border: none;
         padding: 4px 10px;
         border-radius: 6px;
@@ -282,83 +369,285 @@ COMMON_STYLE = """
         cursor: pointer;
         font-weight: 600;
     }
-    .btn-copy-mantra:hover { background: var(--saffron); color: white; }
-    
+    .btn-copy-mantra:hover { background: var(--maroon); }
     .button-group {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
         margin: 20px 0;
     }
     .btn-big {
-        padding: 12px 22px;
-        border-radius: 25px;
-        text-decoration: none;
+        padding: 12px 20px;
+        border-radius: 10px;
         font-weight: 600;
-        font-size: 0.92rem;
+        font-size: 0.95rem;
+        text-decoration: none;
         color: white;
-        border: none;
-        cursor: pointer;
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        cursor: pointer;
+        border: none;
         transition: all 0.25s;
     }
-    .btn-big:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+    .btn-big:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
     .btn-big-wa { background: var(--whatsapp); }
-    .btn-big-dl { background: linear-gradient(135deg, var(--saffron), var(--maroon)); }
+    .btn-big-dl { background: linear-gradient(135deg, var(--maroon), var(--maroon-dark)); }
     .btn-big-pin { background: var(--pinterest); }
-    
     .article-box {
         margin-top: 20px;
-        padding-top: 18px;
-        border-top: 1px solid #eee;
-        color: #444;
+        line-height: 1.7;
         font-size: 0.92rem;
-        line-height: 1.8;
+        color: #444;
+        border-top: 1px solid #eee;
+        padding-top: 16px;
     }
     .tag-cloud {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 16px;
+        gap: 6px;
+        margin-top: 12px;
     }
     .tag-item {
-        padding: 4px 12px;
-        border-radius: 15px;
-        background: #fdf5ec;
-        border: 1px solid rgba(255,119,0,0.3);
-        color: var(--maroon);
+        background: #f0ebe4;
+        color: #666;
+        padding: 4px 10px;
+        border-radius: 12px;
         font-size: 0.75rem;
         text-decoration: none;
     }
     .tag-item:hover { background: var(--saffron); color: white; }
-    
-    /* TOAST NOTIFICATION */
+
+    /* PANCHANG & MUHURAT WIDGET */
+    .panchang-card {
+        background: linear-gradient(135deg, #FFFDF8, #FFF5E6);
+        border: 2px solid var(--gold);
+        border-radius: 18px;
+        padding: 20px 24px;
+        margin: 24px auto;
+        box-shadow: 0 8px 25px rgba(255,119,0,0.12);
+        max-width: 1000px;
+    }
+    .panchang-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px dashed rgba(255,119,0,0.3);
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .panchang-header h3 {
+        font-family: 'Rozha One', serif;
+        color: var(--maroon);
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .panchang-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
+    }
+    .panchang-item {
+        background: white;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border-left: 4px solid var(--saffron);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .panchang-item span.label {
+        font-size: 0.76rem;
+        color: #777;
+        display: block;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .panchang-item strong {
+        font-size: 0.95rem;
+        color: var(--maroon-dark);
+        display: block;
+        margin-top: 2px;
+    }
+    .suvichar-box {
+        margin-top: 14px;
+        background: #FFF9E6;
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        color: var(--maroon);
+        border: 1px solid var(--gold);
+        text-align: center;
+    }
+
+    /* DIGITAL 108 JAP MALA */
+    .mala-card {
+        background: linear-gradient(135deg, #4A000E, #780016);
+        border: 2px solid var(--gold);
+        border-radius: 20px;
+        padding: 24px;
+        color: var(--gold-light);
+        margin: 28px auto;
+        max-width: 900px;
+        box-shadow: 0 10px 30px rgba(74, 0, 14, 0.35);
+        text-align: center;
+    }
+    .mala-card h3 {
+        font-family: 'Rozha One', serif;
+        color: var(--gold);
+        font-size: 1.4rem;
+        margin-bottom: 6px;
+    }
+    .mala-mantra-select {
+        background: rgba(255,255,255,0.15);
+        border: 1px solid var(--gold);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.88rem;
+        margin: 10px 0 16px;
+        outline: none;
+        cursor: pointer;
+    }
+    .mala-mantra-select option { background: #4A000E; color: white; }
+    .mala-bead-btn {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #FFD700 0%, #FF7700 60%, #B71C1C 100%);
+        border: 4px solid var(--gold-light);
+        color: #4A000E;
+        font-family: 'Rozha One', serif;
+        font-size: 1.8rem;
+        cursor: pointer;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 25px rgba(255,215,0,0.5);
+        transition: transform 0.15s, box-shadow 0.15s;
+        user-select: none;
+    }
+    .mala-bead-btn:active { transform: scale(0.92); box-shadow: 0 0 40px rgba(255,215,0,0.8); }
+    .mala-progress-bar {
+        width: 100%;
+        height: 12px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 16px 0 8px;
+    }
+    .mala-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--saffron));
+        width: 0%;
+        transition: width 0.2s;
+    }
+    .mala-stats {
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.85rem;
+        margin-top: 10px;
+    }
+
+    /* SACRED HYMNS FEATURE CARDS */
+    .hymns-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin: 20px 0 35px;
+    }
+    .hymn-card {
+        background: white;
+        border-radius: 14px;
+        padding: 18px 20px;
+        border-left: 5px solid var(--saffron);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.25s;
+    }
+    .hymn-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(255,119,0,0.25);
+        border-left-color: var(--maroon);
+    }
+    .hymn-icon {
+        font-size: 2.2rem;
+        background: #FFF3E0;
+        width: 54px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    .hymn-info h4 { font-family: 'Rozha One', serif; color: var(--maroon); font-size: 1.05rem; }
+    .hymn-info p { font-size: 0.8rem; color: #666; margin-top: 2px; }
+
+    /* SANATAN FOOTER DIRECTORY */
+    .footer-directory {
+        max-width: 1200px;
+        margin: 28px auto 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+        text-align: left;
+        border-top: 1px solid rgba(255,215,0,0.3);
+        padding-top: 24px;
+    }
+    .footer-dir-col h4 {
+        color: var(--gold);
+        font-family: 'Rozha One', serif;
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+        border-bottom: 1px dashed rgba(255,215,0,0.3);
+        padding-bottom: 6px;
+    }
+    .footer-dir-col ul { list-style: none; }
+    .footer-dir-col ul li { margin-bottom: 6px; }
+    .footer-dir-col ul li a {
+        color: var(--gold-light);
+        text-decoration: none;
+        font-size: 0.82rem;
+        transition: color 0.2s;
+        display: inline-block;
+    }
+    .footer-dir-col ul li a:hover { color: #FFF; text-decoration: underline; }
+
+    /* TOAST */
     #toast {
         position: fixed;
-        bottom: 24px;
+        bottom: 70px;
         left: 50%;
         transform: translateX(-50%);
-        background: rgba(74, 0, 14, 0.95);
+        background: var(--maroon-dark);
         color: var(--gold);
         padding: 12px 24px;
         border-radius: 30px;
-        font-weight: 600;
+        border: 1px solid var(--gold);
         font-size: 0.9rem;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        font-weight: 600;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s;
-        z-index: 10000;
+        z-index: 999999;
+        text-align: center;
+        max-width: 90%;
     }
-    #toast.show { opacity: 1; }
-    
-    
-    /* MOBILE FLOATING BOTTOM NAV */
+    #toast.show { opacity: 1; pointer-events: auto; }
+
+    /* MOBILE BOTTOM NAV */
     .mobile-bottom-nav { display: none; }
     @media (max-width: 768px) {
-        body { padding-bottom: 70px; }
         .mobile-bottom-nav {
             display: flex;
             position: fixed;
@@ -432,11 +721,11 @@ COMMON_STYLE = """
         background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
         color: var(--gold-light);
         text-align: center;
-        padding: 30px 16px;
+        padding: 36px 16px 80px;
         font-size: 0.85rem;
-        margin-top: 40px;
+        margin-top: 50px;
     }
-    .site-footer a { color: var(--gold); text-decoration: none; margin: 0 8px; }
+    .site-footer a { color: var(--gold); text-decoration: none; margin: 0 4px; }
     .site-footer a:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
@@ -451,20 +740,77 @@ COMMON_STYLE = """
 
 COMMON_FOOTER = """
 <footer class="site-footer">
-    <p><strong>ॐ दैनिक हिन्दू भगवान दर्शन | Daily Hindu Gods 4K Wallpaper & WhatsApp Status</strong></p>
-    <p style="margin: 8px 0;">All divine images generated with AI for devotional & spiritual purposes.</p>
-    <p>
+    <p style="font-size:1.15rem; font-family:'Rozha One', serif; color:var(--gold);">
+        ॐ दैनिक हिन्दू भगवान दर्शन | Daily Hindu Gods 4K Wallpaper & WhatsApp Status
+    </p>
+    <p style="margin: 8px 0; color:var(--gold-light); font-size:0.9rem;">
+        समस्त देवी-देवताओं के नित्य पावन 4K स्वरूप, आरती, चालीसा और दैनिक शुभ पंचांग।
+    </p>
+
+    <!-- SANATAN DIRECTORY / ALL PAGES INTERNAL LINKING (100% CRAWLABLE BY GOOGLEBOT) -->
+    <div class="footer-directory">
+        <div class="footer-dir-col">
+            <h4>🕉️ देव दर्शन श्रेणियां</h4>
+            <ul>
+                <li><a href="category-cute.html">🧸 क्यूट बाल स्वरूप दर्शन (Cute 4K)</a></li>
+                <li><a href="category-trending.html">🔥 ट्रेंडिंग 4K वॉलपेपर (Trending)</a></li>
+                <li><a href="category-festival.html">🎉 त्यौहार व पर्व स्पेशल (Festivals)</a></li>
+                <li><a href="category-shiva.html">🔱 महादेव शिव 4K फोटो (Lord Shiva)</a></li>
+                <li><a href="category-krishna.html">🦚 श्री कृष्ण व बाल गोपाल (Lord Krishna)</a></li>
+                <li><a href="category-ganesha.html">🐘 विघ्नहर्ता श्री गणेश (Lord Ganesha)</a></li>
+                <li><a href="category-hanuman.html">🚩 संकटमोचन हनुमान जी (Lord Hanuman)</a></li>
+                <li><a href="category-durga.html">🦁 माँ दुर्गा शेरावाली (Maa Durga)</a></li>
+                <li><a href="category-lakshmi.html">🪷 माँ लक्ष्मी धनदायिनी (Maa Lakshmi)</a></li>
+                <li><a href="category-ram.html">🏹 मर्यादा पुरुषोत्तम श्री राम (Lord Ram)</a></li>
+                <li><a href="category-saraswati.html">🪕 माँ सरस्वती विद्यादायिनी (Maa Saraswati)</a></li>
+            </ul>
+        </div>
+        <div class="footer-dir-col">
+            <h4>📖 पावन चालीसा व आरतियां</h4>
+            <ul>
+                <li><a href="hanuman-chalisa.html">🚩 श्री हनुमान चालीसा (सम्पूर्ण पाठ व अर्थ)</a></li>
+                <li><a href="shiv-aarti.html">🔱 ॐ जय शिव ओंकारा (महादेव पावन आरती)</a></li>
+                <li><a href="ganesh-aarti.html">🐘 जय गणेश जय गणेश देवा (गणपति आरती)</a></li>
+            </ul>
+            <h4 style="margin-top:16px;">📿 दैनिक भक्ति टूल्स</h4>
+            <ul>
+                <li><a href="index.html#panchangSection">📅 दैनिक हिन्दू पंचांग व शुभ मुहूर्त</a></li>
+                <li><a href="index.html#japMalaSection">📿 डिजिटल 108 जाप माला (Chant Counter)</a></li>
+                <li><a href="javascript:void(0)" onclick="playTempleBell()">🔔 मंदिर घंटी बजाएं (Temple Bell)</a></li>
+                <li><a href="javascript:void(0)" onclick="playShankh()">🐚 पावन शंख नाद (Conch Shell)</a></li>
+                <li><a href="javascript:void(0)" onclick="toggleAmbientMusic()">🎵 ॐ दिव्य संगीत (Ambient Drone)</a></li>
+            </ul>
+        </div>
+        <div class="footer-dir-col">
+            <h4>🌸 लोकप्रिय 4K देव दर्शन</h4>
+            <ul>
+                <li><a href="photo-cute-radha-krishna.html">राधा कृष्ण क्यूट लव 4K फोटो</a></li>
+                <li><a href="photo-cute-bal-shiva.html">क्यूट बाल शिव जी डमरू 4K</a></li>
+                <li><a href="photo-cute-bal-hanuman.html">क्यूट बाल हनुमान जी संजीवनी</a></li>
+                <li><a href="photo-cute-krishna-makhan.html">माखन चोर बाल गोपाल क्यूट फोटो</a></li>
+                <li><a href="photo-cute-baby-lakshmi.html">क्यूट बेबी लक्ष्मी कमल पुष्प</a></li>
+                <li><a href="photo-cute-baby-saraswati.html">क्यूट बेबी सरस्वती वीणा 4K</a></li>
+                <li><a href="photo-cute-ganesha-reading.html">क्यूट बाल गणेश मोदक दर्शन</a></li>
+                <li><a href="photo-shiva-kailash.html">महादेव शिव कैलाश पर्वत 4K</a></li>
+                <li><a href="photo-ram-ayodhya.html">श्री राम अयोध्या धाम 4K वॉलपेपर</a></li>
+                <li><a href="photo-durga-lion.html">माँ दुर्गा शेरावाली सिंह वाहिनी</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <p style="margin-top: 20px;">
         <a href="index.html">Home</a> |
         <a href="category-cute.html">Cute Gallery</a> |
         <a href="category-trending.html">Trending Gods</a> |
-        <a href="category-festival.html">Festival Special</a> |
-        <a href="hanuman-chalisa.html" style="color:#FFD700; font-weight:700;">🚩 हनुमान चालीसा</a> |
-        <a href="shiv-aarti.html" style="color:#FFD700; font-weight:700;">🔱 शिव आरती</a> |
-        <a href="ganesh-aarti.html" style="color:#FFD700; font-weight:700;">🐘 गणेश आरती</a> |
+        <a href="category-festival.html">Festivals</a> |
+        <a href="hanuman-chalisa.html">हनुमान चालीसा</a> |
+        <a href="shiv-aarti.html">शिव आरती</a> |
+        <a href="ganesh-aarti.html">गणेश आरती</a> |
         <a href="sitemap.xml">Sitemap (XML)</a> |
-        <a href="robots.txt">Robots</a>
+        <a href="feed.xml">RSS Feed</a> |
+        <a href="robots.txt">Robots.txt</a>
     </p>
-    <p style="margin-top: 10px; font-size: 0.78rem; opacity: 0.8;">&copy; 2026 Hindu Gods Daily Gallery. Free 4K Download & Share.</p>
+    <p style="margin-top: 10px; font-size: 0.78rem; opacity: 0.8;">&copy; 2026 Hindu Gods Daily Gallery. Free 4K Download & Devotional WhatsApp Status.</p>
 </footer>
 
 <div class="mobile-bottom-nav">
@@ -491,8 +837,9 @@ COMMON_FOOTER = """
 </div>
 
 <div id="toast"></div>
-<script>
 
+<script>
+// Persistent Diya Lighting
 function toggleDiya() {
     var flame = document.getElementById('diyaFlame');
     if (flame) {
@@ -519,10 +866,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
 function showToast(msg) {
     var t = document.getElementById('toast');
+    if (!t) return;
     t.textContent = msg;
     t.classList.add('show');
     setTimeout(function(){ t.classList.remove('show'); }, 2500);
 }
+
 function copyText(text, successMsg) {
     navigator.clipboard.writeText(text).then(function() {
         showToast(successMsg || 'कॉपी हो गया! 🙏');
@@ -530,7 +879,8 @@ function copyText(text, successMsg) {
         showToast('कॉपी नहीं हो सका');
     });
 }
-// Web Audio API synthesized Temple Bell & Shankh
+
+// Web Audio API Synthesizers: Bell, Shankh & Meditation Drone
 var audioCtx = null;
 function getAudioContext() {
     if (!audioCtx) {
@@ -557,7 +907,7 @@ function playTempleBell() {
         osc.start(now);
         osc.stop(now + 3.5);
     });
-    showToast('🔔 ॐ नमः शिवाय! घंटी बजी 🙏');
+    showToast('🔔 ॐ नमः शिवाय! पावन घंटी बजी 🙏');
     createFlowerBurst();
 }
 
@@ -584,13 +934,78 @@ function playShankh() {
     createFlowerBurst();
 }
 
+// Pure Web Audio Meditative Tanpura / Om Drone Synthesizer (100% Offline & Instant)
+var ambientNodes = null;
+var isAmbientPlaying = false;
+function toggleAmbientMusic() {
+    var ctx = getAudioContext();
+    if (ctx.state === 'suspended') ctx.resume();
+    var btn = document.getElementById('ambientMusicBtn');
+
+    if (isAmbientPlaying) {
+        if (ambientNodes) {
+            ambientNodes.gain.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 1.0);
+            setTimeout(function() {
+                if (ambientNodes) {
+                    ambientNodes.oscillators.forEach(function(o){ try { o.stop(); }catch(e){} });
+                    ambientNodes = null;
+                }
+            }, 1100);
+        }
+        isAmbientPlaying = false;
+        if (btn) {
+            btn.classList.remove('playing');
+            btn.innerHTML = '🎵 ॐ दिव्य संगीत चलाएं';
+        }
+        showToast('संगीत शांत किया गया');
+    } else {
+        var masterGain = ctx.createGain();
+        masterGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 2.0);
+        masterGain.connect(ctx.destination);
+
+        // Indian Tanpura Harmonics (C#3: 138.59Hz, G#3: 207.65Hz, C#4: 277.18Hz)
+        var chord = [69.3, 138.59, 207.65, 277.18, 415.30];
+        var oscs = [];
+        chord.forEach(function(freq, idx) {
+            var osc = ctx.createOscillator();
+            var oscGain = ctx.createGain();
+            osc.type = (idx % 2 === 0) ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+            
+            // Subtle slow tremolo/shimmer
+            var lfo = ctx.createOscillator();
+            lfo.frequency.setValueAtTime(0.2 + idx * 0.05, ctx.currentTime);
+            var lfoGain = ctx.createGain();
+            lfoGain.gain.setValueAtTime(0.04, ctx.currentTime);
+            lfo.connect(oscGain.gain);
+            lfo.start();
+
+            oscGain.gain.setValueAtTime(0.12 / (idx + 1), ctx.currentTime);
+            osc.connect(oscGain);
+            oscGain.connect(masterGain);
+            osc.start();
+            oscs.push(osc);
+            oscs.push(lfo);
+        });
+
+        ambientNodes = { masterGain: masterGain, gain: masterGain, oscillators: oscs };
+        isAmbientPlaying = true;
+        if (btn) {
+            btn.classList.add('playing');
+            btn.innerHTML = '🔊 ॐ संगीत बज रहा है (रोकें)';
+        }
+        showToast('🎵 ॐ पावन धुन आरंभ हुई! ध्यानमग्न रहें 🙏');
+    }
+}
+
 function createFlowerBurst() {
     var icons = ['🌸', '🌺', '🌼', '🪷', '✨'];
-    for (var i = 0; i < 16; i++) {
+    for (var i = 0; i < 18; i++) {
         var f = document.createElement('div');
         f.textContent = icons[Math.floor(Math.random() * icons.length)];
         f.style.position = 'fixed';
-        f.style.left = (20 + Math.random() * 60) + 'vw';
+        f.style.left = (15 + Math.random() * 70) + 'vw';
         f.style.top = (40 + Math.random() * 30) + 'vh';
         f.style.fontSize = (20 + Math.random() * 24) + 'px';
         f.style.pointerEvents = 'none';
@@ -601,18 +1016,58 @@ function createFlowerBurst() {
         document.body.appendChild(f);
         (function(el) {
             setTimeout(function() {
-                el.style.transform = 'translate(' + ((Math.random() - 0.5) * 200) + 'px, -' + (100 + Math.random() * 150) + 'px) scale(1.4)';
+                el.style.transform = 'translate(' + ((Math.random() - 0.5) * 220) + 'px, -' + (100 + Math.random() * 160) + 'px) scale(1.4)';
                 el.style.opacity = '0';
             }, 50);
             setTimeout(function() { el.remove(); }, 1900);
         })(f);
     }
 }
+
+// 108 Jap Mala Counter logic
+var malaCount = 0;
+var totalMalas = 0;
+function countMalaBead() {
+    malaCount++;
+    if (malaCount > 108) {
+        malaCount = 1;
+        totalMalas++;
+        document.getElementById('malaCompletedCount').textContent = totalMalas;
+    }
+    document.getElementById('malaBeadText').textContent = malaCount + ' / 108';
+    var pct = (malaCount / 108) * 100;
+    document.getElementById('malaProgressFill').style.width = pct + '%';
+
+    if (malaCount === 108) {
+        playTempleBell();
+        createFlowerBurst();
+        showToast('🎉 108 जाप पूर्ण! प्रभु की कृपा आप पर सदा रहे 🙏');
+    }
+}
+function resetMala() {
+    malaCount = 0;
+    document.getElementById('malaBeadText').textContent = '0 / 108';
+    document.getElementById('malaProgressFill').style.width = '0%';
+    showToast('जाप माला रीसेट की गई');
+}
+
+// 1-Click WhatsApp Shubh Prabhat Greeting
+function shareCustomWhatsApp(godTitle, url, mantra) {
+    var d = new Date();
+    var dateStr = d.toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    var msg = "🌸 *शुभ प्रभात! आज का पावन दर्शन* 🌸\\n\\n" +
+              "🕉️ *" + godTitle + "*\\n" +
+              "📅 " + dateStr + "\\n" +
+              "✨ *पावन मंत्र:* " + (mantra || 'ॐ नमो भगवते वासुदेवाय नमः') + "\\n\\n" +
+              "📲 4K दर्शन और फ्री डाउनलोड करें:\\n" + url + "\\n\\n" +
+              "🚩 *आपका दिन मंगलमय और सुखमय हो!* 🙏";
+    var waUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msg);
+    window.open(waUrl, '_blank');
+}
 </script>
 """
 
 def generate_photo_page(item, all_items):
-    # Related items (same god or category, excluding current)
     related = [x for x in all_items if x["id"] != item["id"] and (x["god"] == item["god"] or x["category"] == item["category"])][:4]
     if len(related) < 4:
         extra = [x for x in all_items if x["id"] != item["id"] and x not in related][:4 - len(related)]
@@ -639,7 +1094,7 @@ def generate_photo_page(item, all_items):
                 <p>{r['shortDesc']}</p>
                 <div class="card-actions">
                     <a href="{r['slug']}" class="btn-action btn-view">View 4K</a>
-                    <a href="https://api.whatsapp.com/send?text={r['titleHi']} {BASE_URL}{r['slug']}" target="_blank" class="btn-action btn-wa">WA</a>
+                    <button onclick="shareCustomWhatsApp('{r['titleHi']}', '{BASE_URL}{r['slug']}', '{r.get('mantra','')[:50]}...')" class="btn-action btn-wa">WA</button>
                 </div>
             </div>
         </div>
@@ -706,6 +1161,7 @@ def generate_photo_page(item, all_items):
 <header class="site-header">
     <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
     <p>Daily Cute Hindu Gods 4K Wallpaper & WhatsApp Status</p>
+    <button id="ambientMusicBtn" class="header-audio-btn" onclick="toggleAmbientMusic()">🎵 ॐ दिव्य संगीत चलाएं</button>
 </header>
 
 <nav class="top-nav">
@@ -717,6 +1173,7 @@ def generate_photo_page(item, all_items):
     <a href="category-krishna.html" class="nav-link">🦚 Krishna</a>
     <a href="category-ganesha.html" class="nav-link">🐘 Ganesha</a>
     <a href="category-hanuman.html" class="nav-link">🚩 Hanuman</a>
+    <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 हनुमान चालीसा</a>
 </nav>
 
 <div class="container">
@@ -749,27 +1206,30 @@ def generate_photo_page(item, all_items):
             <div class="mantra-box">
                 <div class="mantra-heading">
                     <span>🌸 पावन मंत्र एवं श्लोक</span>
-                    <button class="btn-copy-mantra" onclick="copyText(`{item['mantra']}`, 'मंत्र कॉपी हो गया! जय श्री राधे कृष्णा 🙏')">📋 Copy Mantra</button>
+                    <button class="btn-copy-mantra" onclick="copyText(`{item['mantra']}`, 'मंत्र कॉपी हो गया! 🙏')">📋 Copy Mantra</button>
                 </div>
                 <div class="mantra-text">{item['mantra']}</div>
                 <div class="mantra-meaning"><strong>अर्थ:</strong> {item['mantraMeaning']}</div>
             </div>
 
             <div class="button-group">
-                <a href="https://api.whatsapp.com/send?text={item['titleHi']} - 4K Wallpaper Download: {page_url}" target="_blank" class="btn-big btn-big-wa">
-                    <span>📱 WhatsApp Status Share</span>
-                </a>
+                <button onclick="shareCustomWhatsApp('{item['titleHi']}', '{page_url}', `{item['mantra']}`)" class="btn-big btn-big-wa">
+                    <span>📱 1-Click WhatsApp Status</span>
+                </button>
                 <a href="{img_jpg}" download="{item['id']}_4k.jpg" class="btn-big btn-big-dl">
                     <span>📥 Download 4K Image</span>
                 </a>
                 <button onclick="playTempleBell()" class="btn-big" style="background:#FF7700;">
-                    <span>🔔 मंदिर घंटी बजाएं</span>
+                    <span>🔔 मंदिर घंटी</span>
                 </button>
-                <button onclick="createFlowerBurst(); showToast('🌸 पुष्प अर्पित किए! जय श्री राम 🙏');" class="btn-big" style="background:#E91E63;">
+                <button onclick="playShankh()" class="btn-big" style="background:#4A000E;">
+                    <span>🐚 शंख नाद</span>
+                </button>
+                <button onclick="createFlowerBurst(); showToast('🌸 पुष्प अर्पित किए! 🙏');" class="btn-big" style="background:#E91E63;">
                     <span>🌸 पुष्प अर्पित करें</span>
                 </button>
                 <a href="https://pinterest.com/pin/create/button/?url={page_url}&media={img_abs_url}&description={item['titleHi']}" target="_blank" class="btn-big btn-big-pin">
-                    <span>📌 Pin on Pinterest</span>
+                    <span>📌 Pinterest</span>
                 </a>
             </div>
 
@@ -806,11 +1266,11 @@ def generate_category_page(cat, all_items):
     if cat["id"] == "cute":
         cat_items = [x for x in all_items if x["category"] == "cute" or "cute" in x["tags"]]
     elif cat["id"] == "trending":
-        cat_items = [x for x in all_items if x["badge"] == "Trending 4K" or "trending" in x["category"]]
+        cat_items = [x for x in all_items if x.get("badge") == "Trending 4K" or "trending" in x["category"] or x.get("trending")]
     elif cat["id"] == "festival":
         cat_items = [x for x in all_items if x["category"] == "festival"]
     else:
-        cat_items = [x for x in all_items if x["god"] == cat["id"]]
+        cat_items = [x for x in all_items if x.get("god") == cat["id"] or x.get("category") == cat["id"]]
     
     cards_html = ""
     for it in cat_items:
@@ -828,7 +1288,7 @@ def generate_category_page(cat, all_items):
                 <p>{it['shortDesc']}</p>
                 <div class="card-actions">
                     <a href="{it['slug']}" class="btn-action btn-view">View 4K</a>
-                    <a href="https://api.whatsapp.com/send?text={it['titleHi']} {BASE_URL}{it['slug']}" target="_blank" class="btn-action btn-wa">WA Status</a>
+                    <button onclick="shareCustomWhatsApp('{it['titleHi']}', '{BASE_URL}{it['slug']}', '{it.get('mantra','')[:50]}...')" class="btn-action btn-wa">WA</button>
                     <a href="{it['img']}.jpg" download class="btn-action btn-dl">Download</a>
                 </div>
             </div>
@@ -865,6 +1325,7 @@ def generate_category_page(cat, all_items):
 <header class="site-header">
     <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
     <p>{cat['nameHi']} - {cat['name']}</p>
+    <button id="ambientMusicBtn" class="header-audio-btn" onclick="toggleAmbientMusic()">🎵 ॐ दिव्य संगीत चलाएं</button>
 </header>
 
 <nav class="top-nav">
@@ -876,6 +1337,7 @@ def generate_category_page(cat, all_items):
     <a href="category-krishna.html" class="nav-link { 'active' if cat['id'] == 'krishna' else '' }">🦚 Krishna</a>
     <a href="category-ganesha.html" class="nav-link { 'active' if cat['id'] == 'ganesha' else '' }">🐘 Ganesha</a>
     <a href="category-hanuman.html" class="nav-link { 'active' if cat['id'] == 'hanuman' else '' }">🚩 Hanuman</a>
+    <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 चालीसा</a>
 </nav>
 
 <div class="container">
@@ -901,9 +1363,8 @@ def generate_category_page(cat, all_items):
     return html
 
 def generate_index_page(all_items):
-    # Group items into sections
     cute_items = [x for x in all_items if x["category"] == "cute"]
-    trending_items = [x for x in all_items if x["badge"] == "Trending 4K"]
+    trending_items = [x for x in all_items if x.get("badge") == "Trending 4K" or x.get("trending")]
     festival_items = [x for x in all_items if x["category"] == "festival"]
 
     def build_grid(items_list):
@@ -923,7 +1384,7 @@ def generate_index_page(all_items):
                     <p>{it['shortDesc']}</p>
                     <div class="card-actions">
                         <a href="{it['slug']}" class="btn-action btn-view">View 4K</a>
-                        <a href="https://api.whatsapp.com/send?text={it['titleHi']} {BASE_URL}{it['slug']}" target="_blank" class="btn-action btn-wa">WA Status</a>
+                        <button onclick="shareCustomWhatsApp('{it['titleHi']}', '{BASE_URL}{it['slug']}', '{it.get('mantra','')[:50]}...')" class="btn-action btn-wa">WA</button>
                         <a href="{it['img']}.jpg" download class="btn-action btn-dl">Download</a>
                     </div>
                 </div>
@@ -931,11 +1392,26 @@ def generate_index_page(all_items):
             """
         return h
 
+    # Daily Hindu Panchang & Vaar calculations
+    today = date.today()
+    weekdays_hi = ["सोमवार (Monday)", "मंगलवार (Tuesday)", "बुधवार (Wednesday)", "गुरुवार (Thursday)", "शुक्रवार (Friday)", "शनिवार (Saturday)", "रविवार (Sunday)"]
+    weekday_idx = today.weekday()
+    day_name_hi = weekdays_hi[weekday_idx]
+    
+    deity_by_day = [
+        {"god": "महादेव शिव (Lord Shiva)", "mantra": "ॐ नमः शिवाय", "link": "category-shiva.html"},
+        {"god": "श्री हनुमान जी (Bajrangbali)", "mantra": "ॐ हनुमते नमः", "link": "category-hanuman.html"},
+        {"god": "विघ्नहर्ता श्री गणेश (Ganesha)", "mantra": "ॐ गं गणपतये नमः", "link": "category-ganesha.html"},
+        {"god": "भगवान विष्णु व श्री कृष्ण", "mantra": "ॐ नमो भगवते वासुदेवाय", "link": "category-krishna.html"},
+        {"god": "माँ लक्ष्मी व माँ दुर्गा", "mantra": "ॐ श्रीं ह्रीं क्लीं नमः", "link": "category-lakshmi.html"},
+        {"god": "शनि देव व हनुमान जी", "mantra": "ॐ शं शनैश्चराय नमः", "link": "category-hanuman.html"},
+        {"god": "सूर्य देव व प्रभु श्री राम", "mantra": "ॐ सूर्याय नमः / जय श्री राम", "link": "category-ram.html"}
+    ]
+    today_deity = deity_by_day[weekday_idx]
+
     html = f"""<!DOCTYPE html>
 <html lang="hi" prefix="og: https://ogp.me/ns#">
 <head>
-    <meta name="google-site-verification" content="VN51R5hg-j81ctWmVxSAeWN3DiGhaUM8K-OzI_uXFCY" />
-    <meta name="google-site-verification" content="AecstdStcn1JHOXM253jV6q4g3rar75-4VXU9b7Fyjw" />
     {COMMON_HEAD}
     <title>ॐ दैनिक हिन्दू भगवान दर्शन | Daily Cute Hindu Gods 4K Wallpaper & WhatsApp Status</title>
     <meta name="description" content="दैनिक 21+ नए मनमोहक, क्यूट और 4K हिन्दू भगवानों के AI फोटो। बाल गोपाल, बाल गणेश, महादेव शिव, राम लला, हनुमान जी, माँ लक्ष्मी और माँ दुर्गा के सर्वश्रेष्ठ व्हाट्सएप स्टेटस और वॉलपेपर फ्री डाउनलोड।">
@@ -1050,6 +1526,7 @@ def generate_index_page(all_items):
 <header class="site-header">
     <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
     <p>Daily Cute Hindu Gods 4K Wallpaper & WhatsApp Status</p>
+    <button id="ambientMusicBtn" class="header-audio-btn" onclick="toggleAmbientMusic()">🎵 ॐ दिव्य संगीत चलाएं</button>
 </header>
 
 <nav class="top-nav">
@@ -1065,13 +1542,17 @@ def generate_index_page(all_items):
     <a href="category-lakshmi.html" class="nav-link">🪷 Lakshmi</a>
     <a href="category-ram.html" class="nav-link">🏹 Ram</a>
     <a href="category-saraswati.html" class="nav-link">🪕 Saraswati</a>
+    <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 चालीसा</a>
 </nav>
 
 <div class="container">
+
+    <!-- SEARCH BAR -->
     <div class="search-container">
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 भगवान खोजें: Cute Bal Gopal, Mahadev 4K, Navratri, Hanuman..." onkeyup="filterCards()">
     </div>
 
+    <!-- QUICK CATEGORY PILLS -->
     <div class="category-pills">
         <a href="category-cute.html" class="cat-pill">🧸 Cute Gallery ({len(cute_items)})</a>
         <a href="category-trending.html" class="cat-pill">🔥 Trending 4K ({len(trending_items)})</a>
@@ -1084,6 +1565,92 @@ def generate_index_page(all_items):
         <a href="category-lakshmi.html" class="cat-pill">🪷 मां लक्ष्मी</a>
         <a href="category-ram.html" class="cat-pill">🏹 प्रभु श्री राम</a>
         <a href="category-saraswati.html" class="cat-pill">🪕 मां सरस्वती</a>
+    </div>
+
+    <!-- DAILY PANCHANG & SHUBH MUHURAT WIDGET -->
+    <div class="panchang-card" id="panchangSection">
+        <div class="panchang-header">
+            <h3>📅 दैनिक हिन्दू पंचांग एवं शुभ मुहूर्त</h3>
+            <button onclick="shareCustomWhatsApp('आज का दैनिक पंचांग दर्शन', '{BASE_URL}', 'आज के आराध्य: {today_deity['god']}')" class="btn-action btn-wa" style="padding:6px 14px; border-radius:20px;">
+                📲 पंचांग व्हाट्सएप पर भेजें
+            </button>
+        </div>
+        <div class="panchang-grid">
+            <div class="panchang-item">
+                <span class="label">आज का दिन (Day)</span>
+                <strong>{day_name_hi}</strong>
+            </div>
+            <div class="panchang-item">
+                <span class="label">आज के आराध्य देव</span>
+                <strong><a href="{today_deity['link']}" style="color:var(--maroon); text-decoration:none;">{today_deity['god']}</a></strong>
+            </div>
+            <div class="panchang-item">
+                <span class="label">आज का पावन मंत्र</span>
+                <strong>{today_deity['mantra']}</strong>
+            </div>
+            <div class="panchang-item">
+                <span class="label">अभिजित मुहूर्त (शुभ समय)</span>
+                <strong style="color:#2E7D32;">11:48 AM - 12:38 PM (अत्यंत शुभ)</strong>
+            </div>
+        </div>
+        <div class="suvichar-box">
+            🌸 <strong>आज का सुविचार:</strong> "ईश्वर पर अटूट विश्वास और शुद्ध कर्म ही मनुष्य के समस्त संकटों को दूर करते हैं। प्रभु स्मरण से मन को परम शांति प्राप्त होती है।"
+        </div>
+    </div>
+
+    <!-- DIGITAL 108 JAP MALA COUNTER -->
+    <div class="mala-card" id="japMalaSection">
+        <h3>📿 डिजिटल 108 जाप माला (Chant Counter)</h3>
+        <p style="font-size:0.88rem; opacity:0.9;">आराध्य देव का नाम जपें और दैनिक 108 मणियों की माला पूर्ण करें</p>
+        <select class="mala-mantra-select" id="malaMantraSelect">
+            <option>ॐ नमः शिवाय (Lord Shiva)</option>
+            <option>हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे</option>
+            <option>ॐ गं गणपतये नमः (Lord Ganesha)</option>
+            <option>जय श्री राम (Lord Ram)</option>
+            <option>ॐ हनुमते नमः (Lord Hanuman)</option>
+            <option>ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं (गायत्री मंत्र)</option>
+        </select>
+        <div>
+            <button class="mala-bead-btn" onclick="countMalaBead()">
+                <span style="font-size:0.85rem; opacity:0.8;">जाप</span>
+                <span id="malaBeadText">0 / 108</span>
+            </button>
+        </div>
+        <div class="mala-progress-bar">
+            <div id="malaProgressFill" class="mala-progress-fill"></div>
+        </div>
+        <div class="mala-stats">
+            <span>माला पूर्ण: <strong id="malaCompletedCount">0</strong></span>
+            <button onclick="resetMala()" style="background:none; border:1px solid var(--gold); color:var(--gold); padding:2px 10px; border-radius:12px; cursor:pointer; font-size:0.75rem;">रीसेट करें</button>
+        </div>
+    </div>
+
+    <!-- SACRED HYMNS & AARTIS -->
+    <div class="section-header">
+        <h2>📖 संपूर्ण पाठ, चालीसा एवं पावन आरतियां</h2>
+    </div>
+    <div class="hymns-grid">
+        <a href="hanuman-chalisa.html" class="hymn-card">
+            <div class="hymn-icon">🚩</div>
+            <div class="hymn-info">
+                <h4>श्री हनुमान चालीसा</h4>
+                <p>दोहा, चौपाई, अर्थ सहित संपूर्ण पाठ पढ़ें</p>
+            </div>
+        </a>
+        <a href="shiv-aarti.html" class="hymn-card">
+            <div class="hymn-icon">🔱</div>
+            <div class="hymn-info">
+                <h4>ॐ जय शिव ओंकारा</h4>
+                <p>महादेव की संपूर्ण आरती एवं नित्य पाठ</p>
+            </div>
+        </a>
+        <a href="ganesh-aarti.html" class="hymn-card">
+            <div class="hymn-icon">🐘</div>
+            <div class="hymn-info">
+                <h4>जय गणेश जय गणेश देवा</h4>
+                <p>विघ्नहर्ता गणपति बप्पा की मंगलकारी आरती</p>
+            </div>
+        </a>
     </div>
 
     <!-- FESTIVAL SPECIAL SECTION -->
@@ -1146,10 +1713,9 @@ if ('serviceWorker' in navigator) {{
 </html>"""
     return html
 
-
 def generate_rss_feed(all_items):
-    from datetime import datetime
-    now_str = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT")
+    from datetime import timezone
+    now_str = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
     xml = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
@@ -1175,27 +1741,43 @@ def generate_rss_feed(all_items):
     return '\n'.join(xml)
 
 def generate_sitemap(all_items, all_cats):
+    today_iso = date.today().isoformat()
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
         '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
-        '  <!-- Homepage -->',
+        '  <!-- Homepage with Top Image Extensions for Instant Google Discovery -->',
         '  <url>',
         f'    <loc>{BASE_URL}</loc>',
-        '    <lastmod>2026-09-19</lastmod>',
+        f'    <lastmod>{today_iso}</lastmod>',
         '    <changefreq>daily</changefreq>',
-        '    <priority>1.0</priority>',
-        '  </url>'
+        '    <priority>1.0</priority>'
     ]
 
-    # Category pages
+    # Add top 25 images right to the homepage URL so Googlebot Image indexes them on first crawl!
+    for it in all_items[:25]:
+        xml_lines.append('    <image:image>')
+        xml_lines.append(f'      <image:loc>{BASE_URL}{it["img"]}.jpg</image:loc>')
+        xml_lines.append(f'      <image:title>{it["titleHi"]} - {it["title"]}</image:title>')
+        xml_lines.append(f'      <image:caption>{it["shortDesc"]}</image:caption>')
+        xml_lines.append('    </image:image>')
+    xml_lines.append('  </url>')
+
+    # Category pages with their respective images
     xml_lines.append('  <!-- Category Pages -->')
     for cat in all_cats:
+        c_items = [x for x in all_items if x.get("god") == cat["id"] or x.get("category") == cat["id"]]
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{cat["slug"]}</loc>')
-        xml_lines.append('    <lastmod>2026-09-19</lastmod>')
+        xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
         xml_lines.append('    <changefreq>daily</changefreq>')
         xml_lines.append('    <priority>0.9</priority>')
+        for it in c_items[:10]:
+            xml_lines.append('    <image:image>')
+            xml_lines.append(f'      <image:loc>{BASE_URL}{it["img"]}.jpg</image:loc>')
+            xml_lines.append(f'      <image:title>{it["titleHi"]} - {it["title"]}</image:title>')
+            xml_lines.append(f'      <image:caption>{it["shortDesc"]}</image:caption>')
+            xml_lines.append('    </image:image>')
         xml_lines.append('  </url>')
 
     # Individual photo pages with Google Image extensions
@@ -1203,7 +1785,7 @@ def generate_sitemap(all_items, all_cats):
     for it in all_items:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{it["slug"]}</loc>')
-        xml_lines.append('    <lastmod>2026-09-19</lastmod>')
+        xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
         xml_lines.append('    <changefreq>daily</changefreq>')
         xml_lines.append('    <priority>0.8</priority>')
         xml_lines.append('    <image:image>')
@@ -1218,7 +1800,7 @@ def generate_sitemap(all_items, all_cats):
     for sp in ['hanuman-chalisa.html', 'shiv-aarti.html', 'ganesh-aarti.html']:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{sp}</loc>')
-        xml_lines.append('    <lastmod>2026-09-20</lastmod>')
+        xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
         xml_lines.append('    <changefreq>weekly</changefreq>')
         xml_lines.append('    <priority>0.9</priority>')
         xml_lines.append('  </url>')
@@ -1244,16 +1826,16 @@ for cat in CATEGORIES:
 
 # 3. Generate Index Page
 generated_files["index.html"] = generate_index_page(ITEMS)
-print("Generated index.html")
+print("Generated index.html with Panchang & 108 Jap Mala widgets!")
 
-# 4. Generate Sitemap
+# 4. Generate Sitemap & RSS
 sitemap_content = generate_sitemap(ITEMS, CATEGORIES)
 generated_files["sitemap.xml"] = sitemap_content
 generated_files["feed.xml"] = generate_rss_feed(ITEMS)
 print("Generated feed.xml for Google Discover!")
-print("Generated sitemap.xml with 33 URLs!")
+print(f"Generated sitemap.xml with dynamic lastmod & enriched image tags!")
 
-# 5. Write all files to all 3 directories
+# 5. Write all files to all target directories
 for d in DIRS:
     os.makedirs(d, exist_ok=True)
     for fname, data in generated_files.items():

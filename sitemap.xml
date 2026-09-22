@@ -1,84 +1,349 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <!-- Homepage -->
+  <!-- Homepage with Top Image Extensions for Instant Google Discovery -->
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_radha_krishna.jpg</image:loc>
+      <image:title>राधा कृष्ण क्यूट लव 4K फोटो - Cute Radha Krishna Love 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Radha and baby Krishna holding hands smiling in magical Vrindavan garden with blooming flowers, butterflies, and divine golden light.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_shiva.jpg</image:loc>
+      <image:title>क्यूट बाल शिव जी डमरू 4K फोटो - Cute Baby Shiva with Damru 4K Wallpaper</image:title>
+      <image:caption>Ultra cute baby Lord Shiva playing golden damru on tiger skin with tiny Nandi calf, set against snowy Himalayan peaks in divine golden aura.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_hanuman.jpg</image:loc>
+      <image:title>क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो - Cute Baby Hanuman Flying 4K Wallpaper</image:title>
+      <image:caption>Super cute baby Hanuman flying through sunset sky with flowing red cape and golden gada, surrounded by heart-shaped glowing clouds.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_krishna_makhan.jpg</image:loc>
+      <image:title>माखन चोर बाल गोपाल क्यूट 4K फोटो - Cute Krishna Stealing Butter 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Krishna Bal Gopal stealing freshly churned makhan from hanging clay pot with his gopa friends in Vrindavan kitchen.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_baby_lakshmi.jpg</image:loc>
+      <image:title>क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो - Cute Baby Goddess Lakshmi 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Goddess Lakshmi sitting on blooming pink lotus flower showering gold coins and gems, accompanied by cute owl.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_ganesha_reading.jpg</image:loc>
+      <image:title>क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो - Cute Bal Ganesha Reading Book 4K Wallpaper</image:title>
+      <image:caption>Baby Ganesha wearing spectacles reading glowing divine scripture with modak in hand and his little mouse reading alongside.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_baby_saraswati.jpg</image:loc>
+      <image:title>क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो - Cute Baby Saraswati with Veena 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Goddess Saraswati seated on white swan playing golden veena beside glowing lotus pond with floating sacred books.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_shiva_1789315505870.jpg</image:loc>
+      <image:title>भगवान शिव कैलाश ध्यान 4K महाकाल वॉलपेपर - Lord Shiva Kailash Meditation 4K Ultra HD Wallpaper</image:title>
+      <image:caption>Majestic Lord Shiva Mahadev in deep meditation on snow-covered Mount Kailash with holy Ganga flowing from matted hair, trishul, and damru.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_krishna_1789315536423.jpg</image:loc>
+      <image:title>भगवान श्री कृष्ण बांसुरी वृंदावन 4K वॉलपेपर - Lord Krishna Playing Flute in Vrindavan 4K Wallpaper</image:title>
+      <image:caption>Divine Lord Krishna playing enchanting bansuri flute in sacred Vrindavan forest alongside dancing peacocks and serene Yamuna river.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_ganesha_1789315549643.jpg</image:loc>
+      <image:title>गणपति बप्पा स्वर्ण सिंहासन 4K वॉलपेपर - Lord Ganesha Golden Throne 4K Wallpaper</image:title>
+      <image:caption>Magnificent Lord Ganesha sitting on golden lotus throne with divine cosmic aura, holding sweet modak with faithful mouse at feet.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/goddess_durga_1789315573017.jpg</image:loc>
+      <image:title>मां दुर्गा शेरावाली सिंह वाहिनी 4K फोटो - Goddess Durga Riding Lion 4K Wallpaper</image:title>
+      <image:caption>Fierce yet motherly Goddess Durga riding mighty golden lion, holding eight cosmic weapons with glowing divine power and red silk saree.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_hanuman_1789315589634.jpg</image:loc>
+      <image:title>हनुमान जी संजीवनी पर्वत 4K वॉलपेपर - Lord Hanuman Sanjeevani Mountain 4K Wallpaper</image:title>
+      <image:caption>Mighty Lord Hanuman Bajrangbali carrying the whole Sanjeevani mountain flying through dramatic skies with divine golden strength.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_gopal_1789315873602.jpg</image:loc>
+      <image:title>3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर - 3D Cute Bal Gopal Makhan Chor 4K Wallpaper</image:title>
+      <image:caption>Super cute 3D baby Krishna Bal Gopal with butter pot and mischievous smile, peacock feather crown, and warm divine glow.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/goddess_lakshmi_1789315900662.jpg</image:loc>
+      <image:title>मां लक्ष्मी धन वर्षा 4K वॉलपेपर - Goddess Lakshmi Gold Shower 4K Wallpaper</image:title>
+      <image:caption>Divine Goddess Lakshmi showering gold coins from sacred pink lotus flower, with white divine elephants performing sacred abhishek.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_ram_1789315920936.jpg</image:loc>
+      <image:title>प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो - Lord Ram Ayodhya Ram Mandir 4K Wallpaper</image:title>
+      <image:caption>Majestic Maryada Purushottam Lord Ram standing with divine bow in Ayodhya dham with grand Ram Mandir bathed in golden sunset light.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/goddess_saraswati_1789315983989.jpg</image:loc>
+      <image:title>मां सरस्वती वीणा वादिनी 4K वॉलपेपर - Goddess Saraswati Veena Vadini 4K Wallpaper</image:title>
+      <image:caption>Divine Goddess Saraswati playing sacred golden veena on pure white lotus with graceful swan, peacock, and floating scriptures.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_ganesha_1789316002528.jpg</image:loc>
+      <image:title>3D क्यूट बाल गणेश मोदक 4K फोटो - 3D Cute Bal Ganesha with Modak 4K Wallpaper</image:title>
+      <image:caption>Adorable 3D baby Ganesha with cute curled trunk holding sweet modak laddu, tiny golden crown, and affectionate mouse companion.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/navratri_durga_special.jpg</image:loc>
+      <image:title>नवरात्रि स्पेशल मां दुर्गा पंडाल 4K फोटो - Navratri Special Maa Durga Pandal 4K Wallpaper</image:title>
+      <image:caption>Spectacular Navratri Durga Maa riding golden lion with eight glowing weapons, set in grand Durga Puja festive pandal with sacred yajna fire.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/navratri_nine_devi.jpg</image:loc>
+      <image:title>नवदुर्गा 9 रूप पवित्र मंडल 4K फोटो - Navdurga 9 Forms Mandala 4K Wallpaper</image:title>
+      <image:caption>All nine divine manifestations of Goddess Durga from Day 1 Shailputri to Day 9 Siddhidatri arranged in sacred mandala with Navratri holy colors.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/shiv_parvati_family.jpg</image:loc>
+      <image:title>पावन शिव परिवार कैलाश दर्शन 4K वॉलपेपर - Divine Shiv Parivar Family Portrait 4K Wallpaper</image:title>
+      <image:caption>Beautiful divine Shiv Parivar portrait on Mount Kailash - Lord Shiva, Maa Parvati, baby Ganesha eating modak, Kartikeya, and faithful Nandi bull.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/krishna_govardhan.jpg</image:loc>
+      <image:title>श्री कृष्ण गोवर्धन पर्वत लीला 4K फोटो - Lord Krishna Lifting Govardhan Hill 4K Wallpaper</image:title>
+      <image:caption>Majestic Lord Krishna lifting massive Govardhan mountain on his little pinky finger to shelter Brajwasis and cows from Indra's storm.</image:caption>
+    </image:image>
   </url>
   <!-- Category Pages -->
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-cute.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_radha_krishna.jpg</image:loc>
+      <image:title>राधा कृष्ण क्यूट लव 4K फोटो - Cute Radha Krishna Love 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Radha and baby Krishna holding hands smiling in magical Vrindavan garden with blooming flowers, butterflies, and divine golden light.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_shiva.jpg</image:loc>
+      <image:title>क्यूट बाल शिव जी डमरू 4K फोटो - Cute Baby Shiva with Damru 4K Wallpaper</image:title>
+      <image:caption>Ultra cute baby Lord Shiva playing golden damru on tiger skin with tiny Nandi calf, set against snowy Himalayan peaks in divine golden aura.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_hanuman.jpg</image:loc>
+      <image:title>क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो - Cute Baby Hanuman Flying 4K Wallpaper</image:title>
+      <image:caption>Super cute baby Hanuman flying through sunset sky with flowing red cape and golden gada, surrounded by heart-shaped glowing clouds.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_krishna_makhan.jpg</image:loc>
+      <image:title>माखन चोर बाल गोपाल क्यूट 4K फोटो - Cute Krishna Stealing Butter 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Krishna Bal Gopal stealing freshly churned makhan from hanging clay pot with his gopa friends in Vrindavan kitchen.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_baby_lakshmi.jpg</image:loc>
+      <image:title>क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो - Cute Baby Goddess Lakshmi 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Goddess Lakshmi sitting on blooming pink lotus flower showering gold coins and gems, accompanied by cute owl.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_ganesha_reading.jpg</image:loc>
+      <image:title>क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो - Cute Bal Ganesha Reading Book 4K Wallpaper</image:title>
+      <image:caption>Baby Ganesha wearing spectacles reading glowing divine scripture with modak in hand and his little mouse reading alongside.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_baby_saraswati.jpg</image:loc>
+      <image:title>क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो - Cute Baby Saraswati with Veena 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Goddess Saraswati seated on white swan playing golden veena beside glowing lotus pond with floating sacred books.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_gopal_1789315873602.jpg</image:loc>
+      <image:title>3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर - 3D Cute Bal Gopal Makhan Chor 4K Wallpaper</image:title>
+      <image:caption>Super cute 3D baby Krishna Bal Gopal with butter pot and mischievous smile, peacock feather crown, and warm divine glow.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_ganesha_1789316002528.jpg</image:loc>
+      <image:title>3D क्यूट बाल गणेश मोदक 4K फोटो - 3D Cute Bal Ganesha with Modak 4K Wallpaper</image:title>
+      <image:caption>Adorable 3D baby Ganesha with cute curled trunk holding sweet modak laddu, tiny golden crown, and affectionate mouse companion.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-trending.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-festival.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/navratri_durga_special.jpg</image:loc>
+      <image:title>नवरात्रि स्पेशल मां दुर्गा पंडाल 4K फोटो - Navratri Special Maa Durga Pandal 4K Wallpaper</image:title>
+      <image:caption>Spectacular Navratri Durga Maa riding golden lion with eight glowing weapons, set in grand Durga Puja festive pandal with sacred yajna fire.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/navratri_nine_devi.jpg</image:loc>
+      <image:title>नवदुर्गा 9 रूप पवित्र मंडल 4K फोटो - Navdurga 9 Forms Mandala 4K Wallpaper</image:title>
+      <image:caption>All nine divine manifestations of Goddess Durga from Day 1 Shailputri to Day 9 Siddhidatri arranged in sacred mandala with Navratri holy colors.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-shiva.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_shiva.jpg</image:loc>
+      <image:title>क्यूट बाल शिव जी डमरू 4K फोटो - Cute Baby Shiva with Damru 4K Wallpaper</image:title>
+      <image:caption>Ultra cute baby Lord Shiva playing golden damru on tiger skin with tiny Nandi calf, set against snowy Himalayan peaks in divine golden aura.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_shiva_1789315505870.jpg</image:loc>
+      <image:title>भगवान शिव कैलाश ध्यान 4K महाकाल वॉलपेपर - Lord Shiva Kailash Meditation 4K Ultra HD Wallpaper</image:title>
+      <image:caption>Majestic Lord Shiva Mahadev in deep meditation on snow-covered Mount Kailash with holy Ganga flowing from matted hair, trishul, and damru.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/shiv_parvati_family.jpg</image:loc>
+      <image:title>पावन शिव परिवार कैलाश दर्शन 4K वॉलपेपर - Divine Shiv Parivar Family Portrait 4K Wallpaper</image:title>
+      <image:caption>Beautiful divine Shiv Parivar portrait on Mount Kailash - Lord Shiva, Maa Parvati, baby Ganesha eating modak, Kartikeya, and faithful Nandi bull.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-krishna.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_radha_krishna.jpg</image:loc>
+      <image:title>राधा कृष्ण क्यूट लव 4K फोटो - Cute Radha Krishna Love 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Radha and baby Krishna holding hands smiling in magical Vrindavan garden with blooming flowers, butterflies, and divine golden light.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_krishna_makhan.jpg</image:loc>
+      <image:title>माखन चोर बाल गोपाल क्यूट 4K फोटो - Cute Krishna Stealing Butter 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Krishna Bal Gopal stealing freshly churned makhan from hanging clay pot with his gopa friends in Vrindavan kitchen.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_krishna_1789315536423.jpg</image:loc>
+      <image:title>भगवान श्री कृष्ण बांसुरी वृंदावन 4K वॉलपेपर - Lord Krishna Playing Flute in Vrindavan 4K Wallpaper</image:title>
+      <image:caption>Divine Lord Krishna playing enchanting bansuri flute in sacred Vrindavan forest alongside dancing peacocks and serene Yamuna river.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_gopal_1789315873602.jpg</image:loc>
+      <image:title>3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर - 3D Cute Bal Gopal Makhan Chor 4K Wallpaper</image:title>
+      <image:caption>Super cute 3D baby Krishna Bal Gopal with butter pot and mischievous smile, peacock feather crown, and warm divine glow.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/krishna_govardhan.jpg</image:loc>
+      <image:title>श्री कृष्ण गोवर्धन पर्वत लीला 4K फोटो - Lord Krishna Lifting Govardhan Hill 4K Wallpaper</image:title>
+      <image:caption>Majestic Lord Krishna lifting massive Govardhan mountain on his little pinky finger to shelter Brajwasis and cows from Indra's storm.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-ganesha.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_ganesha_reading.jpg</image:loc>
+      <image:title>क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो - Cute Bal Ganesha Reading Book 4K Wallpaper</image:title>
+      <image:caption>Baby Ganesha wearing spectacles reading glowing divine scripture with modak in hand and his little mouse reading alongside.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_ganesha_1789315549643.jpg</image:loc>
+      <image:title>गणपति बप्पा स्वर्ण सिंहासन 4K वॉलपेपर - Lord Ganesha Golden Throne 4K Wallpaper</image:title>
+      <image:caption>Magnificent Lord Ganesha sitting on golden lotus throne with divine cosmic aura, holding sweet modak with faithful mouse at feet.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_ganesha_1789316002528.jpg</image:loc>
+      <image:title>3D क्यूट बाल गणेश मोदक 4K फोटो - 3D Cute Bal Ganesha with Modak 4K Wallpaper</image:title>
+      <image:caption>Adorable 3D baby Ganesha with cute curled trunk holding sweet modak laddu, tiny golden crown, and affectionate mouse companion.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-hanuman.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_bal_hanuman.jpg</image:loc>
+      <image:title>क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो - Cute Baby Hanuman Flying 4K Wallpaper</image:title>
+      <image:caption>Super cute baby Hanuman flying through sunset sky with flowing red cape and golden gada, surrounded by heart-shaped glowing clouds.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_hanuman_1789315589634.jpg</image:loc>
+      <image:title>हनुमान जी संजीवनी पर्वत 4K वॉलपेपर - Lord Hanuman Sanjeevani Mountain 4K Wallpaper</image:title>
+      <image:caption>Mighty Lord Hanuman Bajrangbali carrying the whole Sanjeevani mountain flying through dramatic skies with divine golden strength.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-durga.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/goddess_durga_1789315573017.jpg</image:loc>
+      <image:title>मां दुर्गा शेरावाली सिंह वाहिनी 4K फोटो - Goddess Durga Riding Lion 4K Wallpaper</image:title>
+      <image:caption>Fierce yet motherly Goddess Durga riding mighty golden lion, holding eight cosmic weapons with glowing divine power and red silk saree.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/navratri_durga_special.jpg</image:loc>
+      <image:title>नवरात्रि स्पेशल मां दुर्गा पंडाल 4K फोटो - Navratri Special Maa Durga Pandal 4K Wallpaper</image:title>
+      <image:caption>Spectacular Navratri Durga Maa riding golden lion with eight glowing weapons, set in grand Durga Puja festive pandal with sacred yajna fire.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/navratri_nine_devi.jpg</image:loc>
+      <image:title>नवदुर्गा 9 रूप पवित्र मंडल 4K फोटो - Navdurga 9 Forms Mandala 4K Wallpaper</image:title>
+      <image:caption>All nine divine manifestations of Goddess Durga from Day 1 Shailputri to Day 9 Siddhidatri arranged in sacred mandala with Navratri holy colors.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-lakshmi.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_baby_lakshmi.jpg</image:loc>
+      <image:title>क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो - Cute Baby Goddess Lakshmi 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Goddess Lakshmi sitting on blooming pink lotus flower showering gold coins and gems, accompanied by cute owl.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/goddess_lakshmi_1789315900662.jpg</image:loc>
+      <image:title>मां लक्ष्मी धन वर्षा 4K वॉलपेपर - Goddess Lakshmi Gold Shower 4K Wallpaper</image:title>
+      <image:caption>Divine Goddess Lakshmi showering gold coins from sacred pink lotus flower, with white divine elephants performing sacred abhishek.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-ram.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/lord_ram_1789315920936.jpg</image:loc>
+      <image:title>प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो - Lord Ram Ayodhya Ram Mandir 4K Wallpaper</image:title>
+      <image:caption>Majestic Maryada Purushottam Lord Ram standing with divine bow in Ayodhya dham with grand Ram Mandir bathed in golden sunset light.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/category-saraswati.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/cute_baby_saraswati.jpg</image:loc>
+      <image:title>क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो - Cute Baby Saraswati with Veena 4K Wallpaper</image:title>
+      <image:caption>Adorable baby Goddess Saraswati seated on white swan playing golden veena beside glowing lotus pond with floating sacred books.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/images/goddess_saraswati_1789315983989.jpg</image:loc>
+      <image:title>मां सरस्वती वीणा वादिनी 4K वॉलपेपर - Goddess Saraswati Veena Vadini 4K Wallpaper</image:title>
+      <image:caption>Divine Goddess Saraswati playing sacred golden veena on pure white lotus with graceful swan, peacock, and floating scriptures.</image:caption>
+    </image:image>
   </url>
   <!-- Dedicated Photo Pages -->
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-cute-radha-krishna.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -89,7 +354,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-cute-bal-shiva.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -100,7 +365,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-cute-bal-hanuman.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -111,7 +376,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-cute-krishna-makhan.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -122,7 +387,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-cute-baby-lakshmi.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -133,7 +398,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-cute-ganesha-reading.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -144,7 +409,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-cute-baby-saraswati.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -155,7 +420,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-shiva-kailash.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -166,7 +431,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-krishna-flute.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -177,7 +442,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-ganesha-throne.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -188,7 +453,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-durga-lion.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -199,7 +464,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-hanuman-sanjeevani.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -210,7 +475,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-bal-gopal-original.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -221,7 +486,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-lakshmi-gold.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -232,7 +497,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-ram-ayodhya.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -243,7 +508,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-saraswati-veena.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -254,7 +519,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-bal-ganesha-original.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -265,7 +530,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-navratri-durga-special.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -276,7 +541,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-navratri-nine-devi.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -287,7 +552,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-shiv-parivar.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -298,7 +563,7 @@
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/photo-krishna-govardhan.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -310,19 +575,19 @@
   <!-- Spiritual Text Pages (Chalisa & Aartis) -->
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/hanuman-chalisa.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/shiv-aarti.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/ganesh-aarti.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
