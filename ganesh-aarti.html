@@ -177,5 +177,29 @@ function createFlowerBurst() {
 <script>
 function showToast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');}, 2500); }
 </script>
+
+<div class="mobile-bottom-nav" style="display:flex; position:fixed; bottom:0; left:0; right:0; background:rgba(74, 0, 14, 0.98); border-top:2px solid #FFD700; padding:8px 12px; justify-content:space-around; align-items:center; z-index:100000; box-shadow:0 -4px 15px rgba(0,0,0,0.25);">
+    <a href="index.html" style="color:#FFF099; text-decoration:none; display:flex; flex-direction:column; align-items:center; font-size:0.75rem; font-weight:600;">
+        <span style="font-size:1.25rem;">🏠</span>
+        <span>होम</span>
+    </a>
+    <a href="category-cute.html" style="color:#FFF099; text-decoration:none; display:flex; flex-direction:column; align-items:center; font-size:0.75rem; font-weight:600;">
+        <span style="font-size:1.25rem;">🧸</span>
+        <span>क्यूट</span>
+    </a>
+    <a href="category-trending.html" style="color:#FFF099; text-decoration:none; display:flex; flex-direction:column; align-items:center; font-size:0.75rem; font-weight:600;">
+        <span style="font-size:1.25rem;">🔥</span>
+        <span>ट्रेंडिंग</span>
+    </a>
+    <a href="hanuman-chalisa.html" style="color:#FFD700; text-decoration:none; display:flex; flex-direction:column; align-items:center; font-size:0.75rem; font-weight:600;">
+        <span style="font-size:1.25rem;">🚩</span>
+        <span>चालीसा</span>
+    </a>
+    <button onclick="playTempleBell()" style="background:none; border:none; cursor:pointer; color:#FFF099; display:flex; flex-direction:column; align-items:center; font-size:0.75rem; font-weight:600;">
+        <span style="font-size:1.25rem;">🔔</span>
+        <span>घंटी</span>
+    </button>
+</div>
+
 </body>
 </html>

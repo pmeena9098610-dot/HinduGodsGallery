@@ -1,12 +1,16 @@
-const CACHE_NAME = 'hindu-gods-v3';
+const CACHE_NAME = 'hindu-gods-v4';
 const ASSETS = [
   './',
   'index.html',
   'manifest.json',
   'favicon.png',
+  'feed.xml',
   'hanuman-chalisa.html',
   'shiv-aarti.html',
-  'ganesh-aarti.html'
+  'ganesh-aarti.html',
+  'category-cute.html',
+  'category-trending.html',
+  'category-festival.html'
 ];
 
 self.addEventListener('install', event => {

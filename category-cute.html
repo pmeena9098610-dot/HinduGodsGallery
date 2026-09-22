@@ -8,6 +8,7 @@
     <link rel="apple-touch-icon" href="favicon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#780016">
+    <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
@@ -362,6 +363,79 @@
     }
     #toast.show { opacity: 1; }
     
+    
+    /* MOBILE FLOATING BOTTOM NAV */
+    .mobile-bottom-nav { display: none; }
+    @media (max-width: 768px) {
+        body { padding-bottom: 70px; }
+        .mobile-bottom-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(74, 0, 14, 0.98);
+            border-top: 2px solid var(--gold);
+            padding: 8px 12px;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100000;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.25);
+            backdrop-filter: blur(8px);
+        }
+        .mobile-nav-item {
+            color: var(--gold-light);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.72rem;
+            font-weight: 600;
+            gap: 2px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .mobile-nav-item span.icon { font-size: 1.25rem; }
+        .mobile-nav-item:hover, .mobile-nav-item.active { color: var(--gold); transform: scale(1.08); }
+    }
+
+    /* DIGITAL DIYA & AARTI */
+    .diya-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 16px 0;
+        cursor: pointer;
+        user-select: none;
+    }
+    .diya-flame {
+        width: 18px;
+        height: 28px;
+        background: radial-gradient(ellipse at bottom, #FFD700 0%, #FF5722 65%, transparent 95%);
+        border-radius: 50% 50% 20% 20%;
+        box-shadow: 0 0 15px #FFD700, 0 0 25px #FF5722;
+        animation: flicker 1.2s infinite alternate ease-in-out;
+        opacity: 0.3;
+        transition: opacity 0.5s;
+    }
+    .diya-flame.lit {
+        opacity: 1;
+        box-shadow: 0 0 20px #FFD700, 0 0 35px #FF5722, 0 0 50px rgba(255,215,0,0.6);
+    }
+    .diya-base {
+        width: 54px;
+        height: 18px;
+        background: linear-gradient(180deg, #D84315 0%, #5D4037 100%);
+        border-radius: 0 0 25px 25px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+    @keyframes flicker {
+        0% { transform: scale(1) rotate(-1deg); }
+        50% { transform: scale(1.08, 1.15) rotate(1deg); }
+        100% { transform: scale(0.96, 0.98) rotate(-0.5deg); }
+    }
+
     /* FOOTER */
     .site-footer {
         background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
@@ -606,8 +680,57 @@
     </p>
     <p style="margin-top: 10px; font-size: 0.78rem; opacity: 0.8;">&copy; 2026 Hindu Gods Daily Gallery. Free 4K Download & Share.</p>
 </footer>
+
+<div class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item">
+        <span class="icon">🏠</span>
+        <span>होम</span>
+    </a>
+    <a href="category-cute.html" class="mobile-nav-item">
+        <span class="icon">🧸</span>
+        <span>क्यूट</span>
+    </a>
+    <a href="category-trending.html" class="mobile-nav-item">
+        <span class="icon">🔥</span>
+        <span>ट्रेंडिंग</span>
+    </a>
+    <a href="hanuman-chalisa.html" class="mobile-nav-item">
+        <span class="icon">🚩</span>
+        <span>चालीसा</span>
+    </a>
+    <button onclick="playTempleBell()" class="mobile-nav-item">
+        <span class="icon">🔔</span>
+        <span>घंटी</span>
+    </button>
+</div>
+
 <div id="toast"></div>
 <script>
+
+function toggleDiya() {
+    var flame = document.getElementById('diyaFlame');
+    if (flame) {
+        var isLit = flame.classList.toggle('lit');
+        if (isLit) {
+            playTempleBell();
+            createFlowerBurst();
+            showToast('🪔 दीप प्रज्ज्वलित हुआ! आपका दिन मंगलमय हो 🙏');
+            try { localStorage.setItem('diya_lit', '1'); } catch(e){}
+        } else {
+            showToast('दीप शांत किया गया');
+            try { localStorage.removeItem('diya_lit'); } catch(e){}
+        }
+    }
+}
+window.addEventListener('DOMContentLoaded', function() {
+    try {
+        if (localStorage.getItem('diya_lit') === '1') {
+            var f = document.getElementById('diyaFlame');
+            if (f) f.classList.add('lit');
+        }
+    } catch(e){}
+});
+
 function showToast(msg) {
     var t = document.getElementById('toast');
     t.textContent = msg;

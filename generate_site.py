@@ -16,6 +16,7 @@ COMMON_HEAD = """
     <link rel="apple-touch-icon" href="favicon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#780016">
+    <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
@@ -353,6 +354,79 @@ COMMON_STYLE = """
     }
     #toast.show { opacity: 1; }
     
+    
+    /* MOBILE FLOATING BOTTOM NAV */
+    .mobile-bottom-nav { display: none; }
+    @media (max-width: 768px) {
+        body { padding-bottom: 70px; }
+        .mobile-bottom-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(74, 0, 14, 0.98);
+            border-top: 2px solid var(--gold);
+            padding: 8px 12px;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100000;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.25);
+            backdrop-filter: blur(8px);
+        }
+        .mobile-nav-item {
+            color: var(--gold-light);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.72rem;
+            font-weight: 600;
+            gap: 2px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .mobile-nav-item span.icon { font-size: 1.25rem; }
+        .mobile-nav-item:hover, .mobile-nav-item.active { color: var(--gold); transform: scale(1.08); }
+    }
+
+    /* DIGITAL DIYA & AARTI */
+    .diya-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 16px 0;
+        cursor: pointer;
+        user-select: none;
+    }
+    .diya-flame {
+        width: 18px;
+        height: 28px;
+        background: radial-gradient(ellipse at bottom, #FFD700 0%, #FF5722 65%, transparent 95%);
+        border-radius: 50% 50% 20% 20%;
+        box-shadow: 0 0 15px #FFD700, 0 0 25px #FF5722;
+        animation: flicker 1.2s infinite alternate ease-in-out;
+        opacity: 0.3;
+        transition: opacity 0.5s;
+    }
+    .diya-flame.lit {
+        opacity: 1;
+        box-shadow: 0 0 20px #FFD700, 0 0 35px #FF5722, 0 0 50px rgba(255,215,0,0.6);
+    }
+    .diya-base {
+        width: 54px;
+        height: 18px;
+        background: linear-gradient(180deg, #D84315 0%, #5D4037 100%);
+        border-radius: 0 0 25px 25px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+    @keyframes flicker {
+        0% { transform: scale(1) rotate(-1deg); }
+        50% { transform: scale(1.08, 1.15) rotate(1deg); }
+        100% { transform: scale(0.96, 0.98) rotate(-0.5deg); }
+    }
+
     /* FOOTER */
     .site-footer {
         background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
@@ -392,8 +466,57 @@ COMMON_FOOTER = """
     </p>
     <p style="margin-top: 10px; font-size: 0.78rem; opacity: 0.8;">&copy; 2026 Hindu Gods Daily Gallery. Free 4K Download & Share.</p>
 </footer>
+
+<div class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item">
+        <span class="icon">🏠</span>
+        <span>होम</span>
+    </a>
+    <a href="category-cute.html" class="mobile-nav-item">
+        <span class="icon">🧸</span>
+        <span>क्यूट</span>
+    </a>
+    <a href="category-trending.html" class="mobile-nav-item">
+        <span class="icon">🔥</span>
+        <span>ट्रेंडिंग</span>
+    </a>
+    <a href="hanuman-chalisa.html" class="mobile-nav-item">
+        <span class="icon">🚩</span>
+        <span>चालीसा</span>
+    </a>
+    <button onclick="playTempleBell()" class="mobile-nav-item">
+        <span class="icon">🔔</span>
+        <span>घंटी</span>
+    </button>
+</div>
+
 <div id="toast"></div>
 <script>
+
+function toggleDiya() {
+    var flame = document.getElementById('diyaFlame');
+    if (flame) {
+        var isLit = flame.classList.toggle('lit');
+        if (isLit) {
+            playTempleBell();
+            createFlowerBurst();
+            showToast('🪔 दीप प्रज्ज्वलित हुआ! आपका दिन मंगलमय हो 🙏');
+            try { localStorage.setItem('diya_lit', '1'); } catch(e){}
+        } else {
+            showToast('दीप शांत किया गया');
+            try { localStorage.removeItem('diya_lit'); } catch(e){}
+        }
+    }
+}
+window.addEventListener('DOMContentLoaded', function() {
+    try {
+        if (localStorage.getItem('diya_lit') === '1') {
+            var f = document.getElementById('diyaFlame');
+            if (f) f.classList.add('lit');
+        }
+    } catch(e){}
+});
+
 function showToast(msg) {
     var t = document.getElementById('toast');
     t.textContent = msg;
@@ -610,6 +733,12 @@ def generate_photo_page(item, all_items):
                 <source srcset="{img_webp}" type="image/webp">
                 <img src="{img_jpg}" alt="{item['titleHi']} - {item['title']} 4K Free Download" width="1024" height="1365">
             </picture>
+
+            <div class="diya-container" onclick="toggleDiya()" title="क्लिक करके दीप जलाएं">
+                <div id="diyaFlame" class="diya-flame"></div>
+                <div class="diya-base"></div>
+                <span style="font-size:0.75rem; color:#8D6E63; font-weight:700; margin-top:6px;">🪔 दीप प्रज्ज्वलित करें (Tap to Light)</span>
+            </div>
         </div>
 
         <div class="detail-info">
@@ -1017,6 +1146,34 @@ if ('serviceWorker' in navigator) {{
 </html>"""
     return html
 
+
+def generate_rss_feed(all_items):
+    from datetime import datetime
+    now_str = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT")
+    xml = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+        '  <channel>',
+        '    <title>ॐ दैनिक हिन्दू भगवान दर्शन | Daily Hindu Gods 4K Wallpaper</title>',
+        f'    <link>{BASE_URL}</link>',
+        '    <description>Daily automated cute and divine 4K AI images of Hindu deities, Mantras and WhatsApp Status.</description>',
+        '    <language>hi</language>',
+        f'    <lastBuildDate>{now_str}</lastBuildDate>',
+        f'    <atom:link href="{BASE_URL}feed.xml" rel="self" type="application/rss+xml" />'
+    ]
+    for it in all_items:
+        xml.append('    <item>')
+        xml.append(f'      <title><![CDATA[{it["titleHi"]} | {it["title"]}]]></title>')
+        xml.append(f'      <link>{BASE_URL}{it["slug"]}</link>')
+        xml.append(f'      <guid isPermaLink="true">{BASE_URL}{it["slug"]}</guid>')
+        xml.append(f'      <description><![CDATA[{it["shortDesc"]}]]></description>')
+        xml.append(f'      <enclosure url="{BASE_URL}{it["img"]}.jpg" length="250000" type="image/jpeg" />')
+        xml.append(f'      <pubDate>{now_str}</pubDate>')
+        xml.append('    </item>')
+    xml.append('  </channel>')
+    xml.append('</rss>')
+    return '\n'.join(xml)
+
 def generate_sitemap(all_items, all_cats):
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -1092,6 +1249,8 @@ print("Generated index.html")
 # 4. Generate Sitemap
 sitemap_content = generate_sitemap(ITEMS, CATEGORIES)
 generated_files["sitemap.xml"] = sitemap_content
+generated_files["feed.xml"] = generate_rss_feed(ITEMS)
+print("Generated feed.xml for Google Discover!")
 print("Generated sitemap.xml with 33 URLs!")
 
 # 5. Write all files to all 3 directories

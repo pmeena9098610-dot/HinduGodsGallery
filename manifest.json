@@ -2,7 +2,8 @@
   "name": "Hindu Gods Daily Gallery - Cute Bhagwan Photo & 4K Wallpaper",
   "short_name": "Gods Gallery",
   "description": "Daily 21+ cute & divine Hindu God AI photos. Free 4K Download & WhatsApp Status. Festival Special images!",
-  "start_url": "/HinduGodsGallery/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#FFFDF7",
   "theme_color": "#780016",
@@ -16,6 +17,12 @@
     {
       "src": "favicon.png",
       "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
