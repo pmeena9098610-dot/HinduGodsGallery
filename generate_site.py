@@ -1,5 +1,6 @@
 import os, sys, json
 from datetime import datetime, date
+import xml.sax.saxutils
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
@@ -9,6 +10,34 @@ DIRS = [SCRIPT_DIR]
 for extra in [r"C:\Users\Bappa official\OneDrive\Desktop\HinduGodsGallery", r"C:\Users\Bappa official\HinduGodsGallery", r"c:\Users\Bappa official\.gemini\antigravity\playground\primordial-chromosphere"]:
     if os.path.exists(extra) and extra not in DIRS:
         DIRS.append(extra)
+
+def xml_escape(val):
+    if not val:
+        return ""
+    return xml.sax.saxutils.escape(str(val), {'"': "&quot;", "'": "&apos;"})
+
+def resolve_image_assets(img_path):
+    """
+    Returns (img_jpg, img_webp, img_abs_url, sitemap_loc)
+    Safely resolves image paths for both local assets and remote CDN URLs.
+    Guarantees:
+    - Never appends .jpg/.webp to query params of remote URLs
+    - Never prepends BASE_URL to remote URLs
+    - Escapes special characters for XML sitemaps
+    """
+    if not img_path:
+        default_img = "images/cute_radha_krishna"
+        return f"{default_img}.jpg", f"{default_img}.webp", f"{BASE_URL}{default_img}.jpg", f"{BASE_URL}{default_img}.jpg"
+    
+    if str(img_path).startswith("http://") or str(img_path).startswith("https://"):
+        return img_path, img_path, img_path, xml_escape(img_path)
+    
+    clean = str(img_path).lstrip("/")
+    base = os.path.splitext(clean)[0]
+    jpg = f"{base}.jpg"
+    webp = f"{base}.webp"
+    abs_url = f"{BASE_URL}{base}.jpg"
+    return jpg, webp, abs_url, abs_url
 
 def load_fused_items():
     """Fuses curated items with any newly generated items from images_data.json"""
@@ -1073,21 +1102,29 @@ def generate_photo_page(item, all_items):
         extra = [x for x in all_items if x["id"] != item["id"] and x not in related][:4 - len(related)]
         related.extend(extra)
         
-    img_jpg = item["img"] + ".jpg"
-    img_webp = item["img"] + ".webp"
+    img_jpg, img_webp, img_abs_url, sitemap_loc = resolve_image_assets(item["img"])
     page_url = BASE_URL + item["slug"]
-    img_abs_url = BASE_URL + img_jpg
+
+    if str(item["img"]).startswith("http"):
+        picture_html = f'<img src="{img_jpg}" alt="{item["titleHi"]} - {item["title"]} 4K Free Download" width="1024" height="1365" style="cursor:zoom-in;" onclick="openLightbox(\'{img_jpg}\')">'
+    else:
+        picture_html = f'''<picture>
+                <source srcset="{img_webp}" type="image/webp">
+                <img src="{img_jpg}" alt="{item["titleHi"]} - {item["title"]} 4K Free Download" width="1024" height="1365" style="cursor:zoom-in;" onclick="openLightbox(\'{img_jpg}\')">
+            </picture>'''
 
     related_html = ""
     for r in related:
+        r_jpg, r_webp, _, _ = resolve_image_assets(r["img"])
+        if str(r["img"]).startswith("http"):
+            r_pic = f'<img src="{r_jpg}" alt="{r["title"]}" loading="lazy" width="400" height="533">'
+        else:
+            r_pic = f'<picture><source srcset="{r_webp}" type="image/webp"><img src="{r_jpg}" alt="{r["title"]}" loading="lazy" width="400" height="533"></picture>'
         related_html += f"""
         <div class="card">
             <a class="card-img-link" href="{r['slug']}">
                 <span class="badge">{r['badge']}</span>
-                <picture>
-                    <source srcset="{r['img']}.webp" type="image/webp">
-                    <img src="{r['img']}.jpg" alt="{r['title']}" loading="lazy" width="400" height="533">
-                </picture>
+                {r_pic}
             </a>
             <div class="card-body">
                 <h3><a href="{r['slug']}">{r['titleHi']}</a></h3>
@@ -1186,10 +1223,7 @@ def generate_photo_page(item, all_items):
     <div class="detail-container">
         <div class="detail-img-wrap">
             <span class="badge" style="top:16px; left:16px; font-size:0.85rem; padding:6px 14px;">{item['badge']}</span>
-            <picture>
-                <source srcset="{img_webp}" type="image/webp">
-                <img src="{img_jpg}" alt="{item['titleHi']} - {item['title']} 4K Free Download" width="1024" height="1365">
-            </picture>
+            {picture_html}
 
             <div class="diya-container" onclick="toggleDiya()" title="क्लिक करके दीप जलाएं">
                 <div id="diyaFlame" class="diya-flame"></div>
@@ -1274,14 +1308,16 @@ def generate_category_page(cat, all_items):
     
     cards_html = ""
     for it in cat_items:
+        it_jpg, it_webp, _, _ = resolve_image_assets(it["img"])
+        if str(it["img"]).startswith("http"):
+            card_pic = f'<img src="{it_jpg}" alt="{it["title"]}" loading="lazy" width="400" height="533">'
+        else:
+            card_pic = f'<picture><source srcset="{it_webp}" type="image/webp"><img src="{it_jpg}" alt="{it["title"]}" loading="lazy" width="400" height="533"></picture>'
         cards_html += f"""
         <div class="card">
             <a class="card-img-link" href="{it['slug']}">
                 <span class="badge">{it['badge']}</span>
-                <picture>
-                    <source srcset="{it['img']}.webp" type="image/webp">
-                    <img src="{it['img']}.jpg" alt="{it['title']}" loading="lazy" width="400" height="533">
-                </picture>
+                {card_pic}
             </a>
             <div class="card-body">
                 <h3><a href="{it['slug']}">{it['titleHi']}</a></h3>
@@ -1289,7 +1325,7 @@ def generate_category_page(cat, all_items):
                 <div class="card-actions">
                     <a href="{it['slug']}" class="btn-action btn-view">View 4K</a>
                     <button onclick="shareCustomWhatsApp('{it['titleHi']}', '{BASE_URL}{it['slug']}', '{it.get('mantra','')[:50]}...')" class="btn-action btn-wa">WA</button>
-                    <a href="{it['img']}.jpg" download class="btn-action btn-dl">Download</a>
+                    <a href="{it_jpg}" download class="btn-action btn-dl">Download</a>
                 </div>
             </div>
         </div>
@@ -1370,14 +1406,16 @@ def generate_index_page(all_items):
     def build_grid(items_list):
         h = ""
         for it in items_list:
+            it_jpg, it_webp, _, _ = resolve_image_assets(it["img"])
+            if str(it["img"]).startswith("http"):
+                card_pic = f'<img src="{it_jpg}" alt="{it["titleHi"]} - {it["title"]}" loading="lazy" width="400" height="533">'
+            else:
+                card_pic = f'<picture><source srcset="{it_webp}" type="image/webp"><img src="{it_jpg}" alt="{it["titleHi"]} - {it["title"]}" loading="lazy" width="400" height="533"></picture>'
             h += f"""
-            <div class="card" data-search="{it['title'].lower()} {it['titleHi']} {' '.join(it['tags'])}">
+            <div class="card" data-god="{it.get('god', '')}" data-cat="{it.get('category', '')}" data-search="{it['title'].lower()} {it['titleHi']} {' '.join(it['tags'])}">
                 <a class="card-img-link" href="{it['slug']}">
                     <span class="badge">{it['badge']}</span>
-                    <picture>
-                        <source srcset="{it['img']}.webp" type="image/webp">
-                        <img src="{it['img']}.jpg" alt="{it['titleHi']} - {it['title']}" loading="lazy" width="400" height="533">
-                    </picture>
+                    {card_pic}
                 </a>
                 <div class="card-body">
                     <h3><a href="{it['slug']}">{it['titleHi']}</a></h3>
@@ -1385,7 +1423,7 @@ def generate_index_page(all_items):
                     <div class="card-actions">
                         <a href="{it['slug']}" class="btn-action btn-view">View 4K</a>
                         <button onclick="shareCustomWhatsApp('{it['titleHi']}', '{BASE_URL}{it['slug']}', '{it.get('mantra','')[:50]}...')" class="btn-action btn-wa">WA</button>
-                        <a href="{it['img']}.jpg" download class="btn-action btn-dl">Download</a>
+                        <a href="{it_jpg}" download class="btn-action btn-dl">Download</a>
                     </div>
                 </div>
             </div>
@@ -1549,22 +1587,23 @@ def generate_index_page(all_items):
 
     <!-- SEARCH BAR -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 भगवान खोजें: Cute Bal Gopal, Mahadev 4K, Navratri, Hanuman..." onkeyup="filterCards()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 भगवान खोजें: शिव, कृष्ण, हनुमान, गणेश, दुर्गा, राम, सरस्वती, बाल गोपाल..." onkeyup="filterCards()">
+        <div id="searchCountDisplay" style="text-align:center; font-size:0.85rem; color:#780016; font-weight:600; margin-top:8px;">{len(all_items)}+ पावन 4K दर्शन उपलब्ध</div>
     </div>
 
-    <!-- QUICK CATEGORY PILLS -->
+    <!-- QUICK CATEGORY PILLS (LIVE INSTANT FILTER + DIRECT ACCESS) -->
     <div class="category-pills">
-        <a href="category-cute.html" class="cat-pill">🧸 Cute Gallery ({len(cute_items)})</a>
-        <a href="category-trending.html" class="cat-pill">🔥 Trending 4K ({len(trending_items)})</a>
-        <a href="category-festival.html" class="cat-pill">🎉 Festival Special ({len(festival_items)})</a>
-        <a href="category-shiva.html" class="cat-pill">🔱 भगवान शिव</a>
-        <a href="category-krishna.html" class="cat-pill">🦚 श्री कृष्ण</a>
-        <a href="category-ganesha.html" class="cat-pill">🐘 गणपति बप्पा</a>
-        <a href="category-hanuman.html" class="cat-pill">🚩 संकटमोचन हनुमान</a>
-        <a href="category-durga.html" class="cat-pill">🦁 मां दुर्गा</a>
-        <a href="category-lakshmi.html" class="cat-pill">🪷 मां लक्ष्मी</a>
-        <a href="category-ram.html" class="cat-pill">🏹 प्रभु श्री राम</a>
-        <a href="category-saraswati.html" class="cat-pill">🪕 मां सरस्वती</a>
+        <button onclick="filterByDeity('all', this)" class="cat-pill active">🌟 सभी दर्शन ({len(all_items)})</button>
+        <button onclick="filterByDeity('cute', this)" class="cat-pill">🧸 क्यूट बाल रूप ({len(cute_items)})</button>
+        <button onclick="filterByDeity('trending', this)" class="cat-pill">🔥 ट्रेंडिंग 4K ({len(trending_items)})</button>
+        <button onclick="filterByDeity('shiva', this)" class="cat-pill">🔱 भगवान शिव</button>
+        <button onclick="filterByDeity('krishna', this)" class="cat-pill">🦚 श्री कृष्ण</button>
+        <button onclick="filterByDeity('ganesha', this)" class="cat-pill">🐘 गणपति बप्पा</button>
+        <button onclick="filterByDeity('hanuman', this)" class="cat-pill">🚩 संकटमोचन हनुमान</button>
+        <button onclick="filterByDeity('durga', this)" class="cat-pill">🦁 माँ दुर्गा</button>
+        <button onclick="filterByDeity('lakshmi', this)" class="cat-pill">🪷 माँ लक्ष्मी</button>
+        <button onclick="filterByDeity('ram', this)" class="cat-pill">🏹 प्रभु श्री राम</button>
+        <button onclick="filterByDeity('saraswati', this)" class="cat-pill">🪕 माँ सरस्वती</button>
     </div>
 
     <!-- DAILY PANCHANG & SHUBH MUHURAT WIDGET -->
@@ -1693,14 +1732,32 @@ def generate_index_page(all_items):
 function filterCards() {{
     var q = document.getElementById('searchInput').value.toLowerCase().trim();
     var cards = document.querySelectorAll('.card');
+    var visible = 0;
     cards.forEach(function(c) {{
-        var s = c.getAttribute('data-search') || '';
-        if (!q || s.indexOf(q) !== -1) {{
+        var s = (c.getAttribute('data-search') || '') + ' ' + (c.getAttribute('data-god') || '') + ' ' + (c.getAttribute('data-cat') || '');
+        if (!q || s.toLowerCase().indexOf(q) !== -1) {{
             c.style.display = '';
+            visible++;
         }} else {{
             c.style.display = 'none';
         }}
     }});
+    var disp = document.getElementById('searchCountDisplay');
+    if (disp) {{
+        disp.textContent = q ? (visible + ' पावन दर्शन मिले') : '{len(all_items)}+ पावन 4K दर्शन उपलब्ध';
+    }}
+}}
+
+function filterByDeity(tag, btn) {{
+    document.querySelectorAll('.cat-pill').forEach(function(b){{ b.classList.remove('active'); }});
+    if (btn) btn.classList.add('active');
+    var input = document.getElementById('searchInput');
+    if (tag === 'all') {{
+        input.value = '';
+    }} else {{
+        input.value = tag;
+    }}
+    filterCards();
 }}
 
 // PWA Service worker registration
@@ -1728,12 +1785,13 @@ def generate_rss_feed(all_items):
         f'    <atom:link href="{BASE_URL}feed.xml" rel="self" type="application/rss+xml" />'
     ]
     for it in all_items:
+        _, _, it_abs, _ = resolve_image_assets(it["img"])
         xml.append('    <item>')
         xml.append(f'      <title><![CDATA[{it["titleHi"]} | {it["title"]}]]></title>')
         xml.append(f'      <link>{BASE_URL}{it["slug"]}</link>')
         xml.append(f'      <guid isPermaLink="true">{BASE_URL}{it["slug"]}</guid>')
         xml.append(f'      <description><![CDATA[{it["shortDesc"]}]]></description>')
-        xml.append(f'      <enclosure url="{BASE_URL}{it["img"]}.jpg" length="250000" type="image/jpeg" />')
+        xml.append(f'      <enclosure url="{xml_escape(it_abs)}" length="250000" type="image/jpeg" />')
         xml.append(f'      <pubDate>{now_str}</pubDate>')
         xml.append('    </item>')
     xml.append('  </channel>')
@@ -1754,12 +1812,15 @@ def generate_sitemap(all_items, all_cats):
         '    <priority>1.0</priority>'
     ]
 
-    # Add top 25 images right to the homepage URL so Googlebot Image indexes them on first crawl!
-    for it in all_items[:25]:
+    # Add top 30 images right to the homepage URL so Googlebot Image indexes them on first crawl!
+    for it in all_items[:30]:
+        _, _, _, s_loc = resolve_image_assets(it["img"])
+        s_title = xml_escape(f"{it['titleHi']} - {it['title']}")
+        s_cap = xml_escape(it.get('shortDesc', ''))
         xml_lines.append('    <image:image>')
-        xml_lines.append(f'      <image:loc>{BASE_URL}{it["img"]}.jpg</image:loc>')
-        xml_lines.append(f'      <image:title>{it["titleHi"]} - {it["title"]}</image:title>')
-        xml_lines.append(f'      <image:caption>{it["shortDesc"]}</image:caption>')
+        xml_lines.append(f'      <image:loc>{s_loc}</image:loc>')
+        xml_lines.append(f'      <image:title>{s_title}</image:title>')
+        xml_lines.append(f'      <image:caption>{s_cap}</image:caption>')
         xml_lines.append('    </image:image>')
     xml_lines.append('  </url>')
 
@@ -1773,25 +1834,31 @@ def generate_sitemap(all_items, all_cats):
         xml_lines.append('    <changefreq>daily</changefreq>')
         xml_lines.append('    <priority>0.9</priority>')
         for it in c_items[:10]:
+            _, _, _, s_loc = resolve_image_assets(it["img"])
+            s_title = xml_escape(f"{it['titleHi']} - {it['title']}")
+            s_cap = xml_escape(it.get('shortDesc', ''))
             xml_lines.append('    <image:image>')
-            xml_lines.append(f'      <image:loc>{BASE_URL}{it["img"]}.jpg</image:loc>')
-            xml_lines.append(f'      <image:title>{it["titleHi"]} - {it["title"]}</image:title>')
-            xml_lines.append(f'      <image:caption>{it["shortDesc"]}</image:caption>')
+            xml_lines.append(f'      <image:loc>{s_loc}</image:loc>')
+            xml_lines.append(f'      <image:title>{s_title}</image:title>')
+            xml_lines.append(f'      <image:caption>{s_cap}</image:caption>')
             xml_lines.append('    </image:image>')
         xml_lines.append('  </url>')
 
     # Individual photo pages with Google Image extensions
     xml_lines.append('  <!-- Dedicated Photo Pages -->')
     for it in all_items:
+        _, _, _, s_loc = resolve_image_assets(it["img"])
+        s_title = xml_escape(f"{it['titleHi']} - {it['title']}")
+        s_cap = xml_escape(it.get('shortDesc', ''))
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{it["slug"]}</loc>')
         xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
         xml_lines.append('    <changefreq>daily</changefreq>')
         xml_lines.append('    <priority>0.8</priority>')
         xml_lines.append('    <image:image>')
-        xml_lines.append(f'      <image:loc>{BASE_URL}{it["img"]}.jpg</image:loc>')
-        xml_lines.append(f'      <image:title>{it["titleHi"]} - {it["title"]}</image:title>')
-        xml_lines.append(f'      <image:caption>{it["shortDesc"]}</image:caption>')
+        xml_lines.append(f'      <image:loc>{s_loc}</image:loc>')
+        xml_lines.append(f'      <image:title>{s_title}</image:title>')
+        xml_lines.append(f'      <image:caption>{s_cap}</image:caption>')
         xml_lines.append('    </image:image>')
         xml_lines.append('  </url>')
 

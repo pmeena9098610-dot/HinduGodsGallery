@@ -142,17 +142,22 @@ def generate_pollinations_url(prompt_text, seed_val):
     encoded = urllib.parse.quote(prompt_text)
     return f"https://image.pollinations.ai/prompt/{encoded}?width=800&height=1000&seed={seed_val}&nologo=true&model=flux"
 
-def download_image_file(image_url, target_path, timeout=20):
-    """Image ko local disk par download karta hai (failsafe fallback to URL)"""
-    try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
-        req = urllib.request.Request(image_url, headers=headers)
-        with urllib.request.urlopen(req, timeout=timeout) as response, open(target_path, 'wb') as out_file:
-            out_file.write(response.read())
-        return True
-    except Exception as e:
-        logging.warning(f"Could not download local copy of image ({e}). Using direct high-speed AI CDN link instead.")
-        return False
+def download_image_file(image_url, target_path, timeout=30, retries=3):
+    """Image ko local disk par download karta hai (paced + exponential retry + failsafe fallback)"""
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+    for attempt in range(1, retries + 1):
+        try:
+            time.sleep(3.5) # Crucial rate-limit pacing for Pollinations AI
+            req = urllib.request.Request(image_url, headers=headers)
+            with urllib.request.urlopen(req, timeout=timeout) as response, open(target_path, 'wb') as out_file:
+                out_file.write(response.read())
+            if os.path.exists(target_path) and os.path.getsize(target_path) > 1500:
+                return True
+        except Exception as e:
+            logging.warning(f"Download attempt {attempt}/{retries} failed for {image_url[:40]}... ({e})")
+            time.sleep(4.0 * attempt)
+    logging.warning("Could not download local copy of image after retries. Using direct high-speed AI CDN link instead.")
+    return False
 
 def generate_daily_batch(target_date_str=None, num_entries=10):
     """हर दिन के लिए 10 यूनिक AI इमेज एंट्रीज बनाता है"""
@@ -183,7 +188,7 @@ def generate_daily_batch(target_date_str=None, num_entries=10):
         local_rel_url = f"images/{target_date_str}/{local_filename}"
 
         # Try to download locally for offline/lightning-fast speed
-        download_success = download_image_file(ai_url, local_abs_path, timeout=15)
+        download_success = download_image_file(ai_url, local_abs_path, timeout=30)
         final_image_url = local_rel_url if download_success else ai_url
 
         # Convert to WebP for modern performance & Core Web Vitals
@@ -260,7 +265,7 @@ def update_sitemap(all_data):
         for entry in entries:
             url_node = ET.SubElement(urlset, "{http://www.sitemaps.org/schemas/sitemap/0.9}url")
             loc_node = ET.SubElement(url_node, "{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
-            loc_node.text = f"{WEBSITE_URL}/#god-{entry['id']}"
+            loc_node.text = f"{WEBSITE_URL}/photo-{entry['id']}.html"
 
             lastmod_node = ET.SubElement(url_node, "{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod")
             lastmod_node.text = entry.get("date", day_str)
@@ -268,9 +273,9 @@ def update_sitemap(all_data):
             # Image extension
             img_node = ET.SubElement(url_node, "{http://www.google.com/schemas/sitemap-image/1.1}image")
             img_loc = ET.SubElement(img_node, "{http://www.google.com/schemas/sitemap-image/1.1}loc")
-            img_url = entry["image_url"]
+            img_url = entry.get("image_url", "")
             if not img_url.startswith("http"):
-                img_url = f"{WEBSITE_URL}/{img_url}"
+                img_url = f"{WEBSITE_URL}/{img_url.lstrip('/')}"
             img_loc.text = img_url
 
             img_title = ET.SubElement(img_node, "{http://www.google.com/schemas/sitemap-image/1.1}title")
@@ -283,7 +288,7 @@ def update_sitemap(all_data):
         tree = ET.ElementTree(urlset)
         if hasattr(ET, 'indent'):
             ET.indent(tree, space="  ", level=0)
-        tree.write(SITEMAP_FILE, encoding='utf-8-sig', xml_declaration=True)
+        tree.write(SITEMAP_FILE, encoding='utf-8', xml_declaration=True)
         logging.info(f"✅ Successfully updated {SITEMAP_FILE} with Google Images tags")
     except Exception as e:
         logging.error(f"Error creating sitemap: {e}")

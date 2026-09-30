@@ -802,22 +802,23 @@
 
     <!-- SEARCH BAR -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 भगवान खोजें: Cute Bal Gopal, Mahadev 4K, Navratri, Hanuman..." onkeyup="filterCards()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 भगवान खोजें: शिव, कृष्ण, हनुमान, गणेश, दुर्गा, राम, सरस्वती, बाल गोपाल..." onkeyup="filterCards()">
+        <div id="searchCountDisplay" style="text-align:center; font-size:0.85rem; color:#780016; font-weight:600; margin-top:8px;">101+ पावन 4K दर्शन उपलब्ध</div>
     </div>
 
-    <!-- QUICK CATEGORY PILLS -->
+    <!-- QUICK CATEGORY PILLS (LIVE INSTANT FILTER + DIRECT ACCESS) -->
     <div class="category-pills">
-        <a href="category-cute.html" class="cat-pill">🧸 Cute Gallery (9)</a>
-        <a href="category-trending.html" class="cat-pill">🔥 Trending 4K (10)</a>
-        <a href="category-festival.html" class="cat-pill">🎉 Festival Special (2)</a>
-        <a href="category-shiva.html" class="cat-pill">🔱 भगवान शिव</a>
-        <a href="category-krishna.html" class="cat-pill">🦚 श्री कृष्ण</a>
-        <a href="category-ganesha.html" class="cat-pill">🐘 गणपति बप्पा</a>
-        <a href="category-hanuman.html" class="cat-pill">🚩 संकटमोचन हनुमान</a>
-        <a href="category-durga.html" class="cat-pill">🦁 मां दुर्गा</a>
-        <a href="category-lakshmi.html" class="cat-pill">🪷 मां लक्ष्मी</a>
-        <a href="category-ram.html" class="cat-pill">🏹 प्रभु श्री राम</a>
-        <a href="category-saraswati.html" class="cat-pill">🪕 मां सरस्वती</a>
+        <button onclick="filterByDeity('all', this)" class="cat-pill active">🌟 सभी दर्शन (101)</button>
+        <button onclick="filterByDeity('cute', this)" class="cat-pill">🧸 क्यूट बाल रूप (9)</button>
+        <button onclick="filterByDeity('trending', this)" class="cat-pill">🔥 ट्रेंडिंग 4K (10)</button>
+        <button onclick="filterByDeity('shiva', this)" class="cat-pill">🔱 भगवान शिव</button>
+        <button onclick="filterByDeity('krishna', this)" class="cat-pill">🦚 श्री कृष्ण</button>
+        <button onclick="filterByDeity('ganesha', this)" class="cat-pill">🐘 गणपति बप्पा</button>
+        <button onclick="filterByDeity('hanuman', this)" class="cat-pill">🚩 संकटमोचन हनुमान</button>
+        <button onclick="filterByDeity('durga', this)" class="cat-pill">🦁 माँ दुर्गा</button>
+        <button onclick="filterByDeity('lakshmi', this)" class="cat-pill">🪷 माँ लक्ष्मी</button>
+        <button onclick="filterByDeity('ram', this)" class="cat-pill">🏹 प्रभु श्री राम</button>
+        <button onclick="filterByDeity('saraswati', this)" class="cat-pill">🪕 माँ सरस्वती</button>
     </div>
 
     <!-- DAILY PANCHANG & SHUBH MUHURAT WIDGET -->
@@ -914,13 +915,10 @@
         </div>
         <div class="gallery-grid" id="festivalGrid">
             
-            <div class="card" data-search="navratri special maa durga pandal 4k wallpaper नवरात्रि स्पेशल मां दुर्गा पंडाल 4K फोटो navratri special maa durga image navratri 2026 images durga puja pandal photo maa durga navratri wallpaper sherawali mata navratri navratri day images">
+            <div class="card" data-god="durga" data-cat="festival" data-search="navratri special maa durga pandal 4k wallpaper नवरात्रि स्पेशल मां दुर्गा पंडाल 4K फोटो navratri special maa durga image navratri 2026 images durga puja pandal photo maa durga navratri wallpaper sherawali mata navratri navratri day images">
                 <a class="card-img-link" href="photo-navratri-durga-special.html">
                     <span class="badge">Festival Special</span>
-                    <picture>
-                        <source srcset="images/navratri_durga_special.webp" type="image/webp">
-                        <img src="images/navratri_durga_special.jpg" alt="नवरात्रि स्पेशल मां दुर्गा पंडाल 4K फोटो - Navratri Special Maa Durga Pandal 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/navratri_durga_special.webp" type="image/webp"><img src="images/navratri_durga_special.jpg" alt="नवरात्रि स्पेशल मां दुर्गा पंडाल 4K फोटो - Navratri Special Maa Durga Pandal 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-navratri-durga-special.html">नवरात्रि स्पेशल मां दुर्गा पंडाल 4K फोटो</a></h3>
@@ -934,13 +932,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="navdurga 9 forms mandala 4k wallpaper नवदुर्गा 9 रूप पवित्र मंडल 4K फोटो navdurga nine forms photo navratri 9 devi images navratri day 1 to 9 goddess nine forms durga wallpaper navdurga mandala image navratri colors today">
+            <div class="card" data-god="durga" data-cat="festival" data-search="navdurga 9 forms mandala 4k wallpaper नवदुर्गा 9 रूप पवित्र मंडल 4K फोटो navdurga nine forms photo navratri 9 devi images navratri day 1 to 9 goddess nine forms durga wallpaper navdurga mandala image navratri colors today">
                 <a class="card-img-link" href="photo-navratri-nine-devi.html">
                     <span class="badge">Festival Special</span>
-                    <picture>
-                        <source srcset="images/navratri_nine_devi.webp" type="image/webp">
-                        <img src="images/navratri_nine_devi.jpg" alt="नवदुर्गा 9 रूप पवित्र मंडल 4K फोटो - Navdurga 9 Forms Mandala 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/navratri_nine_devi.webp" type="image/webp"><img src="images/navratri_nine_devi.jpg" alt="नवदुर्गा 9 रूप पवित्र मंडल 4K फोटो - Navdurga 9 Forms Mandala 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-navratri-nine-devi.html">नवदुर्गा 9 रूप पवित्र मंडल 4K फोटो</a></h3>
@@ -965,13 +960,10 @@
         </div>
         <div class="gallery-grid" id="cuteGrid">
             
-            <div class="card" data-search="cute radha krishna love 4k wallpaper राधा कृष्ण क्यूट लव 4K फोटो cute radha krishna love photo radha krishna wallpaper 4k radha krishna whatsapp status baby radha krishna image vrindavan love photo cute bal radha krishna hd">
+            <div class="card" data-god="krishna" data-cat="cute" data-search="cute radha krishna love 4k wallpaper राधा कृष्ण क्यूट लव 4K फोटो cute radha krishna love photo radha krishna wallpaper 4k radha krishna whatsapp status baby radha krishna image vrindavan love photo cute bal radha krishna hd">
                 <a class="card-img-link" href="photo-cute-radha-krishna.html">
                     <span class="badge">Cute Special</span>
-                    <picture>
-                        <source srcset="images/cute_radha_krishna.webp" type="image/webp">
-                        <img src="images/cute_radha_krishna.jpg" alt="राधा कृष्ण क्यूट लव 4K फोटो - Cute Radha Krishna Love 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_radha_krishna.webp" type="image/webp"><img src="images/cute_radha_krishna.jpg" alt="राधा कृष्ण क्यूट लव 4K फोटो - Cute Radha Krishna Love 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-cute-radha-krishna.html">राधा कृष्ण क्यूट लव 4K फोटो</a></h3>
@@ -985,13 +977,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="cute baby shiva with damru 4k wallpaper क्यूट बाल शिव जी डमरू 4K फोटो cute baby shiva photo bal shiv ji wallpaper cute mahadev baby image baby shiva damru photo cute bholenath wallpaper bal shiv 3d wallpaper">
+            <div class="card" data-god="shiva" data-cat="cute" data-search="cute baby shiva with damru 4k wallpaper क्यूट बाल शिव जी डमरू 4K फोटो cute baby shiva photo bal shiv ji wallpaper cute mahadev baby image baby shiva damru photo cute bholenath wallpaper bal shiv 3d wallpaper">
                 <a class="card-img-link" href="photo-cute-bal-shiva.html">
                     <span class="badge">Cute Special</span>
-                    <picture>
-                        <source srcset="images/cute_bal_shiva.webp" type="image/webp">
-                        <img src="images/cute_bal_shiva.jpg" alt="क्यूट बाल शिव जी डमरू 4K फोटो - Cute Baby Shiva with Damru 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_bal_shiva.webp" type="image/webp"><img src="images/cute_bal_shiva.jpg" alt="क्यूट बाल शिव जी डमरू 4K फोटो - Cute Baby Shiva with Damru 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-cute-bal-shiva.html">क्यूट बाल शिव जी डमरू 4K फोटो</a></h3>
@@ -1004,13 +993,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="cute baby hanuman flying 4k wallpaper क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो cute baby hanuman photo bal hanuman flying wallpaper cute hanuman ji image baby bajrangbali photo cute hanuman 3d wallpaper bal hanuman gada photo">
+            <div class="card" data-god="hanuman" data-cat="cute" data-search="cute baby hanuman flying 4k wallpaper क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो cute baby hanuman photo bal hanuman flying wallpaper cute hanuman ji image baby bajrangbali photo cute hanuman 3d wallpaper bal hanuman gada photo">
                 <a class="card-img-link" href="photo-cute-bal-hanuman.html">
                     <span class="badge">Cute Special</span>
-                    <picture>
-                        <source srcset="images/cute_bal_hanuman.webp" type="image/webp">
-                        <img src="images/cute_bal_hanuman.jpg" alt="क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो - Cute Baby Hanuman Flying 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_bal_hanuman.webp" type="image/webp"><img src="images/cute_bal_hanuman.jpg" alt="क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो - Cute Baby Hanuman Flying 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-cute-bal-hanuman.html">क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो</a></h3>
@@ -1023,13 +1009,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="cute krishna stealing butter 4k wallpaper माखन चोर बाल गोपाल क्यूट 4K फोटो makhan chor bal gopal photo baby krishna stealing butter cute krishna makhan wallpaper bal gopal 3d image cute kanhaiya photo krishna butter thief 4k">
+            <div class="card" data-god="krishna" data-cat="cute" data-search="cute krishna stealing butter 4k wallpaper माखन चोर बाल गोपाल क्यूट 4K फोटो makhan chor bal gopal photo baby krishna stealing butter cute krishna makhan wallpaper bal gopal 3d image cute kanhaiya photo krishna butter thief 4k">
                 <a class="card-img-link" href="photo-cute-krishna-makhan.html">
                     <span class="badge">Cute Special</span>
-                    <picture>
-                        <source srcset="images/cute_krishna_makhan.webp" type="image/webp">
-                        <img src="images/cute_krishna_makhan.jpg" alt="माखन चोर बाल गोपाल क्यूट 4K फोटो - Cute Krishna Stealing Butter 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_krishna_makhan.webp" type="image/webp"><img src="images/cute_krishna_makhan.jpg" alt="माखन चोर बाल गोपाल क्यूट 4K फोटो - Cute Krishna Stealing Butter 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-cute-krishna-makhan.html">माखन चोर बाल गोपाल क्यूट 4K फोटो</a></h3>
@@ -1042,13 +1025,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="cute baby goddess lakshmi 4k wallpaper क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो cute baby lakshmi photo baby lakshmi devi wallpaper cute lakshmi lotus image baby goddess lakshmi 3d cute maa lakshmi photo lakshmi gold coins wallpaper">
+            <div class="card" data-god="lakshmi" data-cat="cute" data-search="cute baby goddess lakshmi 4k wallpaper क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो cute baby lakshmi photo baby lakshmi devi wallpaper cute lakshmi lotus image baby goddess lakshmi 3d cute maa lakshmi photo lakshmi gold coins wallpaper">
                 <a class="card-img-link" href="photo-cute-baby-lakshmi.html">
                     <span class="badge">Cute Special</span>
-                    <picture>
-                        <source srcset="images/cute_baby_lakshmi.webp" type="image/webp">
-                        <img src="images/cute_baby_lakshmi.jpg" alt="क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो - Cute Baby Goddess Lakshmi 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_baby_lakshmi.webp" type="image/webp"><img src="images/cute_baby_lakshmi.jpg" alt="क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो - Cute Baby Goddess Lakshmi 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-cute-baby-lakshmi.html">क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो</a></h3>
@@ -1061,13 +1041,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="cute bal ganesha reading book 4k wallpaper क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो cute ganesha reading photo baby ganesh padhai wallpaper cute ganpati bappa image bal ganesh 3d cute ganesha with book image cute ganesh modak wallpaper">
+            <div class="card" data-god="ganesha" data-cat="cute" data-search="cute bal ganesha reading book 4k wallpaper क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो cute ganesha reading photo baby ganesh padhai wallpaper cute ganpati bappa image bal ganesh 3d cute ganesha with book image cute ganesh modak wallpaper">
                 <a class="card-img-link" href="photo-cute-ganesha-reading.html">
                     <span class="badge">Cute Special</span>
-                    <picture>
-                        <source srcset="images/cute_ganesha_reading.webp" type="image/webp">
-                        <img src="images/cute_ganesha_reading.jpg" alt="क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो - Cute Bal Ganesha Reading Book 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_ganesha_reading.webp" type="image/webp"><img src="images/cute_ganesha_reading.jpg" alt="क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो - Cute Bal Ganesha Reading Book 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-cute-ganesha-reading.html">क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो</a></h3>
@@ -1081,13 +1058,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="cute baby saraswati with veena 4k wallpaper क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो cute baby saraswati photo baby saraswati veena wallpaper cute saraswati devi image baby goddess saraswati 3d cute maa saraswati swan saraswati vidya photo">
+            <div class="card" data-god="saraswati" data-cat="cute" data-search="cute baby saraswati with veena 4k wallpaper क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो cute baby saraswati photo baby saraswati veena wallpaper cute saraswati devi image baby goddess saraswati 3d cute maa saraswati swan saraswati vidya photo">
                 <a class="card-img-link" href="photo-cute-baby-saraswati.html">
                     <span class="badge">Cute Special</span>
-                    <picture>
-                        <source srcset="images/cute_baby_saraswati.webp" type="image/webp">
-                        <img src="images/cute_baby_saraswati.jpg" alt="क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो - Cute Baby Saraswati with Veena 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_baby_saraswati.webp" type="image/webp"><img src="images/cute_baby_saraswati.jpg" alt="क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो - Cute Baby Saraswati with Veena 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-cute-baby-saraswati.html">क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो</a></h3>
@@ -1101,13 +1075,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="3d cute bal gopal makhan chor 4k wallpaper 3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर bal gopal 3d photo baby krishna makhan chor cute kanhaiya wallpaper bal gopal cute image krishna butter thief 3d nand gopal photo">
+            <div class="card" data-god="krishna" data-cat="cute" data-search="3d cute bal gopal makhan chor 4k wallpaper 3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर bal gopal 3d photo baby krishna makhan chor cute kanhaiya wallpaper bal gopal cute image krishna butter thief 3d nand gopal photo">
                 <a class="card-img-link" href="photo-bal-gopal-original.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/cute_bal_gopal_1789315873602.webp" type="image/webp">
-                        <img src="images/cute_bal_gopal_1789315873602.jpg" alt="3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर - 3D Cute Bal Gopal Makhan Chor 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_bal_gopal_1789315873602.webp" type="image/webp"><img src="images/cute_bal_gopal_1789315873602.jpg" alt="3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर - 3D Cute Bal Gopal Makhan Chor 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-bal-gopal-original.html">3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर</a></h3>
@@ -1121,13 +1092,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="3d cute bal ganesha with modak 4k wallpaper 3D क्यूट बाल गणेश मोदक 4K फोटो cute bal ganesh 3d photo baby ganesha wallpaper bal ganesh modak image cute ganpati 3d wallpaper baby elephant god photo ganesh chaturthi cute">
+            <div class="card" data-god="ganesha" data-cat="cute" data-search="3d cute bal ganesha with modak 4k wallpaper 3D क्यूट बाल गणेश मोदक 4K फोटो cute bal ganesh 3d photo baby ganesha wallpaper bal ganesh modak image cute ganpati 3d wallpaper baby elephant god photo ganesh chaturthi cute">
                 <a class="card-img-link" href="photo-bal-ganesha-original.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/cute_bal_ganesha_1789316002528.webp" type="image/webp">
-                        <img src="images/cute_bal_ganesha_1789316002528.jpg" alt="3D क्यूट बाल गणेश मोदक 4K फोटो - 3D Cute Bal Ganesha with Modak 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_bal_ganesha_1789316002528.webp" type="image/webp"><img src="images/cute_bal_ganesha_1789316002528.jpg" alt="3D क्यूट बाल गणेश मोदक 4K फोटो - 3D Cute Bal Ganesha with Modak 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-bal-ganesha-original.html">3D क्यूट बाल गणेश मोदक 4K फोटो</a></h3>
@@ -1152,13 +1120,10 @@
         </div>
         <div class="gallery-grid" id="trendingGrid">
             
-            <div class="card" data-search="lord shiva kailash meditation 4k ultra hd wallpaper भगवान शिव कैलाश ध्यान 4K महाकाल वॉलपेपर mahadev 4k wallpaper download lord shiva kailash meditation bholenath hd photo shiva trishul damru image shiv ji 4k wallpaper har har mahadev photo">
+            <div class="card" data-god="shiva" data-cat="shiva" data-search="lord shiva kailash meditation 4k ultra hd wallpaper भगवान शिव कैलाश ध्यान 4K महाकाल वॉलपेपर mahadev 4k wallpaper download lord shiva kailash meditation bholenath hd photo shiva trishul damru image shiv ji 4k wallpaper har har mahadev photo">
                 <a class="card-img-link" href="photo-shiva-kailash.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/lord_shiva_1789315505870.webp" type="image/webp">
-                        <img src="images/lord_shiva_1789315505870.jpg" alt="भगवान शिव कैलाश ध्यान 4K महाकाल वॉलपेपर - Lord Shiva Kailash Meditation 4K Ultra HD Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/lord_shiva_1789315505870.webp" type="image/webp"><img src="images/lord_shiva_1789315505870.jpg" alt="भगवान शिव कैलाश ध्यान 4K महाकाल वॉलपेपर - Lord Shiva Kailash Meditation 4K Ultra HD Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-shiva-kailash.html">भगवान शिव कैलाश ध्यान 4K महाकाल वॉलपेपर</a></h3>
@@ -1172,13 +1137,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="lord krishna playing flute in vrindavan 4k wallpaper भगवान श्री कृष्ण बांसुरी वृंदावन 4K वॉलपेपर lord krishna flute photo 4k krishna bansuri wallpaper vrindavan krishna image shri krishna hd photo krishna peacock feather image krishna yamuna photo">
+            <div class="card" data-god="krishna" data-cat="krishna" data-search="lord krishna playing flute in vrindavan 4k wallpaper भगवान श्री कृष्ण बांसुरी वृंदावन 4K वॉलपेपर lord krishna flute photo 4k krishna bansuri wallpaper vrindavan krishna image shri krishna hd photo krishna peacock feather image krishna yamuna photo">
                 <a class="card-img-link" href="photo-krishna-flute.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/lord_krishna_1789315536423.webp" type="image/webp">
-                        <img src="images/lord_krishna_1789315536423.jpg" alt="भगवान श्री कृष्ण बांसुरी वृंदावन 4K वॉलपेपर - Lord Krishna Playing Flute in Vrindavan 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/lord_krishna_1789315536423.webp" type="image/webp"><img src="images/lord_krishna_1789315536423.jpg" alt="भगवान श्री कृष्ण बांसुरी वृंदावन 4K वॉलपेपर - Lord Krishna Playing Flute in Vrindavan 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-krishna-flute.html">भगवान श्री कृष्ण बांसुरी वृंदावन 4K वॉलपेपर</a></h3>
@@ -1192,13 +1154,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="lord ganesha golden throne 4k wallpaper गणपति बप्पा स्वर्ण सिंहासन 4K वॉलपेपर ganpati bappa 4k wallpaper lord ganesha golden photo ganesh ji hd image ganesha throne wallpaper ganpati bappa morya photo vinayak 4k image">
+            <div class="card" data-god="ganesha" data-cat="ganesha" data-search="lord ganesha golden throne 4k wallpaper गणपति बप्पा स्वर्ण सिंहासन 4K वॉलपेपर ganpati bappa 4k wallpaper lord ganesha golden photo ganesh ji hd image ganesha throne wallpaper ganpati bappa morya photo vinayak 4k image">
                 <a class="card-img-link" href="photo-ganesha-throne.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/lord_ganesha_1789315549643.webp" type="image/webp">
-                        <img src="images/lord_ganesha_1789315549643.jpg" alt="गणपति बप्पा स्वर्ण सिंहासन 4K वॉलपेपर - Lord Ganesha Golden Throne 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/lord_ganesha_1789315549643.webp" type="image/webp"><img src="images/lord_ganesha_1789315549643.jpg" alt="गणपति बप्पा स्वर्ण सिंहासन 4K वॉलपेपर - Lord Ganesha Golden Throne 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-ganesha-throne.html">गणपति बप्पा स्वर्ण सिंहासन 4K वॉलपेपर</a></h3>
@@ -1212,13 +1171,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="goddess durga riding lion 4k wallpaper मां दुर्गा शेरावाली सिंह वाहिनी 4K फोटो maa durga 4k wallpaper durga sherawali image goddess durga lion photo maa durga hd download durga mata photo navratri durga image">
+            <div class="card" data-god="durga" data-cat="durga" data-search="goddess durga riding lion 4k wallpaper मां दुर्गा शेरावाली सिंह वाहिनी 4K फोटो maa durga 4k wallpaper durga sherawali image goddess durga lion photo maa durga hd download durga mata photo navratri durga image">
                 <a class="card-img-link" href="photo-durga-lion.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/goddess_durga_1789315573017.webp" type="image/webp">
-                        <img src="images/goddess_durga_1789315573017.jpg" alt="मां दुर्गा शेरावाली सिंह वाहिनी 4K फोटो - Goddess Durga Riding Lion 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/goddess_durga_1789315573017.webp" type="image/webp"><img src="images/goddess_durga_1789315573017.jpg" alt="मां दुर्गा शेरावाली सिंह वाहिनी 4K फोटो - Goddess Durga Riding Lion 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-durga-lion.html">मां दुर्गा शेरावाली सिंह वाहिनी 4K फोटो</a></h3>
@@ -1232,13 +1188,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="lord hanuman sanjeevani mountain 4k wallpaper हनुमान जी संजीवनी पर्वत 4K वॉलपेपर hanuman ji 4k wallpaper hanuman sanjeevani photo bajrangbali hd image hanuman flying photo jai hanuman wallpaper hanuman ji full screen">
+            <div class="card" data-god="hanuman" data-cat="hanuman" data-search="lord hanuman sanjeevani mountain 4k wallpaper हनुमान जी संजीवनी पर्वत 4K वॉलपेपर hanuman ji 4k wallpaper hanuman sanjeevani photo bajrangbali hd image hanuman flying photo jai hanuman wallpaper hanuman ji full screen">
                 <a class="card-img-link" href="photo-hanuman-sanjeevani.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/lord_hanuman_1789315589634.webp" type="image/webp">
-                        <img src="images/lord_hanuman_1789315589634.jpg" alt="हनुमान जी संजीवनी पर्वत 4K वॉलपेपर - Lord Hanuman Sanjeevani Mountain 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/lord_hanuman_1789315589634.webp" type="image/webp"><img src="images/lord_hanuman_1789315589634.jpg" alt="हनुमान जी संजीवनी पर्वत 4K वॉलपेपर - Lord Hanuman Sanjeevani Mountain 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-hanuman-sanjeevani.html">हनुमान जी संजीवनी पर्वत 4K वॉलपेपर</a></h3>
@@ -1251,13 +1204,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="3d cute bal gopal makhan chor 4k wallpaper 3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर bal gopal 3d photo baby krishna makhan chor cute kanhaiya wallpaper bal gopal cute image krishna butter thief 3d nand gopal photo">
+            <div class="card" data-god="krishna" data-cat="cute" data-search="3d cute bal gopal makhan chor 4k wallpaper 3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर bal gopal 3d photo baby krishna makhan chor cute kanhaiya wallpaper bal gopal cute image krishna butter thief 3d nand gopal photo">
                 <a class="card-img-link" href="photo-bal-gopal-original.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/cute_bal_gopal_1789315873602.webp" type="image/webp">
-                        <img src="images/cute_bal_gopal_1789315873602.jpg" alt="3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर - 3D Cute Bal Gopal Makhan Chor 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_bal_gopal_1789315873602.webp" type="image/webp"><img src="images/cute_bal_gopal_1789315873602.jpg" alt="3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर - 3D Cute Bal Gopal Makhan Chor 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-bal-gopal-original.html">3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर</a></h3>
@@ -1271,13 +1221,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="goddess lakshmi gold shower 4k wallpaper मां लक्ष्मी धन वर्षा 4K वॉलपेपर maa lakshmi 4k photo lakshmi devi gold image lakshmi ji hd wallpaper diwali lakshmi photo goddess lakshmi download lakshmi dhan photo">
+            <div class="card" data-god="lakshmi" data-cat="lakshmi" data-search="goddess lakshmi gold shower 4k wallpaper मां लक्ष्मी धन वर्षा 4K वॉलपेपर maa lakshmi 4k photo lakshmi devi gold image lakshmi ji hd wallpaper diwali lakshmi photo goddess lakshmi download lakshmi dhan photo">
                 <a class="card-img-link" href="photo-lakshmi-gold.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/goddess_lakshmi_1789315900662.webp" type="image/webp">
-                        <img src="images/goddess_lakshmi_1789315900662.jpg" alt="मां लक्ष्मी धन वर्षा 4K वॉलपेपर - Goddess Lakshmi Gold Shower 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/goddess_lakshmi_1789315900662.webp" type="image/webp"><img src="images/goddess_lakshmi_1789315900662.jpg" alt="मां लक्ष्मी धन वर्षा 4K वॉलपेपर - Goddess Lakshmi Gold Shower 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-lakshmi-gold.html">मां लक्ष्मी धन वर्षा 4K वॉलपेपर</a></h3>
@@ -1290,13 +1237,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="lord ram ayodhya ram mandir 4k wallpaper प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो ram lalla ayodhya 4k photo shri ram wallpaper lord ram bow arrow image ram mandir wallpaper jai shri ram photo ayodhya ram mandir image">
+            <div class="card" data-god="ram" data-cat="ram" data-search="lord ram ayodhya ram mandir 4k wallpaper प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो ram lalla ayodhya 4k photo shri ram wallpaper lord ram bow arrow image ram mandir wallpaper jai shri ram photo ayodhya ram mandir image">
                 <a class="card-img-link" href="photo-ram-ayodhya.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/lord_ram_1789315920936.webp" type="image/webp">
-                        <img src="images/lord_ram_1789315920936.jpg" alt="प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो - Lord Ram Ayodhya Ram Mandir 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/lord_ram_1789315920936.webp" type="image/webp"><img src="images/lord_ram_1789315920936.jpg" alt="प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो - Lord Ram Ayodhya Ram Mandir 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-ram-ayodhya.html">प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो</a></h3>
@@ -1310,13 +1254,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="goddess saraswati veena vadini 4k wallpaper मां सरस्वती वीणा वादिनी 4K वॉलपेपर maa saraswati 4k wallpaper saraswati veena photo goddess saraswati hd image saraswati puja wallpaper vidya devi photo saraswati swan lotus">
+            <div class="card" data-god="saraswati" data-cat="saraswati" data-search="goddess saraswati veena vadini 4k wallpaper मां सरस्वती वीणा वादिनी 4K वॉलपेपर maa saraswati 4k wallpaper saraswati veena photo goddess saraswati hd image saraswati puja wallpaper vidya devi photo saraswati swan lotus">
                 <a class="card-img-link" href="photo-saraswati-veena.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/goddess_saraswati_1789315983989.webp" type="image/webp">
-                        <img src="images/goddess_saraswati_1789315983989.jpg" alt="मां सरस्वती वीणा वादिनी 4K वॉलपेपर - Goddess Saraswati Veena Vadini 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/goddess_saraswati_1789315983989.webp" type="image/webp"><img src="images/goddess_saraswati_1789315983989.jpg" alt="मां सरस्वती वीणा वादिनी 4K वॉलपेपर - Goddess Saraswati Veena Vadini 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-saraswati-veena.html">मां सरस्वती वीणा वादिनी 4K वॉलपेपर</a></h3>
@@ -1330,13 +1271,10 @@
                 </div>
             </div>
             
-            <div class="card" data-search="3d cute bal ganesha with modak 4k wallpaper 3D क्यूट बाल गणेश मोदक 4K फोटो cute bal ganesh 3d photo baby ganesha wallpaper bal ganesh modak image cute ganpati 3d wallpaper baby elephant god photo ganesh chaturthi cute">
+            <div class="card" data-god="ganesha" data-cat="cute" data-search="3d cute bal ganesha with modak 4k wallpaper 3D क्यूट बाल गणेश मोदक 4K फोटो cute bal ganesh 3d photo baby ganesha wallpaper bal ganesh modak image cute ganpati 3d wallpaper baby elephant god photo ganesh chaturthi cute">
                 <a class="card-img-link" href="photo-bal-ganesha-original.html">
                     <span class="badge">Trending 4K</span>
-                    <picture>
-                        <source srcset="images/cute_bal_ganesha_1789316002528.webp" type="image/webp">
-                        <img src="images/cute_bal_ganesha_1789316002528.jpg" alt="3D क्यूट बाल गणेश मोदक 4K फोटो - 3D Cute Bal Ganesha with Modak 4K Wallpaper" loading="lazy" width="400" height="533">
-                    </picture>
+                    <picture><source srcset="images/cute_bal_ganesha_1789316002528.webp" type="image/webp"><img src="images/cute_bal_ganesha_1789316002528.jpg" alt="3D क्यूट बाल गणेश मोदक 4K फोटो - 3D Cute Bal Ganesha with Modak 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
                 </a>
                 <div class="card-body">
                     <h3><a href="photo-bal-ganesha-original.html">3D क्यूट बाल गणेश मोदक 4K फोटो</a></h3>
@@ -1687,14 +1625,32 @@ function shareCustomWhatsApp(godTitle, url, mantra) {
 function filterCards() {
     var q = document.getElementById('searchInput').value.toLowerCase().trim();
     var cards = document.querySelectorAll('.card');
+    var visible = 0;
     cards.forEach(function(c) {
-        var s = c.getAttribute('data-search') || '';
-        if (!q || s.indexOf(q) !== -1) {
+        var s = (c.getAttribute('data-search') || '') + ' ' + (c.getAttribute('data-god') || '') + ' ' + (c.getAttribute('data-cat') || '');
+        if (!q || s.toLowerCase().indexOf(q) !== -1) {
             c.style.display = '';
+            visible++;
         } else {
             c.style.display = 'none';
         }
     });
+    var disp = document.getElementById('searchCountDisplay');
+    if (disp) {
+        disp.textContent = q ? (visible + ' पावन दर्शन मिले') : '101+ पावन 4K दर्शन उपलब्ध';
+    }
+}
+
+function filterByDeity(tag, btn) {
+    document.querySelectorAll('.cat-pill').forEach(function(b){ b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+    var input = document.getElementById('searchInput');
+    if (tag === 'all') {
+        input.value = '';
+    } else {
+        input.value = tag;
+    }
+    filterCards();
 }
 
 // PWA Service worker registration
