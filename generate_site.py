@@ -39,6 +39,170 @@ def resolve_image_assets(img_path):
     abs_url = f"{BASE_URL}{base}.jpg"
     return jpg, webp, abs_url, abs_url
 
+# ─────────────────────────────────────────────────────────────────────────────
+# DEITY ARTICLE & MANTRA LIBRARY — Rich Content Engine for AdSense Compliance
+# ─────────────────────────────────────────────────────────────────────────────
+
+_DEITY_MANTRAS = {
+    "shiva": (
+        "ॐ नमः शिवाय ।\nमहादेव शम्भो भगवान त्रिपुरान्तक ॥",
+        "हे शिव, हे महादेव, हे शम्भु — मैं आपको प्रणाम करता/करती हूँ। यह पंचाक्षरी मंत्र समस्त पापों का नाश करता है और मोक्ष का द्वार खोलता है।"
+    ),
+    "krishna": (
+        "हरे कृष्ण हरे कृष्ण, कृष्ण कृष्ण हरे हरे ।\nहरे राम हरे राम, राम राम हरे हरे ॥",
+        "यह महामंत्र कलियुग में सर्वश्रेष्ठ माना जाता है। इसके नित्य जप से मन की शांति, प्रेम और आत्मज्ञान प्राप्त होता है।"
+    ),
+    "hanuman": (
+        "मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम् ।\nवातात्मजं वानरयूथमुख्यं श्रीरामदूतं शरणं प्रपद्ये ॥",
+        "मन की गति से चलने वाले, वायु के समान वेगवान, इंद्रियजित, बुद्धिमानों में श्रेष्ठ श्री रामदूत हनुमान जी को मैं शरण लेता हूँ।"
+    ),
+    "lakshmi": (
+        "ॐ श्रीं ह्रीं क्लीं त्रिभुवन महालक्ष्म्यै अस्माकं दारिद्र्यं नाशय प्रचुर धनं देहि देहि ।",
+        "हे त्रिभुवन की महालक्ष्मी, हमारी दरिद्रता का नाश करें और प्रचुर धन-वैभव प्रदान करें। यह लक्ष्मी महामंत्र शुक्रवार के व्रत में विशेष फलदायी है।"
+    ),
+    "durga": (
+        "ॐ दुं दुर्गायै नमः ।\nसर्वमंगलमांगल्ये शिवे सर्वार्थसाधिके ।\nशरण्ये त्र्यम्बके गौरि नारायणि नमोस्तुते ॥",
+        "हे सर्वमंगलकारी, शिवस्वरूपा, सर्वार्थसाधिका माँ दुर्गा — आपको नमन। नवरात्रि में इस मंत्र का 108 बार जप करने से माँ की विशेष कृपा प्राप्त होती है।"
+    ),
+    "ganesha": (
+        "ॐ गं गणपतये नमः ।\nवक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।\nनिर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥",
+        "हे वक्रतुण्ड, हे सूर्यकोटि के समान तेजस्वी गणपति — मेरे सभी कार्यों में सदा विघ्नों का नाश करें। प्रत्येक शुभ कार्य से पहले गणेश जी का यह मंत्र अनिवार्य माना जाता है।"
+    ),
+    "saraswati": (
+        "ॐ ऐं सरस्वत्यै नमः ।\nया कुन्देन्दुतुषारहारधवला या शुभ्रवस्त्रावृता ।\nया वीणावरदण्डमण्डितकरा या श्वेतपद्मासना ॥",
+        "हे श्वेत वस्त्रधारिणी, वीणावादिनी, कमलासना माँ सरस्वती — आप विद्या, बुद्धि और कला की देवी हैं। परीक्षाओं से पहले इस मंत्र का जप विद्यार्थियों के लिए अत्यंत लाभकारी है।"
+    ),
+    "ram": (
+        "श्री राम जय राम जय जय राम ।\nरामाय रामभद्राय रामचन्द्राय वेधसे ।\nरघुनाथाय नाथाय सीतायाः पतये नमः ॥",
+        "हे राम, हे रामभद्र, हे रघुनाथ, सीता पति को नमन। यह मंत्र मर्यादा, सत्य और धर्म का प्रतीक है। रामनवमी और नित्य पाठ में यह मंत्र विशेष फलदायी है।"
+    ),
+    "cute": (
+        "ॐ नमो भगवते वासुदेवाय नमः ।\nसर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ।\nसर्वे भद्राणि पश्यन्तु मा कश्चिद् दुःखभाग्भवेत् ॥",
+        "सभी प्राणी सुखी हों, सभी निरोगी हों, सभी मंगल देखें, कोई भी दुःख का भागी न हो। यह सर्वकल्याण मंत्र प्रात:काल जपने से दिन की शुभ शुरुआत होती है।"
+    ),
+    "festival": (
+        "ॐ सर्वमंगलमांगल्ये शिवे सर्वार्थसाधिके ।\nशरण्ये त्र्यम्बके गौरि नारायणि नमोस्तुते ॥",
+        "हे सर्वमंगलकारी, शिवस्वरूपा, सर्वार्थसाधिका — आपको नमन। त्योहारों के शुभ अवसर पर इस मंत्र का उच्चारण घर में सुख-समृद्धि और शांति लाता है।"
+    ),
+    "trending": (
+        "ॐ नमो भगवते वासुदेवाय नमः ।\nसर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥",
+        "सभी सुखी हों, सभी निरोगी रहें, सभी का कल्याण हो। यह सरल किन्तु अत्यंत शक्तिशाली मंत्र जीवन में सकारात्मक ऊर्जा और ईश्वरीय कृपा का संचार करता है।"
+    ),
+}
+
+_DEITY_ARTICLES = {
+    "shiva": [
+        "भगवान शिव — जिन्हें महादेव, आदियोगी, नीलकंठ और भोलेनाथ भी कहा जाता है — हिंदू त्रिदेवों में सबसे रहस्यमयी और शक्तिशाली देव हैं। शिव को 'देवों के देव' अर्थात् महादेव कहा जाता है। समुद्र मंथन के समय जब विष निकला, तो जगत की रक्षा के लिए महादेव ने वह विष स्वयं पी लिया और नीलकंठ कहलाए। वे सृष्टि के संहारक भी हैं और पालक भी, क्योंकि उनके बिना सृष्टि का चक्र संभव नहीं।",
+        "भगवान शिव का स्वरूप अत्यंत भव्य और दिव्य है — माथे पर अर्धचंद्र, जटाओं से बहती गंगा, गले में सर्प, हाथ में त्रिशूल और डमरू, शरीर पर भस्म और बाघ की खाल। उनके नंदी बैल सत्य और धर्म के प्रतीक हैं। कैलाश पर्वत पर माँ पार्वती सहित विराजमान भगवान शिव ध्यान, वैराग्य और मोक्ष के परम प्रतीक हैं। पंचाक्षरी मंत्र 'ॐ नमः शिवाय' को सभी मंत्रों में सर्वश्रेष्ठ माना गया है।",
+        "सोमवार का व्रत भगवान शिव को समर्पित है। महाशिवरात्रि वर्ष का सबसे बड़ा शिव पर्व है जब श्रद्धालु रात्रि जागरण कर शिवलिंग पर जल, दूध, बेलपत्र, धतूरा और भांग अर्पित करते हैं। बेलपत्र त्रिदेव — ब्रह्मा, विष्णु और महेश — के तीन रूपों का प्रतीक है। महादेव की आराधना से भय, क्रोध, अहंकार और नकारात्मकता का नाश होता है।",
+        "इस 4K दिव्य छवि को अपने मोबाइल का वॉलपेपर, WhatsApp DP, या Good Morning Status बनाकर प्रतिदिन महादेव के दर्शन का लाभ उठाएं। भगवान शिव की इस पावन तस्वीर को परिवार और मित्रों के साथ शेयर करें और सबके जीवन में शिव कृपा का संचार करें।"
+    ],
+    "krishna": [
+        "भगवान श्री कृष्ण — भगवान विष्णु के आठवें अवतार — हिंदू धर्म के सर्वाधिक प्रिय और पूजनीय देव हैं। उनका जन्म द्वापर युग में मथुरा में देवकी और वासुदेव के पुत्र के रूप में हुआ। बाल्यकाल गोकुल और वृंदावन में बीता जहाँ उन्होंने माखन चोरी, कालिया दमन और गोवर्धन उठाने जैसी अनेक लीलाएं कीं। राधा-कृष्ण का प्रेम इस ब्रह्मांड का सबसे पावन और अलौकिक प्रेम माना जाता है।",
+        "श्रीमद् भगवद्गीता में भगवान कृष्ण ने अर्जुन को जो ज्ञान दिया वह आज भी करोड़ों लोगों के जीवन का आधार है। 'कर्म करो, फल की चिंता मत करो' — यह गीता का सार है। कृष्ण का मोरपंख मुकुट, पीताम्बर वस्त्र, वंशी की मधुर धुन और शंख (पांचजन्य) उनके दिव्य स्वरूप की पहचान हैं। उनकी आँखों में ब्रह्मांड का सौंदर्य समाया हुआ है।",
+        "जन्माष्टमी — श्रीकृष्ण का जन्मदिन — पूरे भारत में अत्यंत धूमधाम से मनाया जाता है। मथुरा-वृंदावन में तो यह पर्व अद्वितीय होता है। दही-हांडी, झाँकियाँ, रासलीला और भजन-कीर्तन से वातावरण कृष्णमय हो जाता है। हरे कृष्ण महामंत्र के नित्य जप से मन की शांति, कर्म की शुद्धि और मोक्ष का मार्ग प्रशस्त होता है।",
+        "इस सुंदर 4K कृष्ण छवि को अपने मोबाइल वॉलपेपर, लॉक स्क्रीन, WhatsApp Status या Facebook DP पर लगाकर प्रतिदिन श्रीकृष्ण के दर्शन का अलौकिक आनंद लें। अपने प्रियजनों के साथ यह पावन छवि शेयर करें और सबके जीवन में कृष्ण की बाँसुरी की मधुरता घोलें।"
+    ],
+    "hanuman": [
+        "पवनपुत्र हनुमान — भगवान राम के परमभक्त, असीमित शक्ति के स्वामी और कलियुग के जागृत देव — हिंदू धर्म में सर्वाधिक लोकप्रिय देव हैं। वे भगवान शिव के रुद्रावतार माने जाते हैं। हनुमान जी अमर हैं — वे आज भी इस धरती पर विराजमान हैं। जहाँ भी रामकथा होती है, वहाँ हनुमान जी अदृश्य रूप में उपस्थित रहते हैं।",
+        "हनुमान जी ने लंका जाकर माता सीता का पता लगाया, संजीवनी बूटी लाकर लक्ष्मण जी के प्राण बचाए, और समुद्र पर लंका पुल बनाने में अग्रणी भूमिका निभाई। उनकी पूँछ से लंका को जलाने की कथा आज भी बच्चों और बड़ों दोनों के मन में अदम्य साहस का संचार करती है। हनुमान चालीसा के 40 चौपाइयों में उनका पूर्ण यशोगान है जो हर भक्त के कंठ पर है।",
+        "मंगलवार और शनिवार हनुमान जी के प्रिय दिन हैं। इन दिनों हनुमान मंदिर में जाकर सिंदूर चढ़ाना, चमेली के तेल का दीप जलाना और हनुमान चालीसा का पाठ करना अत्यंत फलदायी माना जाता है। हनुमान जी की आराधना से भय, भूत-प्रेत बाधा, ग्रह दोष और शत्रु पीड़ा का नाश होता है और शारीरिक-मानसिक शक्ति की प्राप्ति होती है।",
+        "इस शक्तिशाली 4K हनुमान छवि को अपने फोन में रखें और प्रतिदिन दर्शन कर जय बजरंगबली का उद्घोष करें। WhatsApp Status पर शेयर करके अपने मित्रों और परिवार के जीवन में भी हनुमान जी का आशीर्वाद पहुँचाएं। बोलो — जय हनुमान! जय श्री राम!"
+    ],
+    "lakshmi": [
+        "माँ लक्ष्मी — धन, वैभव, सौभाग्य और समृद्धि की अधिष्ठात्री देवी — भगवान विष्णु की अर्धांगिनी और सृष्टि की पालक शक्ति हैं। उनका जन्म समुद्र मंथन से हुआ था। वे श्वेत कमल पर विराजमान, चार हाथों में कमल, अभय मुद्रा और स्वर्ण कलश धारण करती हैं। सफेद हाथी उन पर जल की वर्षा करते हैं जो राजसी ऐश्वर्य का प्रतीक है।",
+        "माँ लक्ष्मी के आठ रूप हैं — अष्टलक्ष्मी — जिनमें आदिलक्ष्मी, धनलक्ष्मी, धान्यलक्ष्मी, गजलक्ष्मी, संतानलक्ष्मी, वीरलक्ष्मी, विजयलक्ष्मी और विद्यालक्ष्मी शामिल हैं। प्रत्येक रूप जीवन के अलग पहलू को आशीर्वाद देता है। माँ लक्ष्मी स्थायी वास उसी घर में करती हैं जहाँ स्वच्छता, सत्य और परिश्रम हो।",
+        "दीपावली माँ लक्ष्मी का सबसे बड़ा पर्व है। इस दिन घर की साफ-सफाई, दीपक जलाना और लक्ष्मी-गणेश पूजा करने से माँ घर में स्थायी रूप से निवास करती हैं। धनतेरस पर सोना, चाँदी या नई वस्तु खरीदना अत्यंत शुभ माना जाता है। शुक्रवार का दिन माँ लक्ष्मी की उपासना के लिए विशेष है — इस दिन श्री सूक्त का पाठ घर में धन-वर्षा करता है।",
+        "इस दिव्य 4K लक्ष्मी माँ की छवि को अपने घर में, दुकान में, ऑफिस में या मोबाइल वॉलपेपर में लगाएं और माँ के आशीर्वाद से जीवन में सुख-समृद्धि की बाढ़ आने दें। व्हाट्सएप स्टेटस पर शेयर करके सबके जीवन में माँ लक्ष्मी की कृपा का संचार करें। जय माँ लक्ष्मी!"
+    ],
+    "durga": [
+        "माँ दुर्गा — आद्यशक्ति, महाशक्ति, जगदम्बा — समस्त देवताओं की संयुक्त शक्ति से प्रकट हुई महाशक्ति हैं। जब महिषासुर के अत्याचारों से तीनों लोक त्राहि-त्राहि कर उठे, तब सभी देवताओं ने अपनी-अपनी शक्तियाँ एकत्रित कर माँ दुर्गा का अवतरण किया। सिंह पर सवार, अठारह भुजाओं में विभिन्न अस्त्र-शस्त्र धारण किए माँ दुर्गा असुरों का विनाश करती हैं।",
+        "माँ दुर्गा के नौ रूप — नवदुर्गा — नवरात्रि के नौ दिनों में पूजे जाते हैं। शैलपुत्री, ब्रह्मचारिणी, चंद्रघंटा, कूष्माण्डा, स्कन्दमाता, कात्यायनी, कालरात्रि, महागौरी और सिद्धिदात्री — ये नौ रूप क्रमशः शक्ति, तप, संगीत, सृजन, ममता, शौर्य, काल पर विजय, पवित्रता और सिद्धि के प्रतीक हैं। इन नौ रूपों की आराधना जीवन को पूर्णता देती है।",
+        "नवरात्रि में माँ दुर्गा की विशेष पूजा, जागरण, डांडिया और दुर्गा सप्तशती का पाठ होता है। दुर्गा सप्तशती में 700 श्लोक हैं जो माँ की महिमा, युद्ध-कथा और वरदान का वर्णन करते हैं। माँ दुर्गा को लाल रंग, लाल फूल और विशेषकर लाल चुनरी प्रिय है। नवरात्रि में व्रत रखकर माँ की उपासना से सभी मनोकामनाएं पूर्ण होती हैं।",
+        "इस शक्तिशाली 4K माँ दुर्गा छवि को नवरात्रि और प्रतिदिन के दर्शन के लिए अपने मोबाइल में रखें। दुर्गा माँ की यह भव्य तस्वीर WhatsApp Status, Facebook और Instagram पर शेयर करके सबको माँ के दर्शन का लाभ दें। जय माँ दुर्गा! जय माँ भवानी!"
+    ],
+    "ganesha": [
+        "भगवान गणेश — विघ्नहर्ता, गणपति, लम्बोदर, एकदंत — हिंदू धर्म में सर्वप्रथम पूजनीय देव हैं। कोई भी शुभ कार्य — विवाह, गृह-प्रवेश, व्यापार शुरू करना, यात्रा — गणेश पूजन के बिना अधूरा माना जाता है। हाथी जैसे सिर वाले गणेश जी ज्ञान, बुद्धि और विवेक के देव हैं। उनका मूषक (चूहा) वाहन यह बताता है कि बुद्धि छोटे से छोटे प्राणी में भी रह सकती है।",
+        "गणेश जी का जन्म माँ पार्वती ने अपने शरीर के उबटन से किया था। पिता शिव के साथ हुई भ्रांति में उनका मस्तक कट गया, किन्तु हाथी का मस्तक लगाकर उन्हें पुनर्जीवित किया गया। देवता बोले — 'परशु ले लो, यह हाथी-मस्तक ब्रह्मांड की बुद्धि का प्रतीक है।' गणेश जी ने महाभारत को श्री वेद व्यास जी से सुनते हुए स्वयं लिखा — वे विद्या और लेखन के देव भी हैं।",
+        "गणेश चतुर्थी भाद्रपद शुक्ल चतुर्थी को मनाई जाती है — महाराष्ट्र में 10 दिनों का यह महापर्व देश का सबसे बड़ा सार्वजनिक उत्सव है। मोदक गणेश जी का प्रिय भोग है। बुधवार का दिन गणेश जी को समर्पित है। 'ॐ गं गणपतये नमः' मंत्र का 108 बार जप विद्यार्थियों की बुद्धि, व्यापारियों के कार्य और साधकों की सिद्धि के लिए उत्तम माना जाता है।",
+        "इस सुंदर 4K गणेश जी की छवि को अपने घर, ऑफिस और मोबाइल में स्थापित करें। नई शुरुआत, परीक्षा, साक्षात्कार या किसी भी महत्वपूर्ण कार्य से पहले गणेश जी के इस पावन स्वरूप के दर्शन करें। WhatsApp Status पर शेयर करके सबको गणपति जी का आशीर्वाद पहुँचाएं। गणपति बप्पा मोरया!"
+    ],
+    "saraswati": [
+        "माँ सरस्वती — वागीश्वरी, वीणावादिनी, ब्रह्माणी, शारदा — ज्ञान, विद्या, कला, संगीत और वाणी की देवी हैं। श्वेत वस्त्र धारण किए, श्वेत कमल पर विराजमान, वीणा बजाती माँ सरस्वती की छवि मन को असीम शांति देती है। उनका वाहन हंस विवेक और ज्ञान का प्रतीक है — हंस दूध और पानी को अलग करके सत्य को असत्य से अलग कर सकता है।",
+        "माँ सरस्वती की आराधना विशेषकर छात्र, शिक्षक, कवि, संगीतकार, कलाकार और लेखक करते हैं। बसंत पंचमी माँ सरस्वती का जन्मदिन है। इस दिन पीले वस्त्र पहनकर, पीले फूल चढ़ाकर और सरस्वती वंदना गाकर माँ की आराधना की जाती है। स्कूल-कॉलेज में सरस्वती पूजा होती है और किताबें-कलम माँ के चरणों में रखी जाती हैं।",
+        "माँ सरस्वती की पूजा से वाणी में मधुरता, बुद्धि में तीक्ष्णता और स्मरण शक्ति में वृद्धि होती है। 'ॐ ऐं सरस्वत्यै नमः' बीज मंत्र का नित्य जप करने से कला, संगीत और शिक्षा के क्षेत्र में सफलता मिलती है। परीक्षा से पूर्व माँ सरस्वती की स्तुति करने से मन एकाग्र होता है और ज्ञान प्रकाशित होता है। माँ सरस्वती सभी विद्यार्थियों की रक्षिका हैं।",
+        "इस दिव्य 4K माँ सरस्वती छवि को विद्यार्थी अपनी पढ़ाई की मेज के सामने रखें और परीक्षा में उत्तीर्णता का आशीर्वाद प्राप्त करें। शिक्षक दिवस, बसंत पंचमी और दैनिक पूजा के लिए यह छवि अत्यंत शुभ है। सरस्वती माँ की यह तस्वीर अपने मित्रों, बच्चों और परिवार के साथ शेयर करें। जय माँ सरस्वती!"
+    ],
+    "ram": [
+        "भगवान श्री राम — मर्यादा पुरुषोत्तम, दशरथनंदन, रघुकुल तिलक — भगवान विष्णु के सातवें अवतार हैं। अयोध्या में जन्मे श्री राम का जीवन मर्यादा, सत्य, प्रेम और कर्तव्य का आदर्श उदाहरण है। पिता के वचन की रक्षा के लिए 14 वर्ष का वनवास स्वीकार करना, माता-पिता की सेवा, पत्नी सीता के प्रति एकनिष्ठ प्रेम — ये सब श्री राम को मानव इतिहास का सर्वश्रेष्ठ पुरुष बनाते हैं।",
+        "श्री राम का धनुष — शार्ङ्ग — और बाण अजेय थे। रावण के अत्याचारों से पीड़ित माता सीता को लंका से मुक्त कराने के लिए श्री राम ने वानर सेना के साथ मिलकर समुद्र पर सेतु बनाया और लंका पर विजय प्राप्त की। रावण वध के पश्चात् श्री राम का अयोध्या वापसी पर भव्य अभिनंदन हुआ — यही दीपावली का मूल उत्सव है। श्री राम का राज्य 'रामराज्य' आज भी आदर्श शासन का प्रतीक है।",
+        "रामनवमी — श्री राम का जन्मदिन — चैत्र शुक्ल नवमी को मनाया जाता है। इस दिन भगवान राम की पूजा, रामचरितमानस का पाठ और भजन-कीर्तन होते हैं। 'जय श्री राम' — यह दो शब्द करोड़ों हिंदुओं के जीवन का मूलमंत्र है। राम नाम का जप करने से आत्मा को शांति, मन को स्थिरता और जीवन को दिशा मिलती है।",
+        "इस भव्य 4K श्री राम छवि को अपने घर में, मंदिर में, मोबाइल वॉलपेपर में रखें और प्रतिदिन प्रातः दर्शन करके राम नाम का जप करें। रामनवमी, दीपावली और नित्य सुबह-शाम के लिए यह छवि अत्यंत शुभ है। अपने परिवार और मित्रों के साथ इस पावन छवि को शेयर करें। जय श्री राम!"
+    ],
+    "cute": [
+        "हिंदू देवी-देवताओं के इस मनमोहक बाल रूप (Cute Divine Form) की कल्पना आधुनिक भक्तों के मन में एक नई भावना जगाती है — भक्ति के साथ-साथ वात्सल्य और प्रेम। जब हम भगवान को एक नन्हे, मासूम शिशु के रूप में देखते हैं, तो हृदय में माँ या पिता जैसा भाव उत्पन्न होता है। यही वात्सल्य भक्ति हिंदू अध्यात्म की एक अनूठी परंपरा है।",
+        "बाल लीलाएँ — जैसे बाल कृष्ण की माखन चोरी, बाल हनुमान का सूर्य को फल समझकर छलांग लगाना, बाल गणेश का चूहे पर सवार होकर मिठाई खाना — ये सभी कथाएँ बच्चों और बड़ों दोनों के हृदय को छू लेती हैं। इन प्रेमपूर्ण कथाओं में संदेश यह है कि ईश्वर केवल भव्य और गंभीर नहीं, वे बाल सुलभ चंचलता में भी हैं।",
+        "इस प्रकार की Cute Divine Art भारत में अत्यंत लोकप्रिय है। WhatsApp Status, Instagram Reels, Facebook Posts — हर जगह इन मनमोहक भगवान की तस्वीरें धड़ल्ले से शेयर होती हैं। जो बच्चे पारंपरिक पूजा-पाठ से दूर थे, वे इन Cute God images के माध्यम से भगवान से जुड़ रहे हैं। यह डिजिटल भक्ति की एक नई और सुंदर परंपरा है।",
+        "इस अत्यंत सुंदर 4K Cute God वॉलपेपर को अपने मोबाइल का होम स्क्रीन, लॉक स्क्रीन बनाएं। बच्चों के कमरे में, स्टडी टेबल पर या रसोई में लगाएं — हर जगह यह छवि एक दिव्य उपस्थिति का अनुभव कराएगी। अपने मित्रों और परिवार के साथ शेयर करके उनके दिन को भी दिव्य बनाएं।"
+    ],
+    "festival": [
+        "हिंदू त्योहार — दीपावली, होली, नवरात्रि, जन्माष्टमी, गणेश चतुर्थी, रामनवमी — केवल धार्मिक आयोजन नहीं हैं, ये भारतीय संस्कृति की आत्मा हैं। हर त्योहार एक विशेष संदेश लेकर आता है — दीपावली अंधकार पर प्रकाश की, होली वैर पर प्रेम की, नवरात्रि दुर्बलता पर शक्ति की विजय का उद्घोष है। इन पर्वों में सजावट, पूजा, भोजन और मिलन का एक अनूठा समन्वय होता है।",
+        "भारत के विभिन्न राज्यों में एक ही त्योहार अलग-अलग तरीकों से मनाया जाता है — नवरात्रि में गुजरात का गरबा, महाराष्ट्र की गणेश पूजा, बंगाल की दुर्गा पूजा, तमिलनाडु का पोंगल, केरल का ओणम — यह विविधता में एकता हिंदू परंपरा की विशेषता है। हर पर्व से पहले घर की सजावट, पकवान बनाना और नए वस्त्र पहनने की परंपरा है।",
+        "त्योहारों का मनोवैज्ञानिक महत्व भी अत्यंत गहरा है। ये एकाकीपन दूर करते हैं, परिवार और समुदाय को जोड़ते हैं, और जीवन में उत्साह, आनंद और सकारात्मकता का संचार करते हैं। वैज्ञानिक शोध भी बताते हैं कि त्योहारों के समय मानवीय संबंध मजबूत होते हैं और मानसिक स्वास्थ्य बेहतर रहता है।",
+        "इस विशेष Festival 4K छवि को त्योहार की शुभकामनाओं के साथ WhatsApp Status, Instagram Stories और Facebook पर शेयर करें। अपने परिवार और मित्रों को इस पावन छवि के माध्यम से त्योहार की बधाई दें और उनके घर में उत्सव का उजाला बिखेरें। शुभ पर्व की शुभकामनाएं!"
+    ],
+    "trending": [
+        "हिंदू भगवान की 4K तस्वीरें आज सोशल मीडिया पर सर्वाधिक शेयर होने वाली कंटेंट में से एक हैं। WhatsApp Status, Instagram Reels, Facebook Posts — हर प्लेटफ़ॉर्म पर दैनिक भक्ति सामग्री की माँग लाखों की संख्या में है। यह Trending Hindu God Wallpaper उसी माँग को पूरा करती है — HD से 4K Ultra तक, हर रिज़ॉल्यूशन में उपलब्ध।",
+        "आधुनिक भारत में डिजिटल भक्ति एक नई परंपरा बन चुकी है। सुबह उठकर WhatsApp पर भगवान का Good Morning Status भेजना, इंस्टाग्राम पर मंत्र शेयर करना, यूट्यूब पर भजन सुनना — ये सब डिजिटल भारत की नई पूजा पद्धति है। इस परंपरा में 4K Divine Images की भूमिका केंद्रीय है। हर सुबह नई, ताज़ी और सुंदर भगवान की तस्वीर मिलना आत्मा को प्रसन्न करता है।",
+        "इस वेबसाइट पर प्रतिदिन नई 4K Hindu God Images अपलोड होती हैं — Shiva, Krishna, Hanuman, Lakshmi, Durga, Ganesha और अन्य सभी देवताओं के Cute, Trending और Festival Special रूपों में। AI-generated लेकिन भारतीय कलाकारों की सुरुचि से क्यूरेट की गई ये तस्वीरें आपके मन, घर और डिजिटल जीवन को पवित्र बनाती हैं।",
+        "इस Trending 4K God Wallpaper को अभी Download करें और अपने सभी सोशल मीडिया प्लेटफ़ॉर्म पर शेयर करें। Bookmark करें यह वेबसाइट — क्योंकि यहाँ प्रतिदिन नए दर्शन का लाभ मिलता है। अपने सभी WhatsApp Groups में यह पावन तस्वीर शेयर करके हर किसी के दिन की दिव्य शुरुआत करें।"
+    ],
+}
+
+def _get_deity_mantra(category):
+    """Returns (mantra, mantraMeaning) tuple for a given deity category."""
+    cat_key = category.lower().strip()
+    for key in _DEITY_MANTRAS:
+        if key in cat_key or cat_key in key:
+            return _DEITY_MANTRAS[key]
+    return _DEITY_MANTRAS["cute"]
+
+def _build_rich_article(titleHi, title_en, category, desc_hi, desc_en, ai_prompt, item_date, style_tag):
+    """Builds a 400+ word rich article for a deity item from images_data.json."""
+    cat_key = category.lower().strip()
+    deity_paras = None
+    for key in _DEITY_ARTICLES:
+        if key in cat_key or cat_key in key:
+            deity_paras = _DEITY_ARTICLES[key]
+            break
+    if not deity_paras:
+        deity_paras = _DEITY_ARTICLES["cute"]
+
+    # Build personalized intro from description
+    intro_lines = []
+    if desc_hi:
+        intro_lines.append(f"<strong>{titleHi}</strong> — {desc_hi}")
+    elif desc_en:
+        intro_lines.append(f"<strong>{titleHi}</strong> — {desc_en}")
+    else:
+        intro_lines.append(f"<strong>{titleHi}</strong> का यह अलौकिक 4K स्वरूप दैनिक दर्शन और WhatsApp Status के लिए विशेष रूप से तैयार किया गया है।")
+
+    if style_tag:
+        intro_lines.append(f"इस छवि का कलात्मक शैली: <em>{style_tag}</em> — जो इसे विशेष रूप से आकर्षक और साझा करने योग्य बनाती है।")
+
+    if item_date:
+        try:
+            dt = datetime.strptime(item_date, "%Y-%m-%d")
+            intro_lines.append(f"यह {dt.strftime('%d %B %Y')} को हमारी दैनिक दर्शन श्रृंखला में प्रकाशित की गई थी।")
+        except Exception:
+            pass
+
+    article_parts = ["<p>" + " ".join(intro_lines) + "</p>"]
+    for para in deity_paras:
+        article_parts.append(f"<p>{para}</p>")
+
+    return "\n".join(article_parts)
+
 def load_fused_items():
     """Fuses curated items with any newly generated items from images_data.json"""
     import copy
@@ -71,7 +235,16 @@ def load_fused_items():
                     title = entry.get("title") or entry.get("name_en", "Daily Hindu God 4K Wallpaper")
                     titleHi = entry.get("titleHi") or entry.get("name_hi", "दैनिक हिन्दू भगवान 4K फोटो")
                     cat = (entry.get("category") or "cute").split(",")[0].lower()
-                    
+                    desc_hi = entry.get("description_hi") or ""
+                    desc_en = entry.get("description_en") or ""
+                    ai_prompt = entry.get("ai_prompt") or ""
+                    item_date = entry.get("date", "")
+                    style_tag = entry.get("style", "")
+
+                    mantra, mantraMeaning = _get_deity_mantra(cat)
+                    article = _build_rich_article(titleHi, title, cat, desc_hi, desc_en, ai_prompt, item_date, style_tag)
+                    short_desc = desc_hi or desc_en or f"{titleHi} — भगवान का पावन और अलौकिक 4K स्वरूप। यह दिव्य छवि आपके मन को शांति और भक्ति की अनुभूति कराएगी।"
+
                     new_item = {
                         "id": eid,
                         "slug": f"photo-{eid}.html",
@@ -83,10 +256,10 @@ def load_fused_items():
                         "god": cat,
                         "img": img_base,
                         "badge": "Daily Divine 4K",
-                        "shortDesc": entry.get("description_hi") or f"{titleHi} का मनमोहक और पावन 4K स्वरूप। दैनिक दर्शन एवं वॉलपेपर।",
-                        "mantra": "ॐ नमो भगवते वासुदेवाय नमः ।\nसर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥",
-                        "mantraMeaning": "सभी सुखी हों, सभी निरोगी रहें, सभी का कल्याण हो।",
-                        "article": f"{titleHi} के पावन दर्शन मात्र से जीवन में सुख, शांति और सकारात्मक ऊर्जा का संचार होता है। इस 4K वॉलपेपर को अपने मोबाइल स्क्रीन पर लगाएं या व्हाट्सएप स्टेटस पर शेयर करें।",
+                        "shortDesc": short_desc,
+                        "mantra": mantra,
+                        "mantraMeaning": mantraMeaning,
+                        "article": article,
                         "tags": entry.get("tags") or [title.lower(), "hindu god 4k", "whatsapp status god photo"]
                     }
                     all_items.append(new_item)
@@ -835,9 +1008,13 @@ COMMON_FOOTER = """
         <a href="hanuman-chalisa.html">हनुमान चालीसा</a> |
         <a href="shiv-aarti.html">शिव आरती</a> |
         <a href="ganesh-aarti.html">गणेश आरती</a> |
+        <a href="about.html">हमारे बारे में</a> |
+        <a href="contact.html">संपर्क करें</a> |
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms.html">नियम व शर्तें</a> |
+        <a href="disclaimer.html">अस्वीकरण</a> |
         <a href="sitemap.xml">Sitemap (XML)</a> |
-        <a href="feed.xml">RSS Feed</a> |
-        <a href="robots.txt">Robots.txt</a>
+        <a href="feed.xml">RSS Feed</a>
     </p>
     <p style="margin-top: 10px; font-size: 0.78rem; opacity: 0.8;">&copy; 2026 Hindu Gods Daily Gallery. Free 4K Download & Devotional WhatsApp Status.</p>
 </footer>
@@ -1187,6 +1364,43 @@ def generate_photo_page(item, all_items):
             {{ "@type": "ListItem", "position": 2, "name": "{item['categoryName']}", "item": "{BASE_URL}{item['categorySlug']}" }},
             {{ "@type": "ListItem", "position": 3, "name": "{item['titleHi']}", "item": "{page_url}" }}
           ]
+        }},
+        {{
+          "@type": "FAQPage",
+          "mainEntity": [
+            {{
+              "@type": "Question",
+              "name": "इस 4K वॉलपेपर को कैसे डाउनलोड करें?",
+              "acceptedAnswer": {{
+                "@type": "Answer",
+                "text": "Download 4K Image बटन पर क्लिक करें। छवि तुरंत आपके डिवाइस में मुफ्त सेव हो जाएगी।"
+              }}
+            }},
+            {{
+              "@type": "Question",
+              "name": "WhatsApp Status पर कैसे लगाएं?",
+              "acceptedAnswer": {{
+                "@type": "Answer",
+                "text": "1-Click WhatsApp Status बटन दबाएं। यह स्वचालित रूप से तस्वीर के साथ पावन मंत्र WhatsApp पर शेयर करेगा।"
+              }}
+            }},
+            {{
+              "@type": "Question",
+              "name": "यह इमेज किस रिज़ॉल्यूशन में है?",
+              "acceptedAnswer": {{
+                "@type": "Answer",
+                "text": "यह छवि 4K Ultra HD (1024x1365) रिज़ॉल्यूशन में उपलब्ध है — मोबाइल और कंप्यूटर दोनों के लिए अनुकूलित है।"
+              }}
+            }},
+            {{
+              "@type": "Question",
+              "name": "क्या ये तस्वीरें बिल्कुल मुफ्त हैं?",
+              "acceptedAnswer": {{
+                "@type": "Answer",
+                "text": "हाँ, सभी तस्वीरें 100% मुफ्त हैं — डाउनलोड करें, WhatsApp स्टेटस लगाएं, वॉलपेपर बनाएं।"
+              }}
+            }}
+          ]
         }}
       ]
     }}
@@ -1268,10 +1482,36 @@ def generate_photo_page(item, all_items):
             </div>
 
             <div class="article-box">
-                <h3 style="color:var(--maroon); margin-bottom:10px; font-family:'Rozha One', serif;">धार्मिक महत्व एवं वॉलपेपर विवरण</h3>
-                <p>{item['article']}</p>
-                
-                <h4 style="color:var(--maroon); margin-top:16px; margin-bottom:8px;">संबंधित सर्च कीवर्ड्स (Tags):</h4>
+                <h3 style="color:var(--maroon); margin-bottom:10px; font-family:'Rozha One', serif;">🙏 धार्मिक महत्व एवं आध्यात्मिक विवरण</h3>
+                <div class="article-content">
+                {item['article']}
+                </div>
+
+                <div class="faq-box" style="margin-top:24px; border-top:2px solid var(--saffron); padding-top:16px;">
+                    <h3 style="color:var(--maroon); margin-bottom:14px; font-family:'Rozha One', serif;">❓ अक्सर पूछे जाने वाले प्रश्न (FAQ)</h3>
+                    <details style="margin-bottom:10px; background:rgba(255,153,0,0.07); border-radius:8px; padding:10px 14px;">
+                        <summary style="font-weight:700; color:var(--maroon); cursor:pointer;">📥 इस 4K वॉलपेपर को कैसे डाउनलोड करें?</summary>
+                        <p style="margin-top:8px; color:#555;">ऊपर दिए <strong>📥 Download 4K Image</strong> बटन पर क्लिक करें। छवि तुरंत आपके डिवाइस में सेव हो जाएगी — मोबाइल और कंप्यूटर दोनों पर काम करता है।</p>
+                    </details>
+                    <details style="margin-bottom:10px; background:rgba(255,153,0,0.07); border-radius:8px; padding:10px 14px;">
+                        <summary style="font-weight:700; color:var(--maroon); cursor:pointer;">📱 WhatsApp Status पर कैसे लगाएं?</summary>
+                        <p style="margin-top:8px; color:#555;"><strong>📱 1-Click WhatsApp Status</strong> बटन दबाएं। यह स्वचालित रूप से {item['titleHi']} की तस्वीर के साथ पावन मंत्र WhatsApp पर शेयर करेगा।</p>
+                    </details>
+                    <details style="margin-bottom:10px; background:rgba(255,153,0,0.07); border-radius:8px; padding:10px 14px;">
+                        <summary style="font-weight:700; color:var(--maroon); cursor:pointer;">🖼️ यह इमेज किस रिज़ॉल्यूशन में है?</summary>
+                        <p style="margin-top:8px; color:#555;">यह छवि 4K Ultra HD (1024×1365) रिज़ॉल्यूशन में उपलब्ध है — मोबाइल, टैबलेट और कंप्यूटर सभी पर crystal-clear दिखती है।</p>
+                    </details>
+                    <details style="margin-bottom:10px; background:rgba(255,153,0,0.07); border-radius:8px; padding:10px 14px;">
+                        <summary style="font-weight:700; color:var(--maroon); cursor:pointer;">🕐 नई तस्वीरें कब अपलोड होती हैं?</summary>
+                        <p style="margin-top:8px; color:#555;">इस वेबसाइट पर प्रतिदिन 10 नई 4K Hindu God Images अपलोड होती हैं। बुकमार्क करें और प्रतिदिन ताज़े दर्शन का लाभ उठाएं।</p>
+                    </details>
+                    <details style="margin-bottom:10px; background:rgba(255,153,0,0.07); border-radius:8px; padding:10px 14px;">
+                        <summary style="font-weight:700; color:var(--maroon); cursor:pointer;">💰 क्या ये तस्वीरें बिल्कुल मुफ्त हैं?</summary>
+                        <p style="margin-top:8px; color:#555;">हाँ! सभी तस्वीरें 100% मुफ्त हैं — डाउनलोड करें, WhatsApp पर शेयर करें, वॉलपेपर लगाएं — सब कुछ निःशुल्क।</p>
+                    </details>
+                </div>
+
+                <h4 style="color:var(--maroon); margin-top:20px; margin-bottom:8px;">🔖 संबंधित सर्च कीवर्ड्स (Tags):</h4>
                 <div class="tag-cloud">
                     {tags_html}
                 </div>
@@ -1872,8 +2112,419 @@ def generate_sitemap(all_items, all_cats):
         xml_lines.append('    <priority>0.9</priority>')
         xml_lines.append('  </url>')
 
+    # Static Policy Pages
+    xml_lines.append('  <!-- Static Policy & Trust Pages (AdSense Compliance) -->')
+    for sp in ['about.html', 'contact.html', 'privacy-policy.html', 'terms.html', 'disclaimer.html']:
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{BASE_URL}{sp}</loc>')
+        xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
+        xml_lines.append('    <changefreq>monthly</changefreq>')
+        xml_lines.append('    <priority>0.7</priority>')
+        xml_lines.append('  </url>')
+
     xml_lines.append('</urlset>')
     return "\n".join(xml_lines)
+
+def generate_about_page():
+    """About Us page — required for AdSense approval and E-E-A-T."""
+    today_iso = date.today().isoformat()
+    return f"""<!DOCTYPE html>
+<html lang="hi" prefix="og: https://ogp.me/ns#">
+<head>
+    {COMMON_HEAD}
+    <title>हमारे बारे में | Hindu Gods Daily Gallery — About Us</title>
+    <meta name="description" content="Hindu Gods Daily Gallery के बारे में जानें — भारत की #1 दैनिक हिन्दू देव-देवी 4K वॉलपेपर वेबसाइट। हमारा मिशन, विजन और संपादकीय मूल्य।">
+    <link rel="canonical" href="{BASE_URL}about.html">
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "हमारे बारे में — Hindu Gods Daily Gallery",
+      "description": "Daily 4K Hindu God Wallpaper, Mantras, Chalisa and WhatsApp Status — Free for all devotees.",
+      "url": "{BASE_URL}about.html",
+      "publisher": {{
+        "@type": "Organization",
+        "name": "Hindu Gods Daily Gallery",
+        "url": "{BASE_URL}",
+        "logo": "{BASE_URL}favicon.png"
+      }}
+    }}
+    </script>
+    {COMMON_STYLE}
+</head>
+<body>
+<header class="site-header">
+    <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
+    <p>Daily Cute Hindu Gods 4K Wallpaper &amp; WhatsApp Status</p>
+</header>
+<nav class="top-nav">
+    <a href="index.html" class="nav-link">Home (होम)</a>
+    <a href="category-cute.html" class="nav-link">🧸 Cute Gallery</a>
+    <a href="category-trending.html" class="nav-link">🔥 Trending 4K</a>
+    <a href="category-shiva.html" class="nav-link">🔱 Mahadev</a>
+    <a href="category-krishna.html" class="nav-link">🦚 Krishna</a>
+    <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 हनुमान चालीसा</a>
+</nav>
+<div class="container" style="max-width:960px; margin:24px auto; padding:20px;">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> &raquo;
+        <span>हमारे बारे में</span>
+    </nav>
+    <main>
+        <div class="article-box" style="background:#fff; border-radius:16px; padding:32px; box-shadow:0 8px 30px rgba(0,0,0,0.06); border-top:4px solid var(--saffron);">
+            <h1 style="color:var(--maroon); font-family:'Rozha One',serif; font-size:2.2rem; margin-bottom:16px; text-align:center;">🙏 हमारे बारे में (About Us)</h1>
+            <p style="font-size:1.15rem; color:#555; text-align:center; max-width:750px; margin:0 auto 24px;">
+                सनातन धर्म की पावन ऊर्जा, दिव्यता और सौम्यता को डिजिटल युग के हर श्रद्धालु तक पहुँचाने का एक विनम्र प्रयास।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:28px; margin-bottom:12px; font-family:'Rozha One',serif;">🌺 हमारा परिचय</h2>
+            <p style="font-size:1.05rem; line-height:1.8; color:#333;">
+                <strong>Hindu Gods Daily Gallery</strong> भारत की एक प्रमुख और समर्पित भक्ति डिजिटल गैलरी है। यहाँ प्रतिदिन हिन्दू देवी-देवताओं के
+                4K Ultra HD वॉलपेपर, वैदिक मंत्र, सम्पूर्ण चालीसा, दैनिक आरतियां और प्रामाणिक पंचांग प्रकाशित किए जाते हैं।
+                हमारा उद्देश्य है कि प्रत्येक श्रद्धालु अपने दिन का प्रारंभ पावन ईश्वरीय दर्शन और सकारात्मक विचारों के साथ कर सके।
+            </p>
+            <p style="font-size:1.05rem; line-height:1.8; color:#333;">
+                हमारे संग्रह में <strong>महादेव शिव, भगवान श्री कृष्ण, पवनपुत्र हनुमान, माता दुर्गा, धनलक्ष्मी, विद्यादायिनी सरस्वती,
+                विघ्नहर्ता गणेश और मर्यादा पुरुषोत्तम श्री राम</strong> के दिव्य और बाल स्वरूप (Cute God Wallpapers) विशेष रूप से सुसज्जित हैं।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:28px; margin-bottom:12px; font-family:'Rozha One',serif;">🎯 हमारा ध्येय एवं विजन (Our Mission)</h2>
+            <p style="font-size:1.05rem; line-height:1.8; color:#333;">
+                हमारा मुख्य विजन है — <em>"हर मोबाइल स्क्रीन पर पावन दर्शन, हर घर में सुख-शांति और ईश्वरीय कृपा।"</em>
+            </p>
+            <ul style="list-style:none; padding:0; margin:16px 0;">
+                <li style="padding:10px 16px; margin-bottom:8px; background:rgba(255,153,0,0.08); border-left:4px solid var(--saffron); border-radius:6px; font-size:1rem;">
+                    ✨ <strong>नित्य नवीन 4K दर्शन:</strong> प्रतिदिन 10 नवीन, उच्च रिज़ॉल्यूशन (1024×1365) देव प्रतिमाएं।
+                </li>
+                <li style="padding:10px 16px; margin-bottom:8px; background:rgba(255,153,0,0.08); border-left:4px solid var(--saffron); border-radius:6px; font-size:1rem;">
+                    📲 <strong>1-Click WhatsApp Status:</strong> एक क्लिक में परिवार और मित्रों के साथ मंत्र सहित फोटो शेयर करने की सुविधा।
+                </li>
+                <li style="padding:10px 16px; margin-bottom:8px; background:rgba(255,153,0,0.08); border-left:4px solid var(--saffron); border-radius:6px; font-size:1rem;">
+                    📖 <strong>प्रामाणिक वैदिक सामग्री:</strong> प्रत्येक छवि के साथ प्रामाणिक श्लोक, मंत्र, उनका सरल हिंदी अर्थ और पौराणिक संदर्भ।
+                </li>
+                <li style="padding:10px 16px; margin-bottom:8px; background:rgba(255,153,0,0.08); border-left:4px solid var(--saffron); border-radius:6px; font-size:1rem;">
+                    📿 <strong>डिजिटल साधना टूल्स:</strong> दैनिक पंचांग, 108 जाप माला, वर्चुअल मंदिर घंटी और शंख नाद।
+                </li>
+            </ul>
+
+            <h2 style="color:var(--maroon); margin-top:28px; margin-bottom:12px; font-family:'Rozha One',serif;">🛡️ संपादकीय एवं गुणवत्ता मानक (Quality Standards)</h2>
+            <p style="font-size:1.05rem; line-height:1.8; color:#333;">
+                हमारी टीम यह सुनिश्चित करती है कि सभी प्रस्तुत छवियां अत्यंत आदर, धार्मिक मर्यादा और भक्ति भाव से तैयार की गई हों।
+                हम आधुनिक रचनात्मक तकनीक के साथ-साथ पारंपरिक शास्त्रों के सौंदर्य का पूर्ण सम्मान करते हैं।
+                यह वेबसाइट सभी भक्तों के लिए 100% निःशुल्क और सुरक्षित है।
+            </p>
+
+            <div style="text-align:center; margin-top:36px; padding-top:24px; border-top:1px solid #eee;">
+                <p style="font-family:'Rozha One',serif; color:var(--maroon); font-size:1.25rem;">
+                    ॥ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥<br>
+                    जय श्री राम | हर हर महादेव | गणपति बप्पा मोरया 🙏
+                </p>
+            </div>
+        </div>
+    </main>
+</div>
+{COMMON_FOOTER}
+</body>
+</html>"""
+
+
+def generate_contact_page():
+    """Contact Us page — required for AdSense approval and transparent communication."""
+    return f"""<!DOCTYPE html>
+<html lang="hi" prefix="og: https://ogp.me/ns#">
+<head>
+    {COMMON_HEAD}
+    <title>संपर्क करें | Hindu Gods Daily Gallery — Contact Us</title>
+    <meta name="description" content="Hindu Gods Daily Gallery से संपर्क करें — सुझाव, प्रतिक्रिया, तकनीकी सहायता, अथवा नवीन देव प्रतिमा अनुरोध।">
+    <link rel="canonical" href="{BASE_URL}contact.html">
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "संपर्क करें — Hindu Gods Daily Gallery",
+      "url": "{BASE_URL}contact.html"
+    }}
+    </script>
+    {COMMON_STYLE}
+</head>
+<body>
+<header class="site-header">
+    <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
+    <p>Daily Cute Hindu Gods 4K Wallpaper &amp; WhatsApp Status</p>
+</header>
+<nav class="top-nav">
+    <a href="index.html" class="nav-link">Home (होम)</a>
+    <a href="about.html" class="nav-link">हमारे बारे में</a>
+    <a href="category-cute.html" class="nav-link">🧸 Cute Gallery</a>
+    <a href="category-trending.html" class="nav-link">🔥 Trending 4K</a>
+    <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 हनुमान चालीसा</a>
+</nav>
+<div class="container" style="max-width:960px; margin:24px auto; padding:20px;">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> &raquo;
+        <span>संपर्क करें</span>
+    </nav>
+    <main>
+        <div class="article-box" style="background:#fff; border-radius:16px; padding:32px; box-shadow:0 8px 30px rgba(0,0,0,0.06); border-top:4px solid var(--saffron);">
+            <h1 style="color:var(--maroon); font-family:'Rozha One',serif; font-size:2.2rem; margin-bottom:16px; text-align:center;">📬 संपर्क करें (Contact Us)</h1>
+            <p style="font-size:1.15rem; color:#555; text-align:center; max-width:750px; margin:0 auto 28px;">
+                श्रद्धालुओं और पाठकों के विचार, सुझाव और प्रश्न हमारे लिए अत्यंत बहुमूल्य हैं।
+            </p>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-bottom:28px;">
+                <div style="background:rgba(255,153,0,0.06); border:1.5px solid rgba(255,119,0,0.3); border-radius:12px; padding:20px; text-align:center;">
+                    <div style="font-size:2.5rem; margin-bottom:8px;">💬</div>
+                    <h3 style="color:var(--maroon); margin-bottom:8px; font-family:'Rozha One',serif;">सामान्य पूछताछ व सुझाव</h3>
+                    <p style="font-size:0.95rem; color:#666; margin-bottom:14px;">वेबसाइट सुधार, नई श्रेणियों अथवा देव प्रतिमाओं के सुझाव हेतु।</p>
+                    <a href="https://github.com/pmeena9098610-dot/HinduGodsGallery/issues" target="_blank" rel="noopener" style="display:inline-block; background:var(--maroon); color:#fff; padding:8px 18px; border-radius:20px; text-decoration:none; font-weight:600; font-size:0.9rem;">
+                        GitHub Community Issues
+                    </a>
+                </div>
+                <div style="background:rgba(255,153,0,0.06); border:1.5px solid rgba(255,119,0,0.3); border-radius:12px; padding:20px; text-align:center;">
+                    <div style="font-size:2.5rem; margin-bottom:8px;">⚖️</div>
+                    <h3 style="color:var(--maroon); margin-bottom:8px; font-family:'Rozha One',serif;">कॉपीराइट एवं नीतिगत विषय</h3>
+                    <p style="font-size:0.95rem; color:#666; margin-bottom:14px;">सामग्री, बौद्धिक संपदा अथवा गोपनीयता नीति संबंधी प्रश्नों हेतु।</p>
+                    <a href="privacy-policy.html" style="display:inline-block; background:var(--saffron); color:#fff; padding:8px 18px; border-radius:20px; text-decoration:none; font-weight:600; font-size:0.9rem;">
+                        Privacy Policy देखें
+                    </a>
+                </div>
+            </div>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">📋 संपर्क के प्रमुख विषय</h2>
+            <ul style="list-style:disc; margin-left:24px; color:#444; line-height:1.8;">
+                <li><strong>विशेष देव प्रतिमा का अनुरोध:</strong> यदि आप किसी विशेष मंदिर, स्वरूप अथवा त्यौहार के 4K वॉलपेपर चाहते हैं।</li>
+                <li><strong>तकनीकी त्रुटि (Bug Report):</strong> यदि कोई छवि लोड न हो रही हो, डाउनलोड में समस्या हो, अथवा लिंक टूटा हो।</li>
+                <li><strong>मंत्र अथवा पाठ संशोधन:</strong> यदि किसी श्लोक या मंत्र के उच्चारण में सुधार अपेक्षित हो।</li>
+            </ul>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">⏱️ प्रतिक्रिया समय</h2>
+            <p style="font-size:1.05rem; line-height:1.8; color:#333;">
+                हमारी तकनीकी व संपादकीय टीम प्राप्त सुझावों का मूल्यांकन कर <strong>24 से 48 घंटों</strong> के भीतर समाधान करने का पूर्ण प्रयास करती है।
+            </p>
+
+            <div style="text-align:center; margin-top:32px; padding-top:20px; border-top:1px solid #eee;">
+                <p style="font-family:'Rozha One',serif; color:var(--maroon); font-size:1.15rem;">
+                    भगवान आपके जीवन में सुख, शांति और समृद्धि प्रदान करें। जय श्री राम 🙏
+                </p>
+            </div>
+        </div>
+    </main>
+</div>
+{COMMON_FOOTER}
+</body>
+</html>"""
+
+
+def generate_privacy_page():
+    """Privacy Policy page — comprehensive compliance for AdSense, GDPR, CCPA, Cookies."""
+    today_iso = date.today().isoformat()
+    return f"""<!DOCTYPE html>
+<html lang="hi" prefix="og: https://ogp.me/ns#">
+<head>
+    {COMMON_HEAD}
+    <title>Privacy Policy (गोपनीयता नीति) | Hindu Gods Daily Gallery</title>
+    <meta name="description" content="Hindu Gods Daily Gallery की गोपनीयता नीति — हम आपके डेटा की सुरक्षा का पूर्ण सम्मान करते हैं। Google AdSense, Cookies और पारदर्शिता विवरण।">
+    <link rel="canonical" href="{BASE_URL}privacy-policy.html">
+    {COMMON_STYLE}
+</head>
+<body>
+<header class="site-header">
+    <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
+    <p>Daily Cute Hindu Gods 4K Wallpaper &amp; WhatsApp Status</p>
+</header>
+<nav class="top-nav">
+    <a href="index.html" class="nav-link">Home (होम)</a>
+    <a href="about.html" class="nav-link">हमारे बारे में</a>
+    <a href="contact.html" class="nav-link">संपर्क</a>
+    <a href="terms.html" class="nav-link">नियम एवं शर्तें</a>
+</nav>
+<div class="container" style="max-width:960px; margin:24px auto; padding:20px;">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> &raquo;
+        <span>Privacy Policy</span>
+    </nav>
+    <main>
+        <div class="article-box" style="background:#fff; border-radius:16px; padding:32px; box-shadow:0 8px 30px rgba(0,0,0,0.06); border-top:4px solid var(--saffron);">
+            <h1 style="color:var(--maroon); font-family:'Rozha One',serif; font-size:2.2rem; margin-bottom:8px; text-align:center;">🔒 गोपनीयता नीति (Privacy Policy)</h1>
+            <p style="color:#888; font-size:0.9rem; text-align:center; margin-bottom:24px;">अंतिम अद्यतन (Last Updated): {today_iso}</p>
+
+            <p style="font-size:1.05rem; line-height:1.8; color:#333;">
+                <strong>Hindu Gods Daily Gallery</strong> (वेबसाइट URL: <a href="{BASE_URL}" style="color:var(--maroon);">{BASE_URL}</a>) पर हम अपने आगंतुकों की गोपनीयता का सर्वोच्च सम्मान करते हैं।
+                यह गोपनीयता नीति दस्तावेज स्पष्ट करता है कि हमारी वेबसाइट द्वारा किस प्रकार की जानकारी एकत्र व दर्ज की जाती है और हम उसका किस प्रकार उपयोग करते हैं।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">1. व्यक्तिगत डेटा संग्रह (Personal Data Collection)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                हम एक निःशुल्क, सार्वजनिक भक्ति पोर्टल हैं। हमारी वेबसाइट पर विज़िट करने, 4K वॉलपेपर डाउनलोड करने, मंत्र पढ़ने अथवा पंचांग देखने के लिए किसी भी प्रकार के 
+                <strong>पंजीकरण (Registration), लॉगिन (Login) अथवा व्यक्तिगत पहचान जानकारी (जैसे नाम, ईमेल, फोन नंबर)</strong> की आवश्यकता नहीं होती। हम प्रत्यक्ष रूप से आपकी कोई भी व्यक्तिगत जानकारी संग्रहीत नहीं करते।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">2. लॉग फाइल्स (Log Files)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                मानक वेब सर्वर प्रक्रियाओं के अनुसार (GitHub Pages होस्टिंग प्लेटफॉर्म द्वारा), सर्वर विज़िट के दौरान अज्ञात तकनीकी लॉग एकत्र हो सकते हैं, जिनमें इंटरनेट प्रोटोकॉल (IP) पते, ब्राउज़र प्रकार, इंटरनेट सेवा प्रदाता (ISP), दिनांक/समय स्टैम्प, रेफरिंग पृष्ठ और क्लिक्स की संख्या शामिल हो सकती है। यह जानकारी किसी भी व्यक्तिगत पहचान से संबद्ध नहीं होती और केवल साइट के तकनीकी प्रबंधन तथा रुझानों के विश्लेषण हेतु प्रयुक्त होती है।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">3. कुकीज़ एवं स्थानीय संग्रहण (Cookies &amp; Local Storage)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                हमारी वेबसाइट उपयोगकर्ता अनुभव को समृद्ध बनाने के लिए स्थानीय ब्राउज़र संग्रहण (Local Storage / Session Storage) का उपयोग करती है। उदाहरणार्थ — आपकी 108 जाप माला की प्रगति, वर्चुअल दीपक प्रज्ज्वलन स्थिति अथवा डार्क मोड प्राथमिकताएं। ये कुकीज़ किसी भी बाहरी सर्वर को प्रेषित नहीं की जातीं और पूर्णतः आपके स्थानीय डिवाइस में सुरक्षित रहती हैं।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">4. गूगल ऐडसेंस एवं थर्ड-पार्टी विज्ञापन (Google AdSense)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                Google हमारी साइट पर एक तृतीय-पक्ष विक्रेता के रूप में विज्ञापन प्रदर्शित करने के लिए कुकीज़ (जैसे DoubleClick DART कुकी) का उपयोग कर सकता है। DART कुकी का उपयोग Google को हमारे उपयोगकर्ताओं को इस साइट और इंटरनेट पर अन्य साइटों पर उनकी विज़िट के आधार पर विज्ञापन प्रस्तुत करने में सक्षम बनाता है।
+                उपयोगकर्ता Google विज्ञापन और सामग्री नेटवर्क गोपनीयता नीति पर जाकर DART कुकी के उपयोग को ऑप्ट-आउट कर सकते हैं:
+                <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener" style="color:var(--maroon); font-weight:600;">Google Ads Privacy Policy</a>.
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">5. बच्चों की गोपनीयता (Children's Privacy Protection)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                हमारी भक्ति सामग्री सभी आयु वर्गों के लिए पूर्णतः सुरक्षित और सकारात्मक है। हम 13 वर्ष से कम आयु के बच्चों से जानबूझकर कोई भी व्यक्तिगत पहचान योग्य जानकारी एकत्र नहीं करते। यदि आपको विश्वास है कि किसी बच्चे ने हमारी साइट पर जानकारी प्रदान की है, तो कृपया तत्काल हमसे संपर्क करें।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">6. सहमति (Consent)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                हमारी वेबसाइट का उपयोग करके, आप एतद्द्वारा हमारी गोपनीयता नीति से सहमति व्यक्त करते हैं और इसके सभी नियमों व शर्तों को स्वीकार करते हैं।
+            </p>
+
+            <div style="text-align:center; margin-top:32px; padding-top:20px; border-top:1px solid #eee;">
+                <p style="font-size:0.95rem; color:#777;">
+                    गोपनीयता नीति संबंधी किसी भी प्रश्न के लिए कृपया <a href="contact.html" style="color:var(--maroon);">संपर्क पृष्ठ</a> पर संपर्क करें।
+                </p>
+            </div>
+        </div>
+    </main>
+</div>
+{COMMON_FOOTER}
+</body>
+</html>"""
+
+
+def generate_terms_page():
+    """Terms of Service page — formal legal clarity for Google compliance."""
+    today_iso = date.today().isoformat()
+    return f"""<!DOCTYPE html>
+<html lang="hi" prefix="og: https://ogp.me/ns#">
+<head>
+    {COMMON_HEAD}
+    <title>नियम एवं शर्तें | Hindu Gods Daily Gallery — Terms of Service</title>
+    <meta name="description" content="Hindu Gods Daily Gallery की सेवा शर्तें एवं उपयोग नियम — निःशुल्क धार्मिक वॉलपेपर, डाउनलोडिंग और स्टेटस शेयरिंग संबंधी दिशा-निर्देश।">
+    <link rel="canonical" href="{BASE_URL}terms.html">
+    {COMMON_STYLE}
+</head>
+<body>
+<header class="site-header">
+    <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
+    <p>Daily Cute Hindu Gods 4K Wallpaper &amp; WhatsApp Status</p>
+</header>
+<nav class="top-nav">
+    <a href="index.html" class="nav-link">Home (होम)</a>
+    <a href="about.html" class="nav-link">हमारे बारे में</a>
+    <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
+    <a href="contact.html" class="nav-link">संपर्क</a>
+</nav>
+<div class="container" style="max-width:960px; margin:24px auto; padding:20px;">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> &raquo;
+        <span>Terms of Service</span>
+    </nav>
+    <main>
+        <div class="article-box" style="background:#fff; border-radius:16px; padding:32px; box-shadow:0 8px 30px rgba(0,0,0,0.06); border-top:4px solid var(--saffron);">
+            <h1 style="color:var(--maroon); font-family:'Rozha One',serif; font-size:2.2rem; margin-bottom:8px; text-align:center;">📜 उपयोग की शर्तें (Terms of Service)</h1>
+            <p style="color:#888; font-size:0.9rem; text-align:center; margin-bottom:24px;">अंतिम अद्यतन: {today_iso}</p>
+
+            <h2 style="color:var(--maroon); margin-top:20px; margin-bottom:12px; font-family:'Rozha One',serif;">1. स्वीकृति (Acceptance of Terms)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                Hindu Gods Daily Gallery में आपका स्वागत है। इस वेबसाइट का उपयोग करके, आप इन सेवा शर्तों, हमारी गोपनीयता नीति तथा लागू सभी स्थानीय व अंतरराष्ट्रीय कानूनों का पालन करने के लिए अपनी बाध्यकारी सहमति प्रदान करते हैं।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">2. सामग्री का अनुमत उपयोग (Permitted Use)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                इस वेबसाइट पर उपलब्ध समस्त 4K देव प्रतिमाएं, मंत्र, आरतियां एवं चालीसा पाठ श्रद्धालुओं के <strong>व्यक्तिगत, गैर-व्यावसायिक एवं भक्ति उपयोग</strong> हेतु 100% निःशुल्क प्रदान की गई हैं।
+                आप इन छवियों को अपने मोबाइल/कंप्यूटर वॉलपेपर, WhatsApp स्टेटस, पारिवारिक साझाकरण तथा व्यक्तिगत पूजा-साधना में निर्बाध रूप से उपयोग कर सकते हैं।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">3. बौद्धिक संपदा एवं प्रतिबंध (Intellectual Property &amp; Restrictions)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                उपयोगकर्ताओं को निम्नलिखित गतिविधियों की अनुमति नहीं है:
+            </p>
+            <ul style="list-style:disc; margin-left:24px; color:#444; line-height:1.8;">
+                <li>वेबसाइट की सामग्री को किसी भी व्यावसायिक लाभ अथवा पुनर्विक्रय (Resale/Merchandise) हेतु बिना पूर्व लिखित अनुमति के उपयोग करना।</li>
+                <li>वेबसाइट के किसी भी अंश का दुर्भावनापूर्ण अथवा सनातन धर्म की मर्यादा के विपरीत अनैतिक प्रयोग।</li>
+                <li>स्वचालित बॉट्स द्वारा साइट के सर्वर पर अनुचित भार डालना।</li>
+            </ul>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">4. दायित्व की सीमा (Limitation of Liability)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                यह वेबसाइट "जैसी है" (AS IS) आधार पर भक्ति सेवा भाव से संचालित है। हम साइट के निरंतर, त्रुटिरहित अथवा किसी भी समय अनुपलब्ध होने के उत्तरदायी नहीं होंगे, यद्यपि हम 99.9% निर्बाध सेवा बनाए रखने हेतु सतत प्रयासरत रहते हैं।
+            </p>
+        </div>
+    </main>
+</div>
+{COMMON_FOOTER}
+</body>
+</html>"""
+
+
+def generate_disclaimer_page():
+    """Disclaimer page — spiritual, mythological, and AI generation transparency."""
+    today_iso = date.today().isoformat()
+    return f"""<!DOCTYPE html>
+<html lang="hi" prefix="og: https://ogp.me/ns#">
+<head>
+    {COMMON_HEAD}
+    <title>अस्वीकरण | Hindu Gods Daily Gallery — Disclaimer</title>
+    <meta name="description" content="Hindu Gods Daily Gallery का अस्वीकरण (Disclaimer) — धार्मिक निष्ठा, कलात्मक चित्रण और सनातन मर्यादा संबंधी स्पष्टीकरण।">
+    <link rel="canonical" href="{BASE_URL}disclaimer.html">
+    {COMMON_STYLE}
+</head>
+<body>
+<header class="site-header">
+    <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
+    <p>Daily Cute Hindu Gods 4K Wallpaper &amp; WhatsApp Status</p>
+</header>
+<nav class="top-nav">
+    <a href="index.html" class="nav-link">Home (होम)</a>
+    <a href="about.html" class="nav-link">हमारे बारे में</a>
+    <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
+    <a href="contact.html" class="nav-link">संपर्क</a>
+</nav>
+<div class="container" style="max-width:960px; margin:24px auto; padding:20px;">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> &raquo;
+        <span>Disclaimer</span>
+    </nav>
+    <main>
+        <div class="article-box" style="background:#fff; border-radius:16px; padding:32px; box-shadow:0 8px 30px rgba(0,0,0,0.06); border-top:4px solid var(--saffron);">
+            <h1 style="color:var(--maroon); font-family:'Rozha One',serif; font-size:2.2rem; margin-bottom:8px; text-align:center;">⚠️ अस्वीकरण (Disclaimer)</h1>
+            <p style="color:#888; font-size:0.9rem; text-align:center; margin-bottom:24px;">अंतिम अद्यतन: {today_iso}</p>
+
+            <h2 style="color:var(--maroon); margin-top:20px; margin-bottom:12px; font-family:'Rozha One',serif;">1. धार्मिक एवं आध्यात्मिक निष्ठा (Faith &amp; Devotion)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                Hindu Gods Daily Gallery पर प्रकाशित समस्त कलाकृतियां, आरतियां, चालीसा, मंत्र एवं पंचांग केवल और केवल सनातन धर्म की निष्ठा, भक्ति प्रचार तथा श्रद्धालुओं के आध्यात्मिक कल्याण के उद्देश्य से प्रस्तुत किए जाते हैं। हमारा उद्देश्य किसी भी संप्रदाय, जाति, पंथ अथवा आस्था की भावना को ठेस पहुँचाना नहीं है।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">2. कलात्मक एवं रचनात्मक स्वरूप (Artistic Representation)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                गैलरी में प्रस्तुत अनेक छवियां — विशेष रूप से 'क्यूट बाल स्वरूप' (Cute Bal Roop) — आधुनिक डिजिटल कलात्मक तकनीकों एवं पारंपरिक पुराणों में वर्णित वात्सल्य भाव की सुंदर प्रेरणा से सृजित की गई हैं। यह विशुद्ध रूप से ईश्वर के प्रति प्रेम और वात्सल्य भक्ति को समर्पित एक कलात्मक अभिव्यक्ति है।
+            </p>
+
+            <h2 style="color:var(--maroon); margin-top:24px; margin-bottom:12px; font-family:'Rozha One',serif;">3. पंचांग एवं मुहूर्त सूचना (Panchang Information)</h2>
+            <p style="font-size:1.02rem; line-height:1.8; color:#444;">
+                प्रदर्शित दैनिक पंचांग, तिथि, नक्षत्र व शुभ मुहूर्त सामान्य धार्मिक जानकारी हेतु प्रदान किए जाते हैं। किसी भी विशेष व्रत, यज्ञानुष्ठान अथवा मांगलिक कार्य के लिए श्रद्धालु अपने स्थानीय पुरोहित अथवा विद्वान ज्योतिषाचार्य से अवश्य परामर्श लें, क्योंकि स्थानीय सूर्योदय-सूर्यास्त के अनुसार समय में सूक्ष्म अंतर हो सकता है।
+            </p>
+
+            <div style="text-align:center; margin-top:32px; padding-top:20px; border-top:1px solid #eee;">
+                <p style="font-family:'Rozha One',serif; color:var(--maroon); font-size:1.15rem;">
+                    ॥ ॐ शांतिः शांतिः शांतिः ॥<br>
+                    समस्त विश्व का कल्याण हो 🙏
+                </p>
+            </div>
+        </div>
+    </main>
+</div>
+{COMMON_FOOTER}
+</body>
+</html>"""
 
 # Main Generation Runner
 print("Starting Ultra Site Generation...")
@@ -1899,6 +2550,14 @@ print("Generated index.html with Panchang & 108 Jap Mala widgets!")
 sitemap_content = generate_sitemap(ITEMS, CATEGORIES)
 generated_files["sitemap.xml"] = sitemap_content
 generated_files["feed.xml"] = generate_rss_feed(ITEMS)
+
+# 5. Generate Essential Policy & Trust Pages (About, Contact, Privacy, Terms, Disclaimer)
+generated_files["about.html"] = generate_about_page()
+generated_files["contact.html"] = generate_contact_page()
+generated_files["privacy-policy.html"] = generate_privacy_page()
+generated_files["terms.html"] = generate_terms_page()
+generated_files["disclaimer.html"] = generate_disclaimer_page()
+print("Generated 5 Essential Policy & Trust Pages for Google AdSense Approval!")
 print("Generated feed.xml for Google Discover!")
 print(f"Generated sitemap.xml with dynamic lastmod & enriched image tags!")
 

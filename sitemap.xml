@@ -1781,4 +1781,35 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- Static Policy & Trust Pages (AdSense Compliance) -->
+  <url>
+    <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/about.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/contact.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/privacy-policy.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/terms.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pmeena9098610-dot.github.io/HinduGodsGallery/disclaimer.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
