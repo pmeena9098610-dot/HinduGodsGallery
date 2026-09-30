@@ -1572,12 +1572,21 @@ def generate_category_page(cat, all_items):
         """
 
     cat_url = BASE_URL + cat["slug"]
+
+    # Retrieve rich deity editorial paragraphs
+    cid = cat["id"]
+    paras = _DEITY_ARTICLES.get(cid, _DEITY_ARTICLES.get("cute", []))
+    editorial_p_html = "".join([f"<p style='font-size:1.02rem; line-height:1.8; color:#333; margin-bottom:14px;'>{p}</p>" for p in paras])
+
+    # Retrieve sacred mantra for category
+    mantra, meaning = _get_deity_mantra(cid)
+
     html = f"""<!DOCTYPE html>
 <html lang="hi" prefix="og: https://ogp.me/ns#">
 <head>
     {COMMON_HEAD}
-    <title>{cat['nameHi']} 4K Wallpaper & Photos | {cat['name']} Free Download</title>
-    <meta name="description" content="{cat['desc']} Free 4K Ultra HD Wallpapers & WhatsApp Status photos download.">
+    <title>{cat['nameHi']} 4K Wallpaper &amp; Photos | {cat['name']} Free Download</title>
+    <meta name="description" content="{cat['desc']} Free 4K Ultra HD Wallpapers, Mantras &amp; WhatsApp Status photos download. {len(cat_items)}+ divine images.">
     <link rel="canonical" href="{cat_url}">
     
     <meta property="og:title" content="{cat['nameHi']} | 4K Hindu Gods Gallery">
@@ -1585,13 +1594,54 @@ def generate_category_page(cat, all_items):
     <meta property="og:url" content="{cat_url}">
     <meta property="og:type" content="website">
     
+    <!-- Google Schema.org CollectionPage, BreadcrumbList, and FAQPage -->
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "{cat['nameHi']} - {cat['name']}",
-      "description": "{cat['desc']}",
-      "url": "{cat_url}"
+      "@graph": [
+        {{
+          "@type": "CollectionPage",
+          "name": "{cat['nameHi']} - {cat['name']}",
+          "description": "{cat['desc']}",
+          "url": "{cat_url}"
+        }},
+        {{
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {{ "@type": "ListItem", "position": 1, "name": "Home", "item": "{BASE_URL}" }},
+            {{ "@type": "ListItem", "position": 2, "name": "{cat['nameHi']}", "item": "{cat_url}" }}
+          ]
+        }},
+        {{
+          "@type": "FAQPage",
+          "mainEntity": [
+            {{
+              "@type": "Question",
+              "name": "इस श्रेणी में कुल कितने {cat['nameHi']} 4K वॉलपेपर हैं?",
+              "acceptedAnswer": {{
+                "@type": "Answer",
+                "text": "इस श्रेणी में वर्तमान में {len(cat_items)}+ उच्च रिज़ॉल्यूशन 4K वॉलपेपर उपलब्ध हैं, जो प्रतिदिन नए जोड़े जाते हैं।"
+              }}
+            }},
+            {{
+              "@type": "Question",
+              "name": "क्या ये वॉलपेपर WhatsApp Status और Instagram Stories के लिए सही हैं?",
+              "acceptedAnswer": {{
+                "@type": "Answer",
+                "text": "हाँ, सभी छवियां 1024x1365 (3:4) लंबवत अनुपात में हैं, जो मोबाइल स्क्रीन, WhatsApp DP, और Status के लिए सटीक हैं।"
+              }}
+            }},
+            {{
+              "@type": "Question",
+              "name": "क्या {cat['nameHi']} के चित्र बिल्कुल मुफ्त डाउनलोड किए जा सकते हैं?",
+              "acceptedAnswer": {{
+                "@type": "Answer",
+                "text": "हाँ, सभी तस्वीरें 100% मुफ्त हैं। आप बिना किसी शुल्क के डाउनलोड कर सकते हैं।"
+              }}
+            }}
+          ]
+        }}
+      ]
     }}
     </script>
     {COMMON_STYLE}
@@ -1600,7 +1650,7 @@ def generate_category_page(cat, all_items):
 
 <header class="site-header">
     <h1><a href="index.html">ॐ दैनिक हिन्दू भगवान दर्शन</a></h1>
-    <p>{cat['nameHi']} - {cat['name']}</p>
+    <p>{cat['nameHi']} — Daily Cute 4K Wallpaper &amp; WhatsApp Status</p>
     <button id="ambientMusicBtn" class="header-audio-btn" onclick="toggleAmbientMusic()">🎵 ॐ दिव्य संगीत चलाएं</button>
 </header>
 
@@ -1613,6 +1663,10 @@ def generate_category_page(cat, all_items):
     <a href="category-krishna.html" class="nav-link { 'active' if cat['id'] == 'krishna' else '' }">🦚 Krishna</a>
     <a href="category-ganesha.html" class="nav-link { 'active' if cat['id'] == 'ganesha' else '' }">🐘 Ganesha</a>
     <a href="category-hanuman.html" class="nav-link { 'active' if cat['id'] == 'hanuman' else '' }">🚩 Hanuman</a>
+    <a href="category-durga.html" class="nav-link { 'active' if cat['id'] == 'durga' else '' }">🦁 Durga</a>
+    <a href="category-lakshmi.html" class="nav-link { 'active' if cat['id'] == 'lakshmi' else '' }">🪷 Lakshmi</a>
+    <a href="category-ram.html" class="nav-link { 'active' if cat['id'] == 'ram' else '' }">🏹 Ram</a>
+    <a href="category-saraswati.html" class="nav-link { 'active' if cat['id'] == 'saraswati' else '' }">🪕 Saraswati</a>
     <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 चालीसा</a>
 </nav>
 
@@ -1622,13 +1676,52 @@ def generate_category_page(cat, all_items):
         <span>{cat['nameHi']}</span>
     </nav>
 
-    <div style="text-align: center; margin: 10px 0 24px;">
-        <h1 style="font-family:'Rozha One', serif; color:var(--maroon); font-size:2rem;">{cat['nameHi']}</h1>
-        <p style="color:#666; max-width:800px; margin:8px auto; font-size:0.95rem;">{cat['desc']}</p>
+    <div style="text-align: center; margin: 16px 0 28px;">
+        <h1 style="font-family:'Rozha One', serif; color:var(--maroon); font-size:2.3rem; margin-bottom:8px;">{cat['nameHi']}</h1>
+        <p style="color:#555; max-width:850px; margin:0 auto 14px; font-size:1.05rem;">{cat['desc']}</p>
+        <div style="display:inline-block; background:rgba(255,153,0,0.12); color:var(--maroon); border:1px solid var(--saffron); padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.9rem;">
+            🌸 कुल {len(cat_items)} पावन दर्शन उपलब्ध
+        </div>
     </div>
 
+    <!-- GALLERY GRID -->
     <div class="gallery-grid">
         {cards_html}
+    </div>
+
+    <!-- RICH DEVOTIONAL EDITORIAL SECTION (Pillar Content for Google SEO & AdSense) -->
+    <div class="article-box" style="margin-top:40px; background:#fff; border-radius:16px; padding:32px; box-shadow:0 8px 30px rgba(0,0,0,0.06); border-top:4px solid var(--saffron);">
+        <h2 style="color:var(--maroon); font-family:'Rozha One', serif; font-size:1.8rem; margin-bottom:16px;">
+            🙏 {cat['nameHi']} — धार्मिक महत्व, महात्म्य एवं दर्शन फल
+        </h2>
+        {editorial_p_html}
+
+        <!-- SACRED MANTRA BOX -->
+        <div class="mantra-box" style="margin:24px 0; background:linear-gradient(135deg, rgba(255,248,240,0.9), rgba(255,243,224,0.9)); border:2px solid var(--gold); border-radius:14px; padding:20px;">
+            <div class="mantra-heading" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-family:'Rozha One', serif; color:var(--maroon); font-size:1.15rem;">🌸 पावन मंत्र एवं ध्यान श्लोक</span>
+                <button class="btn-copy-mantra" onclick="copyText(`{mantra}`, 'मंत्र कॉपी हो गया! 🙏')" style="background:var(--maroon); color:#fff; border:none; padding:6px 14px; border-radius:15px; cursor:pointer; font-size:0.8rem; font-weight:600;">📋 Copy Mantra</button>
+            </div>
+            <div class="mantra-text" style="font-family:'Rozha One', serif; font-size:1.2rem; color:var(--maroon); text-align:center; line-height:1.9; white-space:pre-line; margin-bottom:10px;">{mantra}</div>
+            <div class="mantra-meaning" style="font-size:0.95rem; color:#4E342E; text-align:center; line-height:1.6;"><strong>अर्थ:</strong> {meaning}</div>
+        </div>
+
+        <!-- CATEGORY FAQ ACCORDION -->
+        <div class="faq-box" style="margin-top:28px; border-top:2px solid rgba(255,119,0,0.25); padding-top:20px;">
+            <h3 style="color:var(--maroon); margin-bottom:14px; font-family:'Rozha One', serif;">❓ अक्सर पूछे जाने वाले प्रश्न ({cat['nameHi']} FAQ)</h3>
+            <details style="margin-bottom:10px; background:rgba(255,153,0,0.07); border-radius:8px; padding:10px 14px;">
+                <summary style="font-weight:700; color:var(--maroon); cursor:pointer;">📥 इस श्रेणी की तस्वीरें कैसे डाउनलोड करें?</summary>
+                <p style="margin-top:8px; color:#555;">किसी भी तस्वीर के नीचे दिए गए <strong>Download</strong> बटन पर क्लिक करें अथवा फोटो पेज पर जाकर <strong>Download 4K Image</strong> बटन दबाएं।</p>
+            </details>
+            <details style="margin-bottom:10px; background:rgba(255,153,0,0.07); border-radius:8px; padding:10px 14px;">
+                <summary style="font-weight:700; color:var(--maroon); cursor:pointer;">📱 WhatsApp Status पर शेयर करने का तरीका?</summary>
+                <p style="margin-top:8px; color:#555;">हर कार्ड पर <strong>WA</strong> बटन उपलब्ध है। उस पर क्लिक करते ही तस्वीर और मंत्र WhatsApp Status के लिए तैयार हो जाएंगे।</p>
+            </details>
+            <details style="margin-bottom:10px; background:rgba(255,153,0,0.07); border-radius:8px; padding:10px 14px;">
+                <summary style="font-weight:700; color:var(--maroon); cursor:pointer;">🖼️ क्या ये तस्वीरें प्रिंट या फ्रेम करवाने योग्य हैं?</summary>
+                <p style="margin-top:8px; color:#555;">हाँ, सभी छवियां 4K Ultra HD (1024x1365) रिज़ॉल्यूशन में हैं। आप इन्हें आसानी से घर के मंदिर अथवा स्टडी टेबल हेतु प्रिंट करा सकते हैं।</p>
+            </details>
+        </div>
     </div>
 </div>
 

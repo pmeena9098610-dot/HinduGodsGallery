@@ -1,7 +1,7 @@
 {
   "name": "Hindu Gods Daily Gallery - Cute Bhagwan Photo & 4K Wallpaper",
   "short_name": "Gods Gallery",
-  "description": "Daily 21+ cute & divine Hindu God AI photos. Free 4K Download & WhatsApp Status. Festival Special images!",
+  "description": "Daily 101+ cute & divine 4K Hindu God wallpapers, Mantras, Hanuman Chalisa & WhatsApp Status. Free 4K Download!",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -27,7 +27,57 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["photo", "lifestyle", "entertainment"],
+  "categories": [
+    "photo",
+    "lifestyle",
+    "entertainment"
+  ],
   "lang": "hi",
-  "dir": "ltr"
+  "dir": "ltr",
+  "shortcuts": [
+    {
+      "name": "🧸 क्यूट बाल स्वरूप",
+      "short_name": "Cute",
+      "url": "category-cute.html",
+      "icons": [
+        {
+          "src": "favicon.png",
+          "sizes": "64x64"
+        }
+      ]
+    },
+    {
+      "name": "🔥 ट्रेंडिंग 4K",
+      "short_name": "Trending",
+      "url": "category-trending.html",
+      "icons": [
+        {
+          "src": "favicon.png",
+          "sizes": "64x64"
+        }
+      ]
+    },
+    {
+      "name": "🚩 श्री हनुमान चालीसा",
+      "short_name": "चालीसा",
+      "url": "hanuman-chalisa.html",
+      "icons": [
+        {
+          "src": "favicon.png",
+          "sizes": "64x64"
+        }
+      ]
+    },
+    {
+      "name": "📅 आज का पंचांग",
+      "short_name": "पंचांग",
+      "url": "index.html#panchangSection",
+      "icons": [
+        {
+          "src": "favicon.png",
+          "sizes": "64x64"
+        }
+      ]
+    }
+  ]
 }
