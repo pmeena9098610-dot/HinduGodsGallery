@@ -138,9 +138,9 @@ GOD_PROMPTS = [
 ]
 
 def generate_pollinations_url(prompt_text, seed_val):
-    """Pollinations.ai URL generate karta hai (Free, no API key required)"""
+    """Pollinations.ai URL generate karta hai (Free model, no API key required)"""
     encoded = urllib.parse.quote(prompt_text)
-    return f"https://image.pollinations.ai/prompt/{encoded}?width=800&height=1000&seed={seed_val}&nologo=true&model=flux"
+    return f"https://image.pollinations.ai/prompt/{encoded}?model=sdxl-lightning&nologo=true"
 
 def download_image_file(image_url, target_path, timeout=30, retries=3):
     """Image ko local disk par download karta hai (paced + exponential retry + failsafe fallback)"""

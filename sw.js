@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hindu-gods-v5';
+const CACHE_NAME = 'hindu-gods-v6';
 const ASSETS = [
   './',
   'index.html',
@@ -11,6 +11,11 @@ const ASSETS = [
   'category-cute.html',
   'category-trending.html',
   'category-festival.html',
+  'lakshmi-aarti.html',
+  'durga-aarti.html',
+  'ram-stuti.html',
+  'shubh-prabhat.html',
+  'festivals-2026.html',
   'about.html',
   'contact.html',
   'privacy-policy.html',

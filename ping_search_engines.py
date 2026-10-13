@@ -67,7 +67,7 @@ def run_all_pings():
     logging.info("🚀 Submitting all pages to IndexNow API for instant crawl discovery...")
     success = submit_indexnow()
     if success:
-        logging.info("🎉 All 36 URLs successfully submitted to search engine crawler networks!")
+        logging.info("🎉 All URLs successfully submitted to search engine crawler networks!")
 
 if __name__ == "__main__":
     run_all_pings()

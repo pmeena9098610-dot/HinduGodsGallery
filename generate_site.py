@@ -1008,7 +1008,7 @@ COMMON_FOOTER = """
         <a href="hanuman-chalisa.html">हनुमान चालीसा</a> |
         <a href="shiv-aarti.html">शिव आरती</a> |
         <a href="ganesh-aarti.html">गणेश आरती</a> |
-        <a href="about.html">हमारे बारे में</a> |
+        <a href="shubh-prabhat.html">शुभ प्रभात</a> | <a href="festivals-2026.html">त्यौहार 2026</a> | <a href="about.html">हमारे बारे में</a> |
         <a href="contact.html">संपर्क करें</a> |
         <a href="privacy-policy.html">Privacy Policy</a> |
         <a href="terms.html">नियम व शर्तें</a> |
@@ -1784,7 +1784,7 @@ def generate_index_page(all_items):
 <html lang="hi" prefix="og: https://ogp.me/ns#">
 <head>
     {COMMON_HEAD}
-    <title>ॐ दैनिक हिन्दू भगवान दर्शन | Daily Cute Hindu Gods 4K Wallpaper & WhatsApp Status</title>
+    <title>ॐ दैनिक हिन्दू भगवान दर्शन | Daily Hindu Gods 4K Wallpaper &amp; WhatsApp Status【100% Free HD】</title>
     <meta name="description" content="दैनिक 21+ नए मनमोहक, क्यूट और 4K हिन्दू भगवानों के AI फोटो। बाल गोपाल, बाल गणेश, महादेव शिव, राम लला, हनुमान जी, माँ लक्ष्मी और माँ दुर्गा के सर्वश्रेष्ठ व्हाट्सएप स्टेटस और वॉलपेपर फ्री डाउनलोड।">
     <meta name="keywords" content="cute bhagwan photo, hindu gods photos, good morning god images today, hindu god images for whatsapp status, cute bal gopal photo, baby krishna makhan chor wallpaper 4k, mahadev 4k wallpaper download, lord shiva kailash 3d wallpaper, bholenath photo hd, ram lalla ayodhya photo 4k, ram mandir wallpaper, cute bal ganesh 3d, ganpati bappa cute photo, hanuman ji 4k wallpaper full screen, bajrangbali hd photo, maa durga 4k wallpaper navratri, sherawali mata image, maa lakshmi photo download, diwali lakshmi pujan wallpaper, radha krishna cute love photo, all hindu gods 4k wallpaper, shubh prabhat bhagwan photo, daily god images 2026, 3d ai hindu god images, cute god wallpaper for mobile, god images with quotes in hindi, bhagwan ke photo download, lord shiva hd 1080p, shri ram 4k wallpaper ayodhya">
     <link rel="canonical" href="{BASE_URL}">
@@ -1902,6 +1902,8 @@ def generate_index_page(all_items):
 
 <nav class="top-nav">
     <a href="index.html" class="nav-link active">Home (होम)</a>
+    <a href="shubh-prabhat.html" class="nav-link" style="color:var(--saffron); font-weight:700;">🌅 शुभ प्रभात</a>
+    <a href="festivals-2026.html" class="nav-link" style="color:#B8860B; font-weight:700;">🎉 महापर्व 2026</a>
     <a href="category-cute.html" class="nav-link">🧸 Cute Gallery</a>
     <a href="category-trending.html" class="nav-link">🔥 Trending 4K</a>
     <a href="category-festival.html" class="nav-link">🎉 Festival Special</a>
@@ -1927,6 +1929,8 @@ def generate_index_page(all_items):
     <!-- QUICK CATEGORY PILLS (LIVE INSTANT FILTER + DIRECT ACCESS) -->
     <div class="category-pills">
         <button onclick="filterByDeity('all', this)" class="cat-pill active">🌟 सभी दर्शन ({len(all_items)})</button>
+        <a href="shubh-prabhat.html" class="cat-pill" style="text-decoration:none; background:#FFF3E0; color:var(--maroon); font-weight:700;">🌅 शुभ प्रभात दर्शन</a>
+        <a href="festivals-2026.html" class="cat-pill" style="text-decoration:none; background:#FFF9E6; color:#780016; font-weight:700;">🎉 2026 महापर्व संग्रह</a>
         <button onclick="filterByDeity('cute', this)" class="cat-pill">🧸 क्यूट बाल रूप ({len(cute_items)})</button>
         <button onclick="filterByDeity('trending', this)" class="cat-pill">🔥 ट्रेंडिंग 4K ({len(trending_items)})</button>
         <button onclick="filterByDeity('shiva', this)" class="cat-pill">🔱 भगवान शिव</button>
@@ -2006,21 +2010,42 @@ def generate_index_page(all_items):
             <div class="hymn-icon">🚩</div>
             <div class="hymn-info">
                 <h4>श्री हनुमान चालीसा</h4>
-                <p>दोहा, चौपाई, अर्थ सहित संपूर्ण पाठ पढ़ें</p>
+                <p>दोहा, चौपाई, अर्थ सहित संपूर्ण पाठ</p>
             </div>
         </a>
         <a href="shiv-aarti.html" class="hymn-card">
             <div class="hymn-icon">🔱</div>
             <div class="hymn-info">
                 <h4>ॐ जय शिव ओंकारा</h4>
-                <p>महादेव की संपूर्ण आरती एवं नित्य पाठ</p>
+                <p>महादेव की संपूर्ण पावन आरती</p>
             </div>
         </a>
         <a href="ganesh-aarti.html" class="hymn-card">
             <div class="hymn-icon">🐘</div>
             <div class="hymn-info">
-                <h4>जय गणेश जय गणेश देवा</h4>
-                <p>विघ्नहर्ता गणपति बप्पा की मंगलकारी आरती</p>
+                <h4>जय गणेश देवा</h4>
+                <p>विघ्नहर्ता गणपति बप्पा की आरती</p>
+            </div>
+        </a>
+        <a href="lakshmi-aarti.html" class="hymn-card">
+            <div class="hymn-icon">🪷</div>
+            <div class="hymn-info">
+                <h4>ॐ जय लक्ष्मी माता</h4>
+                <p>महालक्ष्मी धन-वैभव पावन आरती</p>
+            </div>
+        </a>
+        <a href="durga-aarti.html" class="hymn-card">
+            <div class="hymn-icon">🦁</div>
+            <div class="hymn-info">
+                <h4>जय अम्बे गौरी</h4>
+                <p>माँ दुर्गा शेरावाली की आरती</p>
+            </div>
+        </a>
+        <a href="ram-stuti.html" class="hymn-card">
+            <div class="hymn-icon">🏹</div>
+            <div class="hymn-info">
+                <h4>श्री रामचन्द्र कृपालु</h4>
+                <p>प्रभु श्री राम की मंगलकारी स्तुति</p>
             </div>
         </a>
     </div>
@@ -2197,7 +2222,7 @@ def generate_sitemap(all_items, all_cats):
 
     # Spiritual Text Pages
     xml_lines.append('  <!-- Spiritual Text Pages (Chalisa & Aartis) -->')
-    for sp in ['hanuman-chalisa.html', 'shiv-aarti.html', 'ganesh-aarti.html']:
+    for sp in ['hanuman-chalisa.html', 'shiv-aarti.html', 'ganesh-aarti.html', 'lakshmi-aarti.html', 'durga-aarti.html', 'ram-stuti.html', 'shubh-prabhat.html', 'festivals-2026.html']:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{sp}</loc>')
         xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
@@ -2651,6 +2676,14 @@ generated_files["privacy-policy.html"] = generate_privacy_page()
 generated_files["terms.html"] = generate_terms_page()
 generated_files["disclaimer.html"] = generate_disclaimer_page()
 print("Generated 5 Essential Policy & Trust Pages for Google AdSense Approval!")
+
+# 6. Load and distribute 5 New Viral Devotional & Festive Hub Pages
+for viral_page in ["shubh-prabhat.html", "festivals-2026.html", "lakshmi-aarti.html", "durga-aarti.html", "ram-stuti.html"]:
+    v_path = os.path.join(SCRIPT_DIR, viral_page)
+    if os.path.exists(v_path):
+        with open(v_path, "r", encoding="utf-8") as v_fp:
+            generated_files[viral_page] = v_fp.read()
+print("Loaded and distributed all 5 Viral Hub Pages (Shubh Prabhat, Festivals 2026, Lakshmi Aarti, Durga Aarti, Ram Stuti)!")
 print("Generated feed.xml for Google Discover!")
 print(f"Generated sitemap.xml with dynamic lastmod & enriched image tags!")
 
