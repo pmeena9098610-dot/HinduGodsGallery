@@ -34,4 +34,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "🕉️ Auto-generated daily divine god images and updated gallery [skip ci]"
-          file_pattern: "images_data.json generator_data.py sitemap.xml feed.xml robots.txt images/* auto_update.log *.html sw.js manifest.json"
+          file_pattern: "images_data.json generator_data.py sitemap.xml sitemap-images.xml feed.xml robots.txt images/* auto_update.log *.html sw.js manifest.json"

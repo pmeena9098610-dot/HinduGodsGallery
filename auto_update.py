@@ -243,55 +243,12 @@ def update_database(new_entries, target_date_str):
     return data
 
 def update_sitemap(all_data):
-    """Google Images SEO के लिए sitemap.xml जनरेट करता है"""
-    ET.register_namespace('', "http://www.sitemaps.org/schemas/sitemap/0.9")
-    ET.register_namespace('image', "http://www.google.com/schemas/sitemap-image/1.1")
-
-    urlset = ET.Element("{http://www.sitemaps.org/schemas/sitemap/0.9}urlset")
-
-    # Main page
-    url_main = ET.SubElement(urlset, "{http://www.sitemaps.org/schemas/sitemap/0.9}url")
-    loc_main = ET.SubElement(url_main, "{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
-    loc_main.text = WEBSITE_URL
-    lastmod_main = ET.SubElement(url_main, "{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod")
-    lastmod_main.text = date.today().isoformat()
-    changefreq_main = ET.SubElement(url_main, "{http://www.sitemaps.org/schemas/sitemap/0.9}changefreq")
-    changefreq_main.text = "daily"
-    priority_main = ET.SubElement(url_main, "{http://www.sitemaps.org/schemas/sitemap/0.9}priority")
-    priority_main.text = "1.0"
-
-    # All Images for Google Images crawler
-    for day_str, entries in all_data.items():
-        for entry in entries:
-            url_node = ET.SubElement(urlset, "{http://www.sitemaps.org/schemas/sitemap/0.9}url")
-            loc_node = ET.SubElement(url_node, "{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
-            loc_node.text = f"{WEBSITE_URL}/photo-{entry['id']}.html"
-
-            lastmod_node = ET.SubElement(url_node, "{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod")
-            lastmod_node.text = entry.get("date", day_str)
-
-            # Image extension
-            img_node = ET.SubElement(url_node, "{http://www.google.com/schemas/sitemap-image/1.1}image")
-            img_loc = ET.SubElement(img_node, "{http://www.google.com/schemas/sitemap-image/1.1}loc")
-            img_url = entry.get("image_url", "")
-            if not img_url.startswith("http"):
-                img_url = f"{WEBSITE_URL}/{img_url.lstrip('/')}"
-            img_loc.text = img_url
-
-            img_title = ET.SubElement(img_node, "{http://www.google.com/schemas/sitemap-image/1.1}title")
-            img_title.text = f"{entry['name_hi']} | {entry['name_en']} 4K Wallpaper"
-
-            img_caption = ET.SubElement(img_node, "{http://www.google.com/schemas/sitemap-image/1.1}caption")
-            img_caption.text = f"{entry['description_hi']} {', '.join(entry['tags'][:5])}"
-
-    try:
-        tree = ET.ElementTree(urlset)
-        if hasattr(ET, 'indent'):
-            ET.indent(tree, space="  ", level=0)
-        tree.write(SITEMAP_FILE, encoding='utf-8', xml_declaration=True)
-        logging.info(f"✅ Successfully updated {SITEMAP_FILE} with Google Images tags")
-    except Exception as e:
-        logging.error(f"Error creating sitemap: {e}")
+    """Clean delegation to generate_site.py to ensure 100% compliant split sitemaps"""
+    gen_script = os.path.join(SCRIPT_DIR, "generate_site.py")
+    if os.path.exists(gen_script):
+        import subprocess
+        subprocess.run([sys.executable, gen_script], check=True)
+        logging.info("✅ Sitemaps and gallery synchronized via generate_site.py")
 
 def main():
     logging.info("=" * 65)
@@ -324,6 +281,16 @@ def main():
             logging.info("✅ Successfully pinged search engines via IndexNow!")
     except Exception as pe:
         logging.warning(f"Notice on pinging search engines: {pe}")
+
+    # Trigger Google Search Console & Indexing API if service account is available
+    try:
+        gapi_script = os.path.join(SCRIPT_DIR, "google_api_manager.py")
+        if os.path.exists(gapi_script):
+            import subprocess
+            subprocess.run([sys.executable, gapi_script], check=True)
+            logging.info("✅ Successfully notified Google APIs via google_api_manager!")
+    except Exception as ge:
+        logging.warning(f"Notice on Google API Manager: {ge}")
 
     total_images = sum(len(items) for items in all_data.values())
     logging.info(f"🎉 Complete! Total images in gallery database: {total_images}")
