@@ -88,6 +88,10 @@ _DEITY_MANTRAS = {
         "ॐ नमो भगवते वासुदेवाय नमः ।\nसर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥",
         "सभी सुखी हों, सभी निरोगी रहें, सभी का कल्याण हो। यह सरल किन्तु अत्यंत शक्तिशाली मंत्र जीवन में सकारात्मक ऊर्जा और ईश्वरीय कृपा का संचार करता है।"
     ),
+    "vishnu": (
+        "ॐ नमो नारायणाय ।\nशान्ताकारं भुजगशयनं पद्मनाभं सुरेशं विश्वाधारं गगनसदृशं मेघवर्णं शुभाङ्गम् ।\nलक्ष्मीकान्तं कमलनयनं योगिभिर्ध्यानगम्यं वन्दे विष्णुं भवभयहरं सर्वलोकैकनाथम् ॥",
+        "हे शांत स्वरूप, शेषनाग की शैया पर शयन करने वाले, कमल नयन, लक्ष्मीपति, योगियों के ध्यानगम्य, समस्त लोकों के स्वामी भगवान विष्णु — मैं आपको बारंबार नमन करता हूँ। यह महामंत्र जीवन से समस्त भय व दरिद्रता का नाश कर शांति व मोक्ष प्रदान करता है।"
+    ),
 }
 
 _DEITY_ARTICLES = {
@@ -156,6 +160,12 @@ _DEITY_ARTICLES = {
         "आधुनिक भारत में डिजिटल भक्ति एक नई परंपरा बन चुकी है। सुबह उठकर WhatsApp पर भगवान का Good Morning Status भेजना, इंस्टाग्राम पर मंत्र शेयर करना, यूट्यूब पर भजन सुनना — ये सब डिजिटल भारत की नई पूजा पद्धति है। इस परंपरा में 4K Divine Images की भूमिका केंद्रीय है। हर सुबह नई, ताज़ी और सुंदर भगवान की तस्वीर मिलना आत्मा को प्रसन्न करता है।",
         "इस वेबसाइट पर प्रतिदिन नई 4K Hindu God Images अपलोड होती हैं — Shiva, Krishna, Hanuman, Lakshmi, Durga, Ganesha और अन्य सभी देवताओं के Cute, Trending और Festival Special रूपों में। AI-generated लेकिन भारतीय कलाकारों की सुरुचि से क्यूरेट की गई ये तस्वीरें आपके मन, घर और डिजिटल जीवन को पवित्र बनाती हैं।",
         "इस Trending 4K God Wallpaper को अभी Download करें और अपने सभी सोशल मीडिया प्लेटफ़ॉर्म पर शेयर करें। Bookmark करें यह वेबसाइट — क्योंकि यहाँ प्रतिदिन नए दर्शन का लाभ मिलता है। अपने सभी WhatsApp Groups में यह पावन तस्वीर शेयर करके हर किसी के दिन की दिव्य शुरुआत करें।"
+    ],
+    "vishnu": [
+        "भगवान श्री हरि विष्णु — हिंदू त्रिदेवों (ब्रह्मा, विष्णु, महेश) में सृष्टि के परम पालक और संरक्षक देव हैं। वे क्षीरसागर (दूध के समुद्र) में शेषनाग की दिव्य शैया पर विश्राम करते हैं और उनके चरणों में माता लक्ष्मी विराजमान रहती हैं। जब-जब पृथ्वी पर धर्म की हानि होती है और अधर्म बढ़ता है, तब-तब भगवान विष्णु धर्म की रक्षा और दुष्टों के संहार हेतु विभिन्न रूपों में अवतार धारण करते हैं।",
+        "भगवान विष्णु के चतुर्भुज स्वरूप में चार दिव्य आयुध व प्रतीक हैं — शंख (पाञ्चजन्य), चक्र (सुदर्शन चक्र), गदा (कौमोदकी) और पद्म (कमल पुष्प)। उनका पीताम्बर वस्त्र और वक्षःस्थल पर कौस्तुभ मणि उनके अलौकिक सौंदर्य और ऐश्वर्य का प्रतीक हैं। वैकुंठ धाम उनका परम धाम है जहाँ नित्य आनंद और शांति का वास है।",
+        "गुरुवार (बृहस्पतिवार) का दिन भगवान विष्णु की आराधना को समर्पित है। एकादशी का व्रत भगवान विष्णु का सबसे प्रिय व्रत है जिसे करने से जन्म-जन्मांतर के पापों का क्षय होता है। 'ॐ नमो भगवते वासुदेवाय' और 'ॐ नमो नारायणाय' के नित्य स्मरण से साधक को यश, ऐश्वर्य, सद्बुद्धि और अंत में मोक्ष की प्राप्ति होती है।",
+        "इस दिव्य 4K भगवान विष्णु छवि को अपने मोबाइल वॉलपेपर, टैबलेट या लैपटॉप स्क्रीन पर लगाएं। गुरुवार के दिन इस पावन तस्वीर को WhatsApp Status और Facebook पर शेयर करके परिवार और मित्रों के जीवन में श्री हरि के आशीर्वाद का संचार करें। ॐ नमो नारायणाय!"
     ],
 }
 
@@ -1417,14 +1427,21 @@ def generate_photo_page(item, all_items):
 
 <nav class="top-nav">
     <a href="index.html" class="nav-link">Home (होम)</a>
+    <a href="shubh-prabhat.html" class="nav-link" style="color:var(--saffron); font-weight:700;">🌅 शुभ प्रभात</a>
+    <a href="festivals-2026.html" class="nav-link" style="color:#B8860B; font-weight:700;">🎉 महापर्व 2026</a>
     <a href="category-cute.html" class="nav-link { 'active' if item['category'] == 'cute' else '' }">🧸 Cute Gallery</a>
     <a href="category-trending.html" class="nav-link { 'active' if item['category'] == 'trending' else '' }">🔥 Trending 4K</a>
     <a href="category-festival.html" class="nav-link { 'active' if item['category'] == 'festival' else '' }">🎉 Festival Special</a>
-    <a href="category-shiva.html" class="nav-link">🔱 Mahadev</a>
-    <a href="category-krishna.html" class="nav-link">🦚 Krishna</a>
-    <a href="category-ganesha.html" class="nav-link">🐘 Ganesha</a>
-    <a href="category-hanuman.html" class="nav-link">🚩 Hanuman</a>
-    <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 हनुमान चालीसा</a>
+    <a href="category-shiva.html" class="nav-link { 'active' if item['category'] == 'shiva' else '' }">🔱 Mahadev</a>
+    <a href="category-krishna.html" class="nav-link { 'active' if item['category'] == 'krishna' else '' }">🦚 Krishna</a>
+    <a href="category-ganesha.html" class="nav-link { 'active' if item['category'] == 'ganesha' else '' }">🐘 Ganesha</a>
+    <a href="category-hanuman.html" class="nav-link { 'active' if item['category'] == 'hanuman' else '' }">🚩 Hanuman</a>
+    <a href="category-durga.html" class="nav-link { 'active' if item['category'] == 'durga' else '' }">🦁 Durga</a>
+    <a href="category-lakshmi.html" class="nav-link { 'active' if item['category'] == 'lakshmi' else '' }">🪷 Lakshmi</a>
+    <a href="category-ram.html" class="nav-link { 'active' if item['category'] == 'ram' else '' }">🏹 Ram</a>
+    <a href="category-saraswati.html" class="nav-link { 'active' if item['category'] == 'saraswati' else '' }">🪕 Saraswati</a>
+    <a href="category-vishnu.html" class="nav-link { 'active' if item['category'] == 'vishnu' else '' }">🐚 Vishnu</a>
+    <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 चालीसा</a>
 </nav>
 
 <div class="container">
@@ -1537,14 +1554,15 @@ def generate_photo_page(item, all_items):
 
 def generate_category_page(cat, all_items):
     cat_items = []
-    if cat["id"] == "cute":
-        cat_items = [x for x in all_items if x["category"] == "cute" or "cute" in x["tags"]]
-    elif cat["id"] == "trending":
-        cat_items = [x for x in all_items if x.get("badge") == "Trending 4K" or "trending" in x["category"] or x.get("trending")]
-    elif cat["id"] == "festival":
-        cat_items = [x for x in all_items if x["category"] == "festival"]
+    cid = cat["id"].lower()
+    if cid == "cute":
+        cat_items = [x for x in all_items if x.get("category", "").lower() == "cute" or "cute" in [str(t).lower() for t in x.get("tags", [])]]
+    elif cid == "trending":
+        cat_items = [x for x in all_items if x.get("badge") == "Trending 4K" or "trending" in x.get("category", "").lower() or x.get("trending")]
+    elif cid == "festival":
+        cat_items = [x for x in all_items if x.get("category", "").lower() == "festival"]
     else:
-        cat_items = [x for x in all_items if x.get("god") == cat["id"] or x.get("category") == cat["id"]]
+        cat_items = [x for x in all_items if str(x.get("god", "")).lower() == cid or str(x.get("category", "")).lower() == cid or cid in [str(t).lower() for t in x.get("tags", [])]]
     
     cards_html = ""
     for it in cat_items:
@@ -1656,6 +1674,8 @@ def generate_category_page(cat, all_items):
 
 <nav class="top-nav">
     <a href="index.html" class="nav-link">Home (होम)</a>
+    <a href="shubh-prabhat.html" class="nav-link" style="color:var(--saffron); font-weight:700;">🌅 शुभ प्रभात</a>
+    <a href="festivals-2026.html" class="nav-link" style="color:#B8860B; font-weight:700;">🎉 महापर्व 2026</a>
     <a href="category-cute.html" class="nav-link { 'active' if cat['id'] == 'cute' else '' }">🧸 Cute Gallery</a>
     <a href="category-trending.html" class="nav-link { 'active' if cat['id'] == 'trending' else '' }">🔥 Trending 4K</a>
     <a href="category-festival.html" class="nav-link { 'active' if cat['id'] == 'festival' else '' }">🎉 Festival Special</a>
@@ -1667,6 +1687,7 @@ def generate_category_page(cat, all_items):
     <a href="category-lakshmi.html" class="nav-link { 'active' if cat['id'] == 'lakshmi' else '' }">🪷 Lakshmi</a>
     <a href="category-ram.html" class="nav-link { 'active' if cat['id'] == 'ram' else '' }">🏹 Ram</a>
     <a href="category-saraswati.html" class="nav-link { 'active' if cat['id'] == 'saraswati' else '' }">🪕 Saraswati</a>
+    <a href="category-vishnu.html" class="nav-link { 'active' if cat['id'] == 'vishnu' else '' }">🐚 Vishnu</a>
     <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 चालीसा</a>
 </nav>
 
@@ -1773,7 +1794,7 @@ def generate_index_page(all_items):
         {"god": "महादेव शिव (Lord Shiva)", "mantra": "ॐ नमः शिवाय", "link": "category-shiva.html"},
         {"god": "श्री हनुमान जी (Bajrangbali)", "mantra": "ॐ हनुमते नमः", "link": "category-hanuman.html"},
         {"god": "विघ्नहर्ता श्री गणेश (Ganesha)", "mantra": "ॐ गं गणपतये नमः", "link": "category-ganesha.html"},
-        {"god": "भगवान विष्णु व श्री कृष्ण", "mantra": "ॐ नमो भगवते वासुदेवाय", "link": "category-krishna.html"},
+        {"god": "भगवान विष्णु (Lord Vishnu)", "mantra": "ॐ नमो भगवते वासुदेवाय", "link": "category-vishnu.html"},
         {"god": "माँ लक्ष्मी व माँ दुर्गा", "mantra": "ॐ श्रीं ह्रीं क्लीं नमः", "link": "category-lakshmi.html"},
         {"god": "शनि देव व हनुमान जी", "mantra": "ॐ शं शनैश्चराय नमः", "link": "category-hanuman.html"},
         {"god": "सूर्य देव व प्रभु श्री राम", "mantra": "ॐ सूर्याय नमः / जय श्री राम", "link": "category-ram.html"}
@@ -1915,6 +1936,7 @@ def generate_index_page(all_items):
     <a href="category-lakshmi.html" class="nav-link">🪷 Lakshmi</a>
     <a href="category-ram.html" class="nav-link">🏹 Ram</a>
     <a href="category-saraswati.html" class="nav-link">🪕 Saraswati</a>
+    <a href="category-vishnu.html" class="nav-link">🐚 Vishnu</a>
     <a href="hanuman-chalisa.html" class="nav-link" style="color:var(--saffron);">🚩 चालीसा</a>
 </nav>
 
@@ -1922,7 +1944,7 @@ def generate_index_page(all_items):
 
     <!-- SEARCH BAR -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 भगवान खोजें: शिव, कृष्ण, हनुमान, गणेश, दुर्गा, राम, सरस्वती, बाल गोपाल..." onkeyup="filterCards()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 भगवान खोजें: शिव, कृष्ण, हनुमान, गणेश, दुर्गा, राम, सरस्वती, विष्णु, बाल गोपाल..." onkeyup="filterCards()">
         <div id="searchCountDisplay" style="text-align:center; font-size:0.85rem; color:#780016; font-weight:600; margin-top:8px;">{len(all_items)}+ पावन 4K दर्शन उपलब्ध</div>
     </div>
 
@@ -1941,6 +1963,7 @@ def generate_index_page(all_items):
         <button onclick="filterByDeity('lakshmi', this)" class="cat-pill">🪷 माँ लक्ष्मी</button>
         <button onclick="filterByDeity('ram', this)" class="cat-pill">🏹 प्रभु श्री राम</button>
         <button onclick="filterByDeity('saraswati', this)" class="cat-pill">🪕 माँ सरस्वती</button>
+        <button onclick="filterByDeity('vishnu', this)" class="cat-pill">🐚 भगवान विष्णु</button>
     </div>
 
     <!-- DAILY PANCHANG & SHUBH MUHURAT WIDGET -->
@@ -2050,36 +2073,14 @@ def generate_index_page(all_items):
         </a>
     </div>
 
-    <!-- FESTIVAL SPECIAL SECTION -->
+    <!-- 100% CRAWLABLE ALL DEITIES MASTER GALLERY (ZERO ORPHANS, REAL-TIME FILTERABLE) -->
     <section>
         <div class="section-header">
-            <h2>🎉 Festival Special | त्यौहार स्पेशल 4K</h2>
-            <a href="category-festival.html">View All &raquo;</a>
+            <h2>🕉️ सम्पूर्ण पावन देव दर्शन गैलरी | Complete 4K All Hindu Gods Gallery</h2>
+            <span style="font-weight:700; color:var(--maroon); font-size:0.95rem;">{len(all_items)} पावन 4K वॉलपेपर</span>
         </div>
-        <div class="gallery-grid" id="festivalGrid">
-            {build_grid(festival_items)}
-        </div>
-    </section>
-
-    <!-- CUTE GALLERY SECTION -->
-    <section>
-        <div class="section-header">
-            <h2>🧸 Cute Gallery | मनमोहक बाल स्वरूप 4K</h2>
-            <a href="category-cute.html">View All &raquo;</a>
-        </div>
-        <div class="gallery-grid" id="cuteGrid">
-            {build_grid(cute_items)}
-        </div>
-    </section>
-
-    <!-- TRENDING SECTION -->
-    <section>
-        <div class="section-header">
-            <h2>🔥 Trending Gods | सर्वाधिक लोकप्रिय 4K वॉलपेपर</h2>
-            <a href="category-trending.html">View All &raquo;</a>
-        </div>
-        <div class="gallery-grid" id="trendingGrid">
-            {build_grid(trending_items)}
+        <div class="gallery-grid" id="mainAllGrid">
+            {build_grid(all_items)}
         </div>
     </section>
 </div>
@@ -2157,80 +2158,47 @@ def generate_rss_feed(all_items):
     return '\n'.join(xml)
 
 def generate_sitemap(all_items, all_cats):
+    """Generates standard, ultra-fast, 100% compliant XML sitemap for Google Search Console."""
     today_iso = date.today().isoformat()
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
-        '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
-        '  <!-- Homepage with Top Image Extensions for Instant Google Discovery -->',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        '  <!-- Homepage -->',
         '  <url>',
         f'    <loc>{BASE_URL}</loc>',
         f'    <lastmod>{today_iso}</lastmod>',
         '    <changefreq>daily</changefreq>',
-        '    <priority>1.0</priority>'
+        '    <priority>1.0</priority>',
+        '  </url>',
+        '  <!-- Category Pages -->',
     ]
 
-    # Add top 30 images right to the homepage URL so Googlebot Image indexes them on first crawl!
-    for it in all_items[:30]:
-        _, _, _, s_loc = resolve_image_assets(it["img"])
-        s_title = xml_escape(f"{it['titleHi']} - {it['title']}")
-        s_cap = xml_escape(it.get('shortDesc', ''))
-        xml_lines.append('    <image:image>')
-        xml_lines.append(f'      <image:loc>{s_loc}</image:loc>')
-        xml_lines.append(f'      <image:title>{s_title}</image:title>')
-        xml_lines.append(f'      <image:caption>{s_cap}</image:caption>')
-        xml_lines.append('    </image:image>')
-    xml_lines.append('  </url>')
-
-    # Category pages with their respective images
-    xml_lines.append('  <!-- Category Pages -->')
     for cat in all_cats:
-        c_items = [x for x in all_items if x.get("god") == cat["id"] or x.get("category") == cat["id"]]
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{cat["slug"]}</loc>')
         xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
         xml_lines.append('    <changefreq>daily</changefreq>')
         xml_lines.append('    <priority>0.9</priority>')
-        for it in c_items[:10]:
-            _, _, _, s_loc = resolve_image_assets(it["img"])
-            s_title = xml_escape(f"{it['titleHi']} - {it['title']}")
-            s_cap = xml_escape(it.get('shortDesc', ''))
-            xml_lines.append('    <image:image>')
-            xml_lines.append(f'      <image:loc>{s_loc}</image:loc>')
-            xml_lines.append(f'      <image:title>{s_title}</image:title>')
-            xml_lines.append(f'      <image:caption>{s_cap}</image:caption>')
-            xml_lines.append('    </image:image>')
         xml_lines.append('  </url>')
 
-    # Individual photo pages with Google Image extensions
-    xml_lines.append('  <!-- Dedicated Photo Pages -->')
-    for it in all_items:
-        _, _, _, s_loc = resolve_image_assets(it["img"])
-        s_title = xml_escape(f"{it['titleHi']} - {it['title']}")
-        s_cap = xml_escape(it.get('shortDesc', ''))
-        xml_lines.append('  <url>')
-        xml_lines.append(f'    <loc>{BASE_URL}{it["slug"]}</loc>')
-        xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
-        xml_lines.append('    <changefreq>daily</changefreq>')
-        xml_lines.append('    <priority>0.8</priority>')
-        xml_lines.append('    <image:image>')
-        xml_lines.append(f'      <image:loc>{s_loc}</image:loc>')
-        xml_lines.append(f'      <image:title>{s_title}</image:title>')
-        xml_lines.append(f'      <image:caption>{s_cap}</image:caption>')
-        xml_lines.append('    </image:image>')
-        xml_lines.append('  </url>')
-
-    # Spiritual Text Pages
-    xml_lines.append('  <!-- Spiritual Text Pages (Chalisa & Aartis) -->')
+    xml_lines.append('  <!-- Spiritual Text & Viral Hub Pages -->')
     for sp in ['hanuman-chalisa.html', 'shiv-aarti.html', 'ganesh-aarti.html', 'lakshmi-aarti.html', 'durga-aarti.html', 'ram-stuti.html', 'shubh-prabhat.html', 'festivals-2026.html']:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{sp}</loc>')
         xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
-        xml_lines.append('    <changefreq>weekly</changefreq>')
+        xml_lines.append('    <changefreq>daily</changefreq>')
         xml_lines.append('    <priority>0.9</priority>')
         xml_lines.append('  </url>')
 
-    # Static Policy Pages
+    xml_lines.append('  <!-- Dedicated Photo Pages -->')
+    for it in all_items:
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{BASE_URL}{it["slug"]}</loc>')
+        xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
+        xml_lines.append('    <changefreq>weekly</changefreq>')
+        xml_lines.append('    <priority>0.8</priority>')
+        xml_lines.append('  </url>')
+
     xml_lines.append('  <!-- Static Policy & Trust Pages (AdSense Compliance) -->')
     for sp in ['about.html', 'contact.html', 'privacy-policy.html', 'terms.html', 'disclaimer.html']:
         xml_lines.append('  <url>')
@@ -2240,6 +2208,35 @@ def generate_sitemap(all_items, all_cats):
         xml_lines.append('    <priority>0.7</priority>')
         xml_lines.append('  </url>')
 
+    xml_lines.append('</urlset>')
+    return "\n".join(xml_lines)
+
+def generate_image_sitemap(all_items):
+    """Generates dedicated Google Image Sitemap containing ONLY same-origin local assets."""
+    today_iso = date.today().isoformat()
+    xml_lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+        '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
+        '  <!-- Dedicated Google Image Sitemap (Local Verified Assets Only) -->'
+    ]
+    for it in all_items:
+        img_raw = str(it.get("img", ""))
+        if not img_raw.startswith("http"):
+            clean = img_raw.lstrip("/")
+            base = os.path.splitext(clean)[0]
+            img_abs = f"{BASE_URL}{base}.jpg"
+            s_title = xml_escape(f"{it['titleHi']} - {it['title']}")
+            s_cap = xml_escape(it.get('shortDesc', ''))
+            xml_lines.append('  <url>')
+            xml_lines.append(f'    <loc>{BASE_URL}{it["slug"]}</loc>')
+            xml_lines.append(f'    <lastmod>{today_iso}</lastmod>')
+            xml_lines.append('    <image:image>')
+            xml_lines.append(f'      <image:loc>{img_abs}</image:loc>')
+            xml_lines.append(f'      <image:title>{s_title}</image:title>')
+            xml_lines.append(f'      <image:caption>{s_cap}</image:caption>')
+            xml_lines.append('    </image:image>')
+            xml_lines.append('  </url>')
     xml_lines.append('</urlset>')
     return "\n".join(xml_lines)
 
@@ -2667,6 +2664,7 @@ print("Generated index.html with Panchang & 108 Jap Mala widgets!")
 # 4. Generate Sitemap & RSS
 sitemap_content = generate_sitemap(ITEMS, CATEGORIES)
 generated_files["sitemap.xml"] = sitemap_content
+generated_files["sitemap-images.xml"] = generate_image_sitemap(ITEMS)
 generated_files["feed.xml"] = generate_rss_feed(ITEMS)
 
 # 5. Generate Essential Policy & Trust Pages (About, Contact, Privacy, Terms, Disclaimer)

@@ -19,6 +19,9 @@ Allow: /
 User-agent: Yandex
 Allow: /
 
-# Sitemaps and RSS Feeds for Google Discover & Image Indexing
+# Sitemaps and RSS Feeds for Googlebot, Google Discover & Googlebot-Image
 Sitemap: https://pmeena9098610-dot.github.io/HinduGodsGallery/sitemap.xml
+Sitemap: https://pmeena9098610-dot.github.io/HinduGodsGallery/sitemap-images.xml
 Sitemap: https://pmeena9098610-dot.github.io/HinduGodsGallery/feed.xml
+Sitemap: https://pmeena9098610-dot.github.io/sitemap.xml
+

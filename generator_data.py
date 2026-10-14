@@ -410,7 +410,8 @@ CATEGORIES = [
     {"slug": "category-durga.html", "id": "durga", "name": "Maa Durga", "nameHi": "🦁 मां दुर्गा", "desc": "Maa Sherawali lion, Navratri special pandal and Navdurga 9 forms 4K photos."},
     {"slug": "category-lakshmi.html", "id": "lakshmi", "name": "Maa Lakshmi", "nameHi": "🪷 मां लक्ष्मी", "desc": "Goddess Lakshmi gold coins shower and baby Lakshmi on lotus 4K wallpapers."},
     {"slug": "category-ram.html", "id": "ram", "name": "Shri Ram", "nameHi": "🏹 प्रभु श्री राम", "desc": "Lord Ram with bow in Ayodhya dham and Ram Mandir sunset 4K wallpapers."},
-    {"slug": "category-saraswati.html", "id": "saraswati", "name": "Maa Saraswati", "nameHi": "🪕 मां सरस्वती", "desc": "Goddess Saraswati playing veena on swan and cute baby Saraswati 4K photos."}
+    {"slug": "category-saraswati.html", "id": "saraswati", "name": "Maa Saraswati", "nameHi": "🪕 मां सरस्वती", "desc": "Goddess Saraswati playing veena on swan and cute baby Saraswati 4K photos."},
+    {"slug": "category-vishnu.html", "id": "vishnu", "name": "Lord Vishnu", "nameHi": "🐚 भगवान विष्णु", "desc": "Lord Vishnu on Sheshnag, Vaikuntha Dham, Sudarshana Chakra, and Narayana 4K wallpapers."}
 ]
 
 print(f"Loaded {len(ITEMS)} items and {len(CATEGORIES)} categories!")
