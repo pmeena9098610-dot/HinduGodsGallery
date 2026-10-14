@@ -69,15 +69,22 @@ def submit_sitemap_via_api(creds, sitemap_link):
     resp = requests.put(api_url, headers=headers)
     return resp.status_code == 204 or resp.status_code == 200, resp.status_code, resp.text
 
-def submit_indexing_api(creds, url):
+def submit_indexing_api(creds, url, retries=3):
     endpoint = "https://indexing.googleapis.com/v3/urlNotifications:publish"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {creds.token}"
     }
     body = {"url": url, "type": "URL_UPDATED"}
-    resp = requests.post(endpoint, headers=headers, json=body, timeout=20)
-    return resp.status_code == 200, resp.status_code, resp.text
+    for attempt in range(retries):
+        try:
+            resp = requests.post(endpoint, headers=headers, json=body, timeout=15)
+            return resp.status_code == 200, resp.status_code, resp.text
+        except Exception as e:
+            if attempt == retries - 1:
+                return False, 0, str(e)
+            time.sleep(1.5)
+    return False, 0, "Max retries exceeded"
 
 def main():
     print("=" * 65)
@@ -122,16 +129,23 @@ def main():
         urls = [loc.text.strip() for loc in tree.getroot().findall("{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc") if loc is not None]
         print(f"\n🚀 Submitting {min(len(urls), 200)} URLs to Google Indexing API...")
         success = 0
+        errors = 0
         for i, u in enumerate(urls[:200], 1):
-            if creds.expired:
-                creds.refresh(Request())
-            ok, sc, _ = submit_indexing_api(creds, u)
-            if ok:
-                success += 1
-                if i % 25 == 0 or i == len(urls):
-                    print(f"  [{i}/{len(urls)}] Progress: {success} URLs submitted OK")
-            time.sleep(0.1)
-        print(f"\n🎉 Done! {success} URLs submitted to Google for instant crawling.")
+            try:
+                if creds.expired:
+                    creds.refresh(Request())
+                ok, sc, msg = submit_indexing_api(creds, u)
+                if ok:
+                    success += 1
+                else:
+                    errors += 1
+                if i % 20 == 0 or i == len(urls):
+                    print(f"  [{i}/{len(urls)}] Progress: {success} OK, {errors} errors (last HTTP {sc})")
+                time.sleep(0.3)
+            except Exception as e:
+                errors += 1
+                print(f"  [{i}/{len(urls)}] Exception: {e}")
+        print(f"\n🎉 Done! {success} URLs submitted successfully to Google for instant crawling.")
     return True
 
 if __name__ == "__main__":
