@@ -13,8 +13,13 @@
     <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap"></noscript>
 
+    <link rel="preload" as="image" href="images/lord_ram_1789315920936.webp" type="image/webp" fetchpriority="high">
     <title>प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो | Lord Ram Ayodhya Ram Mandir 4K Wallpaper Free Download & WhatsApp Status</title>
     <meta name="description" content="प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो - Majestic Maryada Purushottam Lord Ram standing with divine bow in Ayodhya dham with grand Ram Mandir bathed in golden sunset light. Free 4K Ultra HD Wallpaper download & 1-click WhatsApp Status sharing.">
     <meta name="keywords" content="ram lalla ayodhya 4k photo, shri ram wallpaper, lord ram bow arrow image, ram mandir wallpaper, jai shri ram photo, ayodhya ram mandir image, Lord Ram Ayodhya Ram Mandir 4K Wallpaper, प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो, 4k wallpaper, whatsapp status">
@@ -226,10 +231,12 @@
         border-radius: 16px;
         overflow: hidden;
         box-shadow: var(--card-shadow);
-        transition: all 0.35s;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
         position: relative;
         display: flex;
         flex-direction: column;
+        content-visibility: auto;
+        contain-intrinsic-size: 280px 420px;
     }
     .card:hover {
         transform: translateY(-6px);
@@ -791,9 +798,9 @@
         <div class="detail-img-wrap">
             <span class="badge" style="top:16px; left:16px; font-size:0.85rem; padding:6px 14px;">Trending 4K</span>
             <picture>
-                <source srcset="images/lord_ram_1789315920936.webp" type="image/webp">
-                <img src="images/lord_ram_1789315920936.jpg" alt="प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो - Lord Ram Ayodhya Ram Mandir 4K Wallpaper 4K Free Download" width="1024" height="1365" style="cursor:zoom-in;" onclick="openLightbox('images/lord_ram_1789315920936.jpg')">
-            </picture>
+            <source srcset="images/lord_ram_1789315920936.webp" type="image/webp">
+            <img src="images/lord_ram_1789315920936.jpg" alt="प्रभु श्री राम लला अयोध्या मंदिर 4K फोटो - Lord Ram Ayodhya Ram Mandir 4K Wallpaper 4K Free Download" width="1024" height="1365" fetchpriority="high" decoding="async" style="cursor:zoom-in;" onclick="openLightbox('images/lord_ram_1789315920936.jpg')">
+        </picture>
 
             <div class="diya-container" onclick="toggleDiya()" title="क्लिक करके दीप जलाएं">
                 <div id="diyaFlame" class="diya-flame"></div>
@@ -889,7 +896,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-09-23_7_6e21d7.html">
                 <span class="badge">Daily Divine 4K</span>
-                <img src="https://image.pollinations.ai/prompt/Majestic%20Lord%20Rama%20Maryada%20Purushottam%20in%20royal%20Ayodhya%20attire%2C%20holding%20golden%20Kodanda%20bow%20and%20arrow%2C%20calm%20and%20serene%20divine%20expression%2C%20lotus%20eyes%2C%20glowing%20blue-tinged%20complexion%2C%20royal%20crown%20with%20pearls%20and%20gems%2C%20Ayodhya%20golden%20temple%20palace%20background%20at%20sunrise%2C%20epic%20Indian%20art%20style%208k?width=800&height=1000&seed=2026092307&nologo=true&model=flux" alt="Maryada Purushottam Lord Ram" loading="lazy" width="400" height="533">
+                <picture><source srcset="images/2026-09-23/maryada_purushottam_lord_ram_2026-09-23_7_6e21d7.webp" type="image/webp"><img src="images/2026-09-23/maryada_purushottam_lord_ram_2026-09-23_7_6e21d7.jpg" alt="Maryada Purushottam Lord Ram" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-09-23_7_6e21d7.html">मर्यादा पुरुषोत्तम भगवान राम (अयोध्या)</a></h3>
@@ -905,7 +912,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-09-24_6_af3a71.html">
                 <span class="badge">Daily Divine 4K</span>
-                <img src="https://image.pollinations.ai/prompt/Majestic%20Lord%20Rama%20Maryada%20Purushottam%20in%20royal%20Ayodhya%20attire%2C%20holding%20golden%20Kodanda%20bow%20and%20arrow%2C%20calm%20and%20serene%20divine%20expression%2C%20lotus%20eyes%2C%20glowing%20blue-tinged%20complexion%2C%20royal%20crown%20with%20pearls%20and%20gems%2C%20Ayodhya%20golden%20temple%20palace%20background%20at%20sunrise%2C%20epic%20Indian%20art%20style%208k?width=800&height=1000&seed=2026092406&nologo=true&model=flux" alt="Maryada Purushottam Lord Ram" loading="lazy" width="400" height="533">
+                <picture><source srcset="images/2026-09-24/2026-09-24_6_af3a71.webp" type="image/webp"><img src="images/2026-09-24/2026-09-24_6_af3a71.jpg" alt="Maryada Purushottam Lord Ram" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-09-24_6_af3a71.html">मर्यादा पुरुषोत्तम भगवान राम (अयोध्या)</a></h3>
@@ -921,7 +928,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-09-25_5_bdf9b7.html">
                 <span class="badge">Daily Divine 4K</span>
-                <img src="https://image.pollinations.ai/prompt/Majestic%20Lord%20Rama%20Maryada%20Purushottam%20in%20royal%20Ayodhya%20attire%2C%20holding%20golden%20Kodanda%20bow%20and%20arrow%2C%20calm%20and%20serene%20divine%20expression%2C%20lotus%20eyes%2C%20glowing%20blue-tinged%20complexion%2C%20royal%20crown%20with%20pearls%20and%20gems%2C%20Ayodhya%20golden%20temple%20palace%20background%20at%20sunrise%2C%20epic%20Indian%20art%20style%208k?width=800&height=1000&seed=2026092505&nologo=true&model=flux" alt="Maryada Purushottam Lord Ram" loading="lazy" width="400" height="533">
+                <picture><source srcset="images/2026-09-25/2026-09-25_5_bdf9b7.webp" type="image/webp"><img src="images/2026-09-25/2026-09-25_5_bdf9b7.jpg" alt="Maryada Purushottam Lord Ram" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-09-25_5_bdf9b7.html">मर्यादा पुरुषोत्तम भगवान राम (अयोध्या)</a></h3>
@@ -937,7 +944,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-09-26_8_83d458.html">
                 <span class="badge">Daily Divine 4K</span>
-                <img src="https://image.pollinations.ai/prompt/Majestic%20Lord%20Rama%20Maryada%20Purushottam%20in%20royal%20Ayodhya%20attire%2C%20holding%20golden%20Kodanda%20bow%20and%20arrow%2C%20calm%20and%20serene%20divine%20expression%2C%20lotus%20eyes%2C%20glowing%20blue-tinged%20complexion%2C%20royal%20crown%20with%20pearls%20and%20gems%2C%20Ayodhya%20golden%20temple%20palace%20background%20at%20sunrise%2C%20epic%20Indian%20art%20style%208k?width=800&height=1000&seed=2026092608&nologo=true&model=flux" alt="Maryada Purushottam Lord Ram" loading="lazy" width="400" height="533">
+                <picture><source srcset="images/2026-09-26/2026-09-26_8_83d458.webp" type="image/webp"><img src="images/2026-09-26/2026-09-26_8_83d458.jpg" alt="Maryada Purushottam Lord Ram" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-09-26_8_83d458.html">मर्यादा पुरुषोत्तम भगवान राम (अयोध्या)</a></h3>

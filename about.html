@@ -13,7 +13,11 @@
     <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap"></noscript>
 
     <title>हमारे बारे में | Hindu Gods Daily Gallery — About Us</title>
     <meta name="description" content="Hindu Gods Daily Gallery के बारे में जानें — भारत की #1 दैनिक हिन्दू देव-देवी 4K वॉलपेपर वेबसाइट। हमारा मिशन, विजन और संपादकीय मूल्य।">
@@ -159,10 +163,12 @@
         border-radius: 16px;
         overflow: hidden;
         box-shadow: var(--card-shadow);
-        transition: all 0.35s;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
         position: relative;
         display: flex;
         flex-direction: column;
+        content-visibility: auto;
+        contain-intrinsic-size: 280px 420px;
     }
     .card:hover {
         transform: translateY(-6px);

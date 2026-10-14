@@ -13,8 +13,13 @@
     <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap"></noscript>
 
+    <link rel="preload" as="image" href="images/lord_shiva_1789315505870.webp" type="image/webp" fetchpriority="high">
     <title>महादेव शिव कैलाश ध्यान 4K | Mahadev Shiva Cosmic Meditation Free Download & WhatsApp Status</title>
     <meta name="description" content="महादेव शिव कैलाश ध्यान 4K - कैलाश पर्वत पर गहन समाधि में लीन देवाधिदेव महादेव शिव। त्रिशूल, डमरू, बाल चंद्रमा और बहती पावन गंगा। Free 4K Ultra HD Wallpaper download & 1-click WhatsApp Status sharing.">
     <meta name="keywords" content="Lord Shiva 4K, Mahadev Kailash Wallpaper, Bholenath HD Photo, Har Har Mahadev Status, Mahadev Shiva Cosmic Meditation, महादेव शिव कैलाश ध्यान 4K, 4k wallpaper, whatsapp status">
@@ -226,10 +231,12 @@
         border-radius: 16px;
         overflow: hidden;
         box-shadow: var(--card-shadow);
-        transition: all 0.35s;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
         position: relative;
         display: flex;
         flex-direction: column;
+        content-visibility: auto;
+        contain-intrinsic-size: 280px 420px;
     }
     .card:hover {
         transform: translateY(-6px);
@@ -791,9 +798,9 @@
         <div class="detail-img-wrap">
             <span class="badge" style="top:16px; left:16px; font-size:0.85rem; padding:6px 14px;">Daily Divine 4K</span>
             <picture>
-                <source srcset="images/lord_shiva_1789315505870.webp" type="image/webp">
-                <img src="images/lord_shiva_1789315505870.jpg" alt="महादेव शिव कैलाश ध्यान 4K - Mahadev Shiva Cosmic Meditation 4K Free Download" width="1024" height="1365" style="cursor:zoom-in;" onclick="openLightbox('images/lord_shiva_1789315505870.jpg')">
-            </picture>
+            <source srcset="images/lord_shiva_1789315505870.webp" type="image/webp">
+            <img src="images/lord_shiva_1789315505870.jpg" alt="महादेव शिव कैलाश ध्यान 4K - Mahadev Shiva Cosmic Meditation 4K Free Download" width="1024" height="1365" fetchpriority="high" decoding="async" style="cursor:zoom-in;" onclick="openLightbox('images/lord_shiva_1789315505870.jpg')">
+        </picture>
 
             <div class="diya-container" onclick="toggleDiya()" title="क्लिक करके दीप जलाएं">
                 <div id="diyaFlame" class="diya-flame"></div>
@@ -891,7 +898,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-bal-shiva.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_bal_shiva.webp" type="image/webp"><img src="images/cute_bal_shiva.jpg" alt="Cute Baby Shiva with Damru 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_bal_shiva.webp" type="image/webp"><img src="images/cute_bal_shiva.jpg" alt="Cute Baby Shiva with Damru 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-bal-shiva.html">क्यूट बाल शिव जी डमरू 4K फोटो</a></h3>
@@ -906,7 +913,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-shiva-kailash.html">
                 <span class="badge">Trending 4K</span>
-                <picture><source srcset="images/lord_shiva_1789315505870.webp" type="image/webp"><img src="images/lord_shiva_1789315505870.jpg" alt="Lord Shiva Kailash Meditation 4K Ultra HD Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/lord_shiva_1789315505870.webp" type="image/webp"><img src="images/lord_shiva_1789315505870.jpg" alt="Lord Shiva Kailash Meditation 4K Ultra HD Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-shiva-kailash.html">भगवान शिव कैलाश ध्यान 4K महाकाल वॉलपेपर</a></h3>
@@ -922,7 +929,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-shiv-parivar.html">
                 <span class="badge">Festival Special</span>
-                <picture><source srcset="images/shiv_parvati_family.webp" type="image/webp"><img src="images/shiv_parvati_family.jpg" alt="Divine Shiv Parivar Family Portrait 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/shiv_parvati_family.webp" type="image/webp"><img src="images/shiv_parvati_family.jpg" alt="Divine Shiv Parivar Family Portrait 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-shiv-parivar.html">पावन शिव परिवार कैलाश दर्शन 4K वॉलपेपर</a></h3>
@@ -937,7 +944,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-09-23_4_664239.html">
                 <span class="badge">Daily Divine 4K</span>
-                <img src="https://image.pollinations.ai/prompt/Divine%20Holy%20Family%20Shiv%20Parivar%20sitting%20peacefully%20on%20snow-clad%20Mount%20Kailash%2C%20Lord%20Shiva%2C%20Maa%20Parvati%2C%20cute%20baby%20Ganesha%20sitting%20on%20lap%20eating%20sweet%2C%20young%20Kartikeya%2C%20Nandi%20bull%20resting%20nearby%20with%20lion%20and%20peacock%20peacefully%20together%2C%20warm%20divine%20golden%20sunset%20light%2C%20beautiful%20devotional%20painting?width=800&height=1000&seed=2026092304&nologo=true&model=flux" alt="Lord Shiva & Parvati (Shiv Parivar)" loading="lazy" width="400" height="533">
+                <picture><source srcset="images/2026-09-23/lord_shiva___parvati_2026-09-23_4_664239.webp" type="image/webp"><img src="images/2026-09-23/lord_shiva___parvati_2026-09-23_4_664239.jpg" alt="Lord Shiva & Parvati (Shiv Parivar)" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-09-23_4_664239.html">शिव परिवार (शिव पार्वती गणेश कार्तिकेय)</a></h3>

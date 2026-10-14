@@ -13,7 +13,11 @@
     <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap"></noscript>
 
     <title>🧸 क्यूट गैलरी 4K Wallpaper &amp; Photos | Cute Gallery Free Download</title>
     <meta name="description" content="Adorable baby Hindu God photos - Bal Gopal, Bal Ganesh, Baby Shiva & Hanuman for WhatsApp status. Free 4K Ultra HD Wallpapers, Mantras &amp; WhatsApp Status photos download. 14+ divine images.">
@@ -200,10 +204,12 @@
         border-radius: 16px;
         overflow: hidden;
         box-shadow: var(--card-shadow);
-        transition: all 0.35s;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
         position: relative;
         display: flex;
         flex-direction: column;
+        content-visibility: auto;
+        contain-intrinsic-size: 280px 420px;
     }
     .card:hover {
         transform: translateY(-6px);
@@ -774,7 +780,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-radha-krishna.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_radha_krishna.webp" type="image/webp"><img src="images/cute_radha_krishna.jpg" alt="Cute Radha Krishna Love 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_radha_krishna.webp" type="image/webp"><img src="images/cute_radha_krishna.jpg" alt="Cute Radha Krishna Love 4K Wallpaper" loading="eager" fetchpriority="high" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-radha-krishna.html">राधा कृष्ण क्यूट लव 4K फोटो</a></h3>
@@ -791,7 +797,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-bal-shiva.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_bal_shiva.webp" type="image/webp"><img src="images/cute_bal_shiva.jpg" alt="Cute Baby Shiva with Damru 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_bal_shiva.webp" type="image/webp"><img src="images/cute_bal_shiva.jpg" alt="Cute Baby Shiva with Damru 4K Wallpaper" loading="eager" fetchpriority="high" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-bal-shiva.html">क्यूट बाल शिव जी डमरू 4K फोटो</a></h3>
@@ -807,7 +813,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-bal-hanuman.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_bal_hanuman.webp" type="image/webp"><img src="images/cute_bal_hanuman.jpg" alt="Cute Baby Hanuman Flying 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_bal_hanuman.webp" type="image/webp"><img src="images/cute_bal_hanuman.jpg" alt="Cute Baby Hanuman Flying 4K Wallpaper" loading="eager" fetchpriority="high" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-bal-hanuman.html">क्यूट बाल हनुमान जी उड़ते हुए 4K फोटो</a></h3>
@@ -823,7 +829,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-krishna-makhan.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_krishna_makhan.webp" type="image/webp"><img src="images/cute_krishna_makhan.jpg" alt="Cute Krishna Stealing Butter 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_krishna_makhan.webp" type="image/webp"><img src="images/cute_krishna_makhan.jpg" alt="Cute Krishna Stealing Butter 4K Wallpaper" loading="eager" fetchpriority="high" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-krishna-makhan.html">माखन चोर बाल गोपाल क्यूट 4K फोटो</a></h3>
@@ -839,7 +845,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-baby-lakshmi.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_baby_lakshmi.webp" type="image/webp"><img src="images/cute_baby_lakshmi.jpg" alt="Cute Baby Goddess Lakshmi 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_baby_lakshmi.webp" type="image/webp"><img src="images/cute_baby_lakshmi.jpg" alt="Cute Baby Goddess Lakshmi 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-baby-lakshmi.html">क्यूट बेबी लक्ष्मी जी कमल पर 4K फोटो</a></h3>
@@ -855,7 +861,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-ganesha-reading.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_ganesha_reading.webp" type="image/webp"><img src="images/cute_ganesha_reading.jpg" alt="Cute Bal Ganesha Reading Book 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_ganesha_reading.webp" type="image/webp"><img src="images/cute_ganesha_reading.jpg" alt="Cute Bal Ganesha Reading Book 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-ganesha-reading.html">क्यूट बाल गणेश जी पढ़ाई करते हुए 4K फोटो</a></h3>
@@ -872,7 +878,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-baby-saraswati.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_baby_saraswati.webp" type="image/webp"><img src="images/cute_baby_saraswati.jpg" alt="Cute Baby Saraswati with Veena 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_baby_saraswati.webp" type="image/webp"><img src="images/cute_baby_saraswati.jpg" alt="Cute Baby Saraswati with Veena 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-baby-saraswati.html">क्यूट बेबी सरस्वती जी वीणा वादिनी 4K फोटो</a></h3>
@@ -889,7 +895,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-bal-gopal-original.html">
                 <span class="badge">Trending 4K</span>
-                <picture><source srcset="images/cute_bal_gopal_1789315873602.webp" type="image/webp"><img src="images/cute_bal_gopal_1789315873602.jpg" alt="3D Cute Bal Gopal Makhan Chor 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_bal_gopal_1789315873602.webp" type="image/webp"><img src="images/cute_bal_gopal_1789315873602.jpg" alt="3D Cute Bal Gopal Makhan Chor 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-bal-gopal-original.html">3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर</a></h3>
@@ -906,7 +912,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-bal-ganesha-original.html">
                 <span class="badge">Trending 4K</span>
-                <picture><source srcset="images/cute_bal_ganesha_1789316002528.webp" type="image/webp"><img src="images/cute_bal_ganesha_1789316002528.jpg" alt="3D Cute Bal Ganesha with Modak 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_bal_ganesha_1789316002528.webp" type="image/webp"><img src="images/cute_bal_ganesha_1789316002528.jpg" alt="3D Cute Bal Ganesha with Modak 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-bal-ganesha-original.html">3D क्यूट बाल गणेश मोदक 4K फोटो</a></h3>
@@ -923,7 +929,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-10-05_2_07b996.html">
                 <span class="badge">Daily Divine 4K</span>
-                <picture><source srcset="images/cute_bal_shiva.webp" type="image/webp"><img src="images/cute_bal_shiva.jpg" alt="Cute Bal Shiva Damru Leela" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_bal_shiva.webp" type="image/webp"><img src="images/cute_bal_shiva.jpg" alt="Cute Bal Shiva Damru Leela" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-10-05_2_07b996.html">क्यूट बाल शिव डमरू लीला 4K</a></h3>
@@ -940,7 +946,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-10-06_1_0633f5.html">
                 <span class="badge">Daily Divine 4K</span>
-                <picture><source srcset="images/cute_bal_hanuman.webp" type="image/webp"><img src="images/cute_bal_hanuman.jpg" alt="Cute Bal Hanuman Mango Flight" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_bal_hanuman.webp" type="image/webp"><img src="images/cute_bal_hanuman.jpg" alt="Cute Bal Hanuman Mango Flight" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-10-06_1_0633f5.html">क्यूट बाल हनुमान सूर्य फल लीला 4K</a></h3>
@@ -957,7 +963,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-10-09_2_0179b8.html">
                 <span class="badge">Daily Divine 4K</span>
-                <picture><source srcset="images/cute_krishna_makhan.webp" type="image/webp"><img src="images/cute_krishna_makhan.jpg" alt="Cute Bal Gopal Butter Thief Vrindavan" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_krishna_makhan.webp" type="image/webp"><img src="images/cute_krishna_makhan.jpg" alt="Cute Bal Gopal Butter Thief Vrindavan" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-10-09_2_0179b8.html">क्यूट बाल गोपाल नटखट कन्हैया 4K</a></h3>
@@ -974,7 +980,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-10-10_2_012f98.html">
                 <span class="badge">Daily Divine 4K</span>
-                <picture><source srcset="images/cute_ganesha_reading.webp" type="image/webp"><img src="images/cute_ganesha_reading.jpg" alt="Cute Bal Ganesha Book & Modak" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_ganesha_reading.webp" type="image/webp"><img src="images/cute_ganesha_reading.jpg" alt="Cute Bal Ganesha Book & Modak" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-10-10_2_012f98.html">क्यूट बाल गणेश ज्ञान व मोदक 4K</a></h3>
@@ -991,7 +997,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-2026-10-12_2_069451.html">
                 <span class="badge">Daily Divine 4K</span>
-                <picture><source srcset="images/lord_krishna_1789315536423.webp" type="image/webp"><img src="images/lord_krishna_1789315536423.jpg" alt="Cute Bal Gopal Playing Golden Flute" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/lord_krishna_1789315536423.webp" type="image/webp"><img src="images/lord_krishna_1789315536423.jpg" alt="Cute Bal Gopal Playing Golden Flute" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-2026-10-12_2_069451.html">क्यूट बाल गोपाल मधुर बंसी दर्शन 4K</a></h3>

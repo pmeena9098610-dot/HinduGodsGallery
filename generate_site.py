@@ -294,7 +294,11 @@ COMMON_HEAD = """
     <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap"></noscript>
 """
 
 COMMON_STYLE = """
@@ -423,10 +427,12 @@ COMMON_STYLE = """
         border-radius: 16px;
         overflow: hidden;
         box-shadow: var(--card-shadow);
-        transition: all 0.35s;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
         position: relative;
         display: flex;
         flex-direction: column;
+        content-visibility: auto;
+        contain-intrinsic-size: 280px 420px;
     }
     .card:hover {
         transform: translateY(-6px);
@@ -1292,21 +1298,15 @@ def generate_photo_page(item, all_items):
     img_jpg, img_webp, img_abs_url, sitemap_loc = resolve_image_assets(item["img"])
     page_url = BASE_URL + item["slug"]
 
-    if str(item["img"]).startswith("http"):
-        picture_html = f'<img src="{img_jpg}" alt="{item["titleHi"]} - {item["title"]} 4K Free Download" width="1024" height="1365" style="cursor:zoom-in;" onclick="openLightbox(\'{img_jpg}\')">'
-    else:
-        picture_html = f'''<picture>
-                <source srcset="{img_webp}" type="image/webp">
-                <img src="{img_jpg}" alt="{item["titleHi"]} - {item["title"]} 4K Free Download" width="1024" height="1365" style="cursor:zoom-in;" onclick="openLightbox(\'{img_jpg}\')">
-            </picture>'''
+    picture_html = f'''<picture>
+            <source srcset="{img_webp}" type="image/webp">
+            <img src="{img_jpg}" alt="{item["titleHi"]} - {item["title"]} 4K Free Download" width="1024" height="1365" fetchpriority="high" decoding="async" style="cursor:zoom-in;" onclick="openLightbox(\'{img_jpg}\')">
+        </picture>'''
 
     related_html = ""
     for r in related:
         r_jpg, r_webp, _, _ = resolve_image_assets(r["img"])
-        if str(r["img"]).startswith("http"):
-            r_pic = f'<img src="{r_jpg}" alt="{r["title"]}" loading="lazy" width="400" height="533">'
-        else:
-            r_pic = f'<picture><source srcset="{r_webp}" type="image/webp"><img src="{r_jpg}" alt="{r["title"]}" loading="lazy" width="400" height="533"></picture>'
+        r_pic = f'<picture><source srcset="{r_webp}" type="image/webp"><img src="{r_jpg}" alt="{r["title"]}" loading="lazy" decoding="async" width="400" height="533"></picture>'
         related_html += f"""
         <div class="card">
             <a class="card-img-link" href="{r['slug']}">
@@ -1330,6 +1330,7 @@ def generate_photo_page(item, all_items):
 <html lang="hi" prefix="og: https://ogp.me/ns#">
 <head>
     {COMMON_HEAD}
+    <link rel="preload" as="image" href="{img_webp}" type="image/webp" fetchpriority="high">
     <title>{item['titleHi']} | {item['title']} Free Download & WhatsApp Status</title>
     <meta name="description" content="{item['titleHi']} - {item['shortDesc']} Free 4K Ultra HD Wallpaper download & 1-click WhatsApp Status sharing.">
     <meta name="keywords" content="{', '.join(item['tags'])}, {item['title']}, {item['titleHi']}, 4k wallpaper, whatsapp status">
@@ -1565,12 +1566,13 @@ def generate_category_page(cat, all_items):
         cat_items = [x for x in all_items if str(x.get("god", "")).lower() == cid or str(x.get("category", "")).lower() == cid or cid in [str(t).lower() for t in x.get("tags", [])]]
     
     cards_html = ""
-    for it in cat_items:
+    for i, it in enumerate(cat_items):
         it_jpg, it_webp, _, _ = resolve_image_assets(it["img"])
-        if str(it["img"]).startswith("http"):
-            card_pic = f'<img src="{it_jpg}" alt="{it["title"]}" loading="lazy" width="400" height="533">'
+        if i < 4:
+            loading_attrs = 'loading="eager" fetchpriority="high" width="400" height="533"'
         else:
-            card_pic = f'<picture><source srcset="{it_webp}" type="image/webp"><img src="{it_jpg}" alt="{it["title"]}" loading="lazy" width="400" height="533"></picture>'
+            loading_attrs = 'loading="lazy" decoding="async" width="400" height="533"'
+        card_pic = f'<picture><source srcset="{it_webp}" type="image/webp"><img src="{it_jpg}" alt="{it["title"]}" {loading_attrs}></picture>'
         cards_html += f"""
         <div class="card">
             <a class="card-img-link" href="{it['slug']}">
@@ -1759,12 +1761,13 @@ def generate_index_page(all_items):
 
     def build_grid(items_list):
         h = ""
-        for it in items_list:
+        for i, it in enumerate(items_list):
             it_jpg, it_webp, _, _ = resolve_image_assets(it["img"])
-            if str(it["img"]).startswith("http"):
-                card_pic = f'<img src="{it_jpg}" alt="{it["titleHi"]} - {it["title"]}" loading="lazy" width="400" height="533">'
+            if i < 4:
+                loading_attrs = 'loading="eager" fetchpriority="high" width="400" height="533"'
             else:
-                card_pic = f'<picture><source srcset="{it_webp}" type="image/webp"><img src="{it_jpg}" alt="{it["titleHi"]} - {it["title"]}" loading="lazy" width="400" height="533"></picture>'
+                loading_attrs = 'loading="lazy" decoding="async" width="400" height="533"'
+            card_pic = f'<picture><source srcset="{it_webp}" type="image/webp"><img src="{it_jpg}" alt="{it["titleHi"]} - {it["title"]}" {loading_attrs}></picture>'
             h += f"""
             <div class="card" data-god="{it.get('god', '')}" data-cat="{it.get('category', '')}" data-search="{it['title'].lower()} {it['titleHi']} {' '.join(it['tags'])}">
                 <a class="card-img-link" href="{it['slug']}">
@@ -1805,6 +1808,7 @@ def generate_index_page(all_items):
 <html lang="hi" prefix="og: https://ogp.me/ns#">
 <head>
     {COMMON_HEAD}
+    <link rel="preload" as="image" href="{BASE_URL}images/cute_radha_krishna.webp" type="image/webp" fetchpriority="high">
     <title>ॐ दैनिक हिन्दू भगवान दर्शन | Daily Hindu Gods 4K Wallpaper &amp; WhatsApp Status【100% Free HD】</title>
     <meta name="description" content="दैनिक 21+ नए मनमोहक, क्यूट और 4K हिन्दू भगवानों के AI फोटो। बाल गोपाल, बाल गणेश, महादेव शिव, राम लला, हनुमान जी, माँ लक्ष्मी और माँ दुर्गा के सर्वश्रेष्ठ व्हाट्सएप स्टेटस और वॉलपेपर फ्री डाउनलोड।">
     <meta name="keywords" content="cute bhagwan photo, hindu gods photos, good morning god images today, hindu god images for whatsapp status, cute bal gopal photo, baby krishna makhan chor wallpaper 4k, mahadev 4k wallpaper download, lord shiva kailash 3d wallpaper, bholenath photo hd, ram lalla ayodhya photo 4k, ram mandir wallpaper, cute bal ganesh 3d, ganpati bappa cute photo, hanuman ji 4k wallpaper full screen, bajrangbali hd photo, maa durga 4k wallpaper navratri, sherawali mata image, maa lakshmi photo download, diwali lakshmi pujan wallpaper, radha krishna cute love photo, all hindu gods 4k wallpaper, shubh prabhat bhagwan photo, daily god images 2026, 3d ai hindu god images, cute god wallpaper for mobile, god images with quotes in hindi, bhagwan ke photo download, lord shiva hd 1080p, shri ram 4k wallpaper ayodhya">

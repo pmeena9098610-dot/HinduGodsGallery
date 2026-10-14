@@ -13,8 +13,13 @@
     <link rel="alternate" type="application/rss+xml" title="Hindu Gods Daily Gallery RSS" href="feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Kalam:wght@700&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap"></noscript>
 
+    <link rel="preload" as="image" href="images/cute_radha_krishna.webp" type="image/webp" fetchpriority="high">
     <title>राधा कृष्ण वृंदावन रास 4K | Shri Radha Krishna Vrindavan Prem Free Download & WhatsApp Status</title>
     <meta name="description" content="राधा कृष्ण वृंदावन रास 4K - वृंदावन के निकुंज में कदम की छांव में मधुर बंसी बजाते श्री कृष्ण और प्रेममयी श्री राधा रानी। Free 4K Ultra HD Wallpaper download & 1-click WhatsApp Status sharing.">
     <meta name="keywords" content="Radha Krishna 4K, Vrindavan Krishna Photo, Prem Mandir Wallpaper, Radha Krishna Status, Shri Radha Krishna Vrindavan Prem, राधा कृष्ण वृंदावन रास 4K, 4k wallpaper, whatsapp status">
@@ -226,10 +231,12 @@
         border-radius: 16px;
         overflow: hidden;
         box-shadow: var(--card-shadow);
-        transition: all 0.35s;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
         position: relative;
         display: flex;
         flex-direction: column;
+        content-visibility: auto;
+        contain-intrinsic-size: 280px 420px;
     }
     .card:hover {
         transform: translateY(-6px);
@@ -791,9 +798,9 @@
         <div class="detail-img-wrap">
             <span class="badge" style="top:16px; left:16px; font-size:0.85rem; padding:6px 14px;">Daily Divine 4K</span>
             <picture>
-                <source srcset="images/cute_radha_krishna.webp" type="image/webp">
-                <img src="images/cute_radha_krishna.jpg" alt="राधा कृष्ण वृंदावन रास 4K - Shri Radha Krishna Vrindavan Prem 4K Free Download" width="1024" height="1365" style="cursor:zoom-in;" onclick="openLightbox('images/cute_radha_krishna.jpg')">
-            </picture>
+            <source srcset="images/cute_radha_krishna.webp" type="image/webp">
+            <img src="images/cute_radha_krishna.jpg" alt="राधा कृष्ण वृंदावन रास 4K - Shri Radha Krishna Vrindavan Prem 4K Free Download" width="1024" height="1365" fetchpriority="high" decoding="async" style="cursor:zoom-in;" onclick="openLightbox('images/cute_radha_krishna.jpg')">
+        </picture>
 
             <div class="diya-container" onclick="toggleDiya()" title="क्लिक करके दीप जलाएं">
                 <div id="diyaFlame" class="diya-flame"></div>
@@ -891,7 +898,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-radha-krishna.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_radha_krishna.webp" type="image/webp"><img src="images/cute_radha_krishna.jpg" alt="Cute Radha Krishna Love 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_radha_krishna.webp" type="image/webp"><img src="images/cute_radha_krishna.jpg" alt="Cute Radha Krishna Love 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-radha-krishna.html">राधा कृष्ण क्यूट लव 4K फोटो</a></h3>
@@ -907,7 +914,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-cute-krishna-makhan.html">
                 <span class="badge">Cute Special</span>
-                <picture><source srcset="images/cute_krishna_makhan.webp" type="image/webp"><img src="images/cute_krishna_makhan.jpg" alt="Cute Krishna Stealing Butter 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_krishna_makhan.webp" type="image/webp"><img src="images/cute_krishna_makhan.jpg" alt="Cute Krishna Stealing Butter 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-cute-krishna-makhan.html">माखन चोर बाल गोपाल क्यूट 4K फोटो</a></h3>
@@ -922,7 +929,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-krishna-flute.html">
                 <span class="badge">Trending 4K</span>
-                <picture><source srcset="images/lord_krishna_1789315536423.webp" type="image/webp"><img src="images/lord_krishna_1789315536423.jpg" alt="Lord Krishna Playing Flute in Vrindavan 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/lord_krishna_1789315536423.webp" type="image/webp"><img src="images/lord_krishna_1789315536423.jpg" alt="Lord Krishna Playing Flute in Vrindavan 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-krishna-flute.html">भगवान श्री कृष्ण बांसुरी वृंदावन 4K वॉलपेपर</a></h3>
@@ -938,7 +945,7 @@
         <div class="card">
             <a class="card-img-link" href="photo-bal-gopal-original.html">
                 <span class="badge">Trending 4K</span>
-                <picture><source srcset="images/cute_bal_gopal_1789315873602.webp" type="image/webp"><img src="images/cute_bal_gopal_1789315873602.jpg" alt="3D Cute Bal Gopal Makhan Chor 4K Wallpaper" loading="lazy" width="400" height="533"></picture>
+                <picture><source srcset="images/cute_bal_gopal_1789315873602.webp" type="image/webp"><img src="images/cute_bal_gopal_1789315873602.jpg" alt="3D Cute Bal Gopal Makhan Chor 4K Wallpaper" loading="lazy" decoding="async" width="400" height="533"></picture>
             </a>
             <div class="card-body">
                 <h3><a href="photo-bal-gopal-original.html">3D बाल गोपाल माखन चोर 4K मोबाइल वॉलपेपर</a></h3>

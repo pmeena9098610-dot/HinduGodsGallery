@@ -189,15 +189,35 @@ def generate_daily_batch(target_date_str=None, num_entries=10):
 
         # Try to download locally for offline/lightning-fast speed
         download_success = download_image_file(ai_url, local_abs_path, timeout=30)
-        final_image_url = local_rel_url if download_success else ai_url
+        if not download_success:
+            # Resilient high-speed local fallback to guarantee 0% broken external URLs
+            fallback_map = {
+                "Ganesha": "images/cute_bal_ganesha_1789316002528.jpg",
+                "Krishna": "images/cute_bal_gopal_1789315873602.jpg",
+                "Shiva": "images/cute_bal_shiva.jpg",
+                "Durga": "images/navratri_durga_special.jpg",
+                "Hanuman": "images/cute_bal_hanuman.jpg",
+                "Lakshmi": "images/cute_baby_lakshmi.jpg",
+                "Ram": "images/lord_ram_1789315920936.jpg",
+                "Saraswati": "images/cute_baby_saraswati.jpg"
+            }
+            fb_rel = fallback_map.get(item["category"], "images/cute_radha_krishna.jpg")
+            fb_abs = os.path.join(SCRIPT_DIR, fb_rel)
+            if os.path.exists(fb_abs):
+                import shutil
+                shutil.copy2(fb_abs, local_abs_path)
+                logging.info(f"🛡️ Used high-res local asset fallback for {item['name_en']}")
+                download_success = True
+
+        final_image_url = local_rel_url
 
         # Convert to WebP for modern performance & Core Web Vitals
-        if download_success:
+        if os.path.exists(local_abs_path):
             try:
                 from PIL import Image
                 webp_path = os.path.splitext(local_abs_path)[0] + ".webp"
                 with Image.open(local_abs_path) as im:
-                    im.save(webp_path, "WEBP", quality=85)
+                    im.convert("RGB").save(webp_path, "WEBP", quality=82)
                 logging.info(f"✨ Converted to WebP: {os.path.basename(webp_path)}")
             except Exception as we:
                 logging.warning(f"WebP conversion notice: {we}")
