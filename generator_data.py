@@ -395,6 +395,90 @@ ITEMS = [
 
 गोवर्धन पूजा, अन्नकूट महोत्सव और दिवाली के अगले दिन यह फोटो करोड़ों श्रद्धालुओं द्वारा विशेष रूप से शेयर की जाती है। यह भगवान के शरणागत वत्सल स्वभाव का प्रमाण है।""",
         "tags": ["krishna govardhan photo 4k", "govardhan parvat image", "krishna lifting mountain wallpaper", "govardhan pooja image", "krishna vrindavan photo", "shri krishna leela"]
+    },
+    {
+        "id": "lord-vishnu-sheshnag",
+        "slug": "photo-lord-vishnu-sheshnag.html",
+        "title": "Bhagwan Vishnu on Sheshnag 4K Wallpaper",
+        "titleHi": "भगवान विष्णु नारायण शेषनाग दर्शन 4K फोटो",
+        "category": "vishnu",
+        "categoryName": "Lord Vishnu Gallery",
+        "categorySlug": "category-vishnu.html",
+        "god": "vishnu",
+        "img": "images/lord_vishnu_narayan",
+        "badge": "Divine Masterpiece",
+        "shortDesc": "Sacred classical painting of Bhagwan Vishnu Narayan reclining peacefully on Sheshnag in Kshirasagar with Sudarshana Chakra, Shankha, Gada, Padma, and Mata Lakshmi in traditional temple calendar art.",
+        "mantra": "शान्ताकारं भुजगशयनं पद्मनाभं सुरेशं विश्वाधारं गगनसदृशं मेघवर्णं शुभाङ्गम् ।\\nलक्ष्मीकान्तं कमलनयनं योगिभिर्ध्यानगम्यं वन्दे विष्णुं भवभयहरं सर्वलोकैकनाथम् ॥",
+        "mantraMeaning": "हे शांत स्वरूप, शेषनाग की शैया पर शयन करने वाले, कमल नयन, लक्ष्मीपति, योगियों के ध्यानगम्य, समस्त लोकों के स्वामी भगवान विष्णु — मैं आपको बारंबार नमन करता हूँ।",
+        "article": """सृष्टि के पालनकर्ता और सनातन धर्म के सर्वप्रमुख देव भगवान श्री हरि विष्णु का यह स्वरूप अनंत शांति, ऐश्वर्य और मोक्ष का प्रतीक है। क्षीरसागर के शांत जल में सहस्रफणी शेषनाग की दिव्य शैया पर विश्राम करते हुए नारायण के चार दिव्य हाथों में शंख (पांचजन्य), चक्र (सुदर्शन), गदा (कौमोदकी) और पवित्र पद्म (कमल) सुशोभित हैं। उनके चरणों में धन और ऐश्वर्य की अधिष्ठात्री माता लक्ष्मी अत्यंत भक्ति और आदर भाव से सेवा में उपस्थित हैं।
+
+पीताम्बर वस्त्र, कल्पतरु वनमाला, मस्तक पर दिव्य मुकुट और वक्षस्थल पर कौस्तुभ मणि भगवान विष्णु के परम पावन स्वरूप को आलौकिक तेज प्रदान करते हैं। गुरुवार का व्रत, एकादशी व्रत, सत्यनारायण कथा और दैनिक नित्य स्मरण में भगवान विष्णु के इस 4K स्वरूप का दर्शन मन को अगाध शांति और समस्त संकटों से मुक्ति दिलाता है।
+
+इस पवित्र और वास्तविक हिन्दू मंदिर कला शैली के वॉलपेपर को अपने मोबाइल स्क्रीन, घर के मंदिर या दैनिक व्हाट्सएप स्टेटस में लगाकर जगत के पालनहार श्री हरि विष्णु की नित्य कृपा प्राप्त करें।""",
+        "tags": ["lord vishnu 4k wallpaper", "narayan sheshnag photo", "vaikuntha dham wallpaper", "vishnu bhagwan photo hd", "hari narayan image", "shree hari vishnu photo"]
+    },
+    {
+        "id": "shri-ram-darbar-ayodhya",
+        "slug": "photo-shri-ram-darbar-ayodhya.html",
+        "title": "Sacred Shri Ram Darbar Ayodhya 4K Wallpaper",
+        "titleHi": "पवित्र श्री राम दरबार अयोध्या 4K वॉलपेपर",
+        "category": "ram",
+        "categoryName": "Shri Ram Gallery",
+        "categorySlug": "category-ram.html",
+        "god": "ram",
+        "img": "images/shri_ram_darbar",
+        "badge": "Ayodhya Special",
+        "shortDesc": "Majestic Shri Ram Darbar in Ayodhya golden palace - Lord Rama, Mata Sita, Lakshmana, and Bhaktaraj Hanuman kneeling in pure devotion at Rama's lotus feet.",
+        "mantra": "रामाय रामभद्राय रामचन्द्राय वेधसे ।\\nरघुनाथाय नाथाय सीतायाः पतये नमः ॥",
+        "mantraMeaning": "हे राम, हे रामभद्र, हे रामचंद्र, हे रघुनाथ, सीतापति को मेरा बारंबार नमस्कार। यह मंत्र समस्त बाधाओं का नाश कर सुख-शांति प्रदान करता है।",
+        "article": """मर्यादा पुरुषोत्तम प्रभु श्री राम का दरबार भारतीय संस्कृति, धर्म, प्रेम और भ्रातृभाव का सर्वोच्च शिखर है। अयोध्या के स्वर्ण सिंहासन पर विराजमान प्रभु श्री राम के दाएं भ्राता लक्ष्मण छत्र धारण किए सतर्क भाव से खड़े हैं, वाम अंग में जनकनंदिनी माता सीता दिव्य मंद मुस्कान के साथ शोभित हैं, और प्रभु के पावन चरणकमलों में परम भक्त पवनसुत हनुमान हाथ जोड़े अनन्य भक्ति में लीन हैं।
+
+श्री राम दरबार का यह विग्रह घर में रखने से पारिवारिक कलह समाप्त होते हैं, भाइयों में प्रेम बढ़ता है और सुख-शांति व समृद्धि का वास होता है। रामनवमी, दीपावली और नित्य पूजा के लिए यह पावन छवि सर्वश्रेष्ठ है। 
+
+प्रभु श्री राम के इस भव्य और पारंपरिक 4K वॉलपेपर को अपने मोबाइल पर लगाएं और परिवार-मित्रों के साथ शेयर करके 'जय श्री राम' के पावन उद्घोष से जीवन को धन्य बनाएं।""",
+        "tags": ["shri ram darbar 4k", "ram darbar wallpaper", "ayodhya ram darbar photo", "ram sita lakshman hanuman", "lord ram darbar hd", "ram mandir ayodhya darbar"]
+    },
+    {
+        "id": "hanuman-dhyan-meditation",
+        "slug": "photo-hanuman-dhyan-meditation.html",
+        "title": "Bhaktaraj Hanuman Dhyan Meditation 4K Wallpaper",
+        "titleHi": "भक्तराज हनुमान ध्यान मुद्रा 4K वॉलपेपर",
+        "category": "hanuman",
+        "categoryName": "Lord Hanuman Gallery",
+        "categorySlug": "category-hanuman.html",
+        "god": "hanuman",
+        "img": "images/lord_hanuman_meditation",
+        "badge": "Bhakti Special",
+        "shortDesc": "Serene and peaceful depiction of Pawanputra Hanuman ji meditating in padmasana with folded hands, golden aura, sindoori glow and temple diyas.",
+        "mantra": "अतुलितबलधामं हेमशैलाभदेहं दनुजवनकृशानुं ज्ञानिनामग्रगण्यम् ।\\nसकलगुणनिधानं वानराणामधीशं रघुपतिप्रियभक्तं वातजातं नमामि ॥",
+        "mantraMeaning": "अतुलनीय बल के धाम, स्वर्ण पर्वत के समान कांतियुक्त शरीर वाले, ज्ञानियों में अग्रगण्य, सकल गुणों के निधान, रघुपति के प्रिय भक्त पवनपुत्र हनुमान को मैं नमन करता हूँ।",
+        "article": """संकटमोचन महाबली हनुमान जी केवल अपार शक्ति और पराक्रम के ही नहीं, अपितु परम ज्ञान, वैराग्य और ध्यान के भी साक्षात अवतार हैं। इस पावन 4K चित्र में भक्तराज हनुमान पद्मासन लगाकर हाथ जोड़े प्रभु श्री राम के ध्यान में लीन हैं। उनके सिंदूरी शरीर पर स्वर्णिम आभामंडल, गले में तुलसी व मोतियों की माला और पास में विश्राम करती स्वर्ण गदा अत्यंत नयनाभिराम दृश्य प्रस्तुत करती है।
+
+मंगलवार और शनिवार को हनुमान चालीसा व सुंदरकांड पाठ के समय इस ध्यान मुद्रा के दर्शन करने से मन की एकाग्रता बढ़ती है, अज्ञात भय व मानसिक तनाव दूर होते हैं और आत्मबल में वृद्धि होती है। 
+
+इस अत्यंत शांत, शुद्ध और पारंपरिक हनुमान जी की फोटो को डाउनलोड करके अपने मोबाइल और पूजा स्थल को पावन बनाएं। बोलो जय बजरंगबली!""",
+        "tags": ["hanuman dhyan photo 4k", "hanuman meditation wallpaper", "peaceful hanuman ji image", "bajrangbali dhyan mudra", "hanuman ji wallpaper hd", "sindoor hanuman photo"]
+    },
+    {
+        "id": "shiva-kailash-peaceful-meditation",
+        "slug": "photo-shiva-kailash-peaceful-meditation.html",
+        "title": "Lord Shiva Bholenath Kailash Meditation 4K Wallpaper",
+        "titleHi": "भगवान शिव भोलेनाथ कैलाश ध्यान 4K फोटो",
+        "category": "shiva",
+        "categoryName": "Shiva Gallery",
+        "categorySlug": "category-shiva.html",
+        "god": "shiva",
+        "img": "images/lord_shiva_kailash_peace",
+        "badge": "Mahadev Special",
+        "shortDesc": "Tranquil classical painting of Lord Shiva Bholenath meditating on Mount Kailash with holy Ganga descending from his matted locks, crescent moon, and Nandi bull.",
+        "mantra": "ॐ नमः शिवाय ।\\nध्यायेन्नित्यं महेशं रजतगिरिनिभं चारुचंद्रावतंसं रत्नाकल्पोज्ज्वलांगं परशुमृगवराभीतिहस्तं प्रसन्नम् ॥",
+        "mantraMeaning": "चांदी के पर्वत के समान कांति वाले, सुंदर चंद्रमा के आभूषण वाले, प्रसन्न मुख महेश्वर भगवान शिव का नित्य ध्यान करें।",
+        "article": """देवाधिदेव महादेव शिव शंभू का कैलाश पर्वत पर ध्यानस्थ स्वरूप समस्त ब्रह्मांड को स्थिरता और शांति प्रदान करने वाला है। इस पारंपरिक तेल चित्रकला में भोलेनाथ को श्वेत हिमाच्छादित कैलाश शिखर पर बाघम्बर पर आसीन दिखाया गया है। उनकी जटाओं से मां गंगा की अविरल पवित्र धारा प्रवाहित हो रही है, भाल पर बालचंद्र चमक रहा है और समीप ही शांत भाव से धर्म के प्रतीक नंदी जी बैठे हैं।
+
+महादेव का यह ध्यान रूप साधकों के लिए परम कल्याणकारी है। महाशिवरात्रि, सावन सोमवार और प्रतिदिन प्रातःकाल शिव पंचाक्षर मंत्र 'ॐ नमः शिवाय' के साथ इस छवि का दर्शन करने से समस्त पापों का शमन और चित्त की शांति होती है।
+
+इस पावन, प्रामाणिक और दिव्य महादेव वॉलपेपर को अपने फोन की होम स्क्रीन या लॉक स्क्रीन पर लगाएं और हर हर महादेव की अनुकंपा पाएं।""",
+        "tags": ["lord shiva kailash wallpaper", "bholenath dhyan photo", "shiva meditation 4k", "har har mahadev photo", "kailash parvat shiva hd", "mahadev traditional wallpaper"]
     }
 ]
 

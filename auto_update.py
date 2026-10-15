@@ -178,49 +178,22 @@ def generate_daily_batch(target_date_str=None, num_entries=10):
         entry_id = f"{target_date_str}_{i+1}_{uuid.uuid4().hex[:6]}"
         seed_num = day_hash * 100 + (i + 1)
         
-        # AI Image generation URL
-        ai_url = generate_pollinations_url(item["prompt"], seed_num)
-        
-        # Local filename
-        safe_name = item["name_en"].split("(")[0].strip().replace(" ", "_").lower()
-        local_filename = f"{safe_name}_{seed_num}.jpg"
-        local_abs_path = os.path.join(day_dir_abs, local_filename)
-        local_rel_url = f"images/{target_date_str}/{local_filename}"
+        # Select authentic verified sacred deity artwork
+        fallback_map = {
+            "Ganesha": ["images/lord_ganesha_1789315549643.jpg", "images/cute_bal_ganesha_1789316002528.jpg", "images/cute_ganesha_reading.jpg"],
+            "Krishna": ["images/lord_krishna_1789315536423.jpg", "images/krishna_govardhan.jpg", "images/cute_radha_krishna.jpg", "images/cute_bal_gopal_1789315873602.jpg", "images/cute_krishna_makhan.jpg"],
+            "Shiva": ["images/lord_shiva_1789315505870.jpg", "images/lord_shiva_kailash_peace.jpg", "images/shiv_parvati_family.jpg", "images/cute_bal_shiva.jpg"],
+            "Durga": ["images/goddess_durga_1789315573017.jpg", "images/navratri_durga_special.jpg", "images/navratri_nine_devi.jpg"],
+            "Hanuman": ["images/lord_hanuman_meditation.jpg", "images/lord_hanuman_1789315589634.jpg", "images/cute_bal_hanuman.jpg"],
+            "Lakshmi": ["images/goddess_lakshmi_1789315900662.jpg", "images/cute_baby_lakshmi.jpg"],
+            "Ram": ["images/shri_ram_darbar.jpg", "images/lord_ram_1789315920936.jpg"],
+            "Saraswati": ["images/goddess_saraswati_1789315983989.jpg", "images/cute_baby_saraswati.jpg"],
+            "Vishnu": ["images/lord_vishnu_narayan.jpg"]
+        }
+        pool = fallback_map.get(item["category"], ["images/cute_radha_krishna.jpg"])
+        final_image_url = pool[i % len(pool)]
 
-        # Try to download locally for offline/lightning-fast speed
-        download_success = download_image_file(ai_url, local_abs_path, timeout=30)
-        if not download_success:
-            # Resilient high-speed local fallback to guarantee 0% broken external URLs
-            fallback_map = {
-                "Ganesha": "images/cute_bal_ganesha_1789316002528.jpg",
-                "Krishna": "images/cute_bal_gopal_1789315873602.jpg",
-                "Shiva": "images/cute_bal_shiva.jpg",
-                "Durga": "images/navratri_durga_special.jpg",
-                "Hanuman": "images/cute_bal_hanuman.jpg",
-                "Lakshmi": "images/cute_baby_lakshmi.jpg",
-                "Ram": "images/lord_ram_1789315920936.jpg",
-                "Saraswati": "images/cute_baby_saraswati.jpg"
-            }
-            fb_rel = fallback_map.get(item["category"], "images/cute_radha_krishna.jpg")
-            fb_abs = os.path.join(SCRIPT_DIR, fb_rel)
-            if os.path.exists(fb_abs):
-                import shutil
-                shutil.copy2(fb_abs, local_abs_path)
-                logging.info(f"🛡️ Used high-res local asset fallback for {item['name_en']}")
-                download_success = True
 
-        final_image_url = local_rel_url
-
-        # Convert to WebP for modern performance & Core Web Vitals
-        if os.path.exists(local_abs_path):
-            try:
-                from PIL import Image
-                webp_path = os.path.splitext(local_abs_path)[0] + ".webp"
-                with Image.open(local_abs_path) as im:
-                    im.convert("RGB").save(webp_path, "WEBP", quality=82)
-                logging.info(f"✨ Converted to WebP: {os.path.basename(webp_path)}")
-            except Exception as we:
-                logging.warning(f"WebP conversion notice: {we}")
 
         entry = {
             "id": entry_id,
