@@ -29,6 +29,7 @@ except ImportError:
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SITEMAP_PATH = os.path.join(BASE_DIR, "sitemap.xml")
 SITE_URL = "https://pmeena9098610-dot.github.io/HinduGodsGallery/"
+SITEMAP_INDEX_URL = f"{SITE_URL}sitemap_index.xml"
 SITEMAP_URL = f"{SITE_URL}sitemap.xml"
 FEED_URL = f"{SITE_URL}feed.xml"
 
@@ -61,15 +62,32 @@ def check_permissions(creds):
     resp = requests.get(api_url, headers=headers)
     return resp.status_code == 200, resp.status_code, resp.text
 
+def list_sitemaps(creds):
+    encoded_site = urllib.parse.quote(SITE_URL, safe="")
+    api_url = f"https://www.googleapis.com/webmasters/v3/sites/{encoded_site}/sitemaps"
+    headers = {"Authorization": f"Bearer {creds.token}"}
+    resp = requests.get(api_url, headers=headers)
+    if resp.status_code == 200:
+        return resp.json().get("sitemap", [])
+    return []
+
+def delete_sitemap_via_api(creds, sitemap_link):
+    encoded_site = urllib.parse.quote(SITE_URL, safe="")
+    encoded_sitemap = urllib.parse.quote(sitemap_link, safe="")
+    api_url = f"https://www.googleapis.com/webmasters/v3/sites/{encoded_site}/sitemaps/{encoded_sitemap}"
+    headers = {"Authorization": f"Bearer {creds.token}"}
+    resp = requests.delete(api_url, headers=headers)
+    return resp.status_code in [200, 204], resp.status_code, resp.text
+
 def submit_sitemap_via_api(creds, sitemap_link):
     encoded_site = urllib.parse.quote(SITE_URL, safe="")
     encoded_sitemap = urllib.parse.quote(sitemap_link, safe="")
     api_url = f"https://www.googleapis.com/webmasters/v3/sites/{encoded_site}/sitemaps/{encoded_sitemap}"
     headers = {"Authorization": f"Bearer {creds.token}"}
     resp = requests.put(api_url, headers=headers)
-    return resp.status_code == 204 or resp.status_code == 200, resp.status_code, resp.text
+    return resp.status_code in [200, 204], resp.status_code, resp.text
 
-def submit_indexing_api(creds, url, retries=3):
+def submit_indexing_api(creds, url, retries=2):
     endpoint = "https://indexing.googleapis.com/v3/urlNotifications:publish"
     headers = {
         "Content-Type": "application/json",
@@ -83,7 +101,7 @@ def submit_indexing_api(creds, url, retries=3):
         except Exception as e:
             if attempt == retries - 1:
                 return False, 0, str(e)
-            time.sleep(1.5)
+            time.sleep(1.0)
     return False, 0, "Max retries exceeded"
 
 def main():
@@ -94,7 +112,7 @@ def main():
     sa_path = find_service_account()
     if not sa_path:
         print("❌ service_account.json not found.")
-        return
+        return False
         
     print(f"🔑 Using Service Account from: {sa_path}")
     creds = get_credentials(sa_path)
@@ -103,49 +121,54 @@ def main():
     
     has_perm, status, text = check_permissions(creds)
     if not has_perm:
-        print("\n" + "!" * 65)
-        print("⚠️ PERMISSION NOTICE FOR GOOGLE SEARCH CONSOLE:")
-        print(f"Status Code: {status}")
-        print("To enable 100% full hands-free automation:")
-        print(f"1. Open Google Search Console for {SITE_URL}")
-        print("2. Go to: Settings (सेटिंग्स) -> Users and permissions (उपयोगकर्ता और अनुमतियां)")
-        print("3. Click 'Add User' (उपयोगकर्ता जोड़ें)")
-        print(f"4. Email: {sa_email}")
-        print("5. Permission: Owner (मालिक)")
-        print("Once added, this script can submit all sitemaps & URLs via API!")
-        print("!" * 65 + "\n")
+        print(f"\n⚠️ Permission Check Failed: HTTP {status}")
         return False
     
-    print("\n✅ Permission Verified! Submitting Sitemaps via Search Console API...")
-    ok1, code1, _ = submit_sitemap_via_api(creds, SITEMAP_URL)
-    print(f"  - sitemap.xml: {'✅ Success' if ok1 else f'❌ Error {code1}'}")
+    print("\n✅ Permission Verified! Checking Search Console Sitemaps...")
+    current_sitemaps = list_sitemaps(creds)
+    for sm in current_sitemaps:
+        path = sm.get("path", "")
+        # Remove feed.xml if present in sitemaps (feed.xml is RSS feed, causes Unknown type in GSC)
+        if "feed.xml" in path:
+            print(f"  🗑️ Removing non-sitemap feed '{path}'...")
+            del_ok, del_sc, _ = delete_sitemap_via_api(creds, path)
+            print(f"     Deleted: {'✅ Success' if del_ok else f'❌ Error {del_sc}'}")
+
+    print("\n📤 Submitting Clean Sitemaps via Search Console API...")
+    ok_idx, code_idx, _ = submit_sitemap_via_api(creds, SITEMAP_INDEX_URL)
+    print(f"  - sitemap_index.xml: {'✅ Success (HTTP 204/200)' if ok_idx else f'❌ Error {code_idx}'}")
     
-    ok2, code2, _ = submit_sitemap_via_api(creds, FEED_URL)
-    print(f"  - feed.xml: {'✅ Success' if ok2 else f'❌ Error {code2}'}")
+    ok1, code1, _ = submit_sitemap_via_api(creds, SITEMAP_URL)
+    print(f"  - sitemap.xml: {'✅ Success (HTTP 204/200)' if ok1 else f'❌ Error {code1}'}")
     
     # Submitting URLs via Indexing API
     if os.path.exists(SITEMAP_PATH):
         tree = ET.parse(SITEMAP_PATH)
         urls = [loc.text.strip() for loc in tree.getroot().findall("{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc") if loc is not None]
-        print(f"\n🚀 Submitting {min(len(urls), 200)} URLs to Google Indexing API...")
+        print(f"\n🚀 Submitting URLs to Google Indexing API (Daily Quota: 200)...")
         success = 0
-        errors = 0
-        for i, u in enumerate(urls[:200], 1):
+        quota_exceeded = False
+        for i, u in enumerate(urls, 1):
             try:
                 if creds.expired:
                     creds.refresh(Request())
                 ok, sc, msg = submit_indexing_api(creds, u)
                 if ok:
                     success += 1
+                elif sc == 429:
+                    print(f"  ℹ️ Google Indexing API Daily Quota reached (200 requests/day). All URLs already queued for today!")
+                    quota_exceeded = True
+                    break
                 else:
-                    errors += 1
-                if i % 20 == 0 or i == len(urls):
-                    print(f"  [{i}/{len(urls)}] Progress: {success} OK, {errors} errors (last HTTP {sc})")
-                time.sleep(0.3)
+                    print(f"  [{i}/{len(urls)}] Notice: HTTP {sc} for {u}")
+                if i % 25 == 0:
+                    print(f"  [{i}/{len(urls)}] Progress: {success} OK")
+                time.sleep(0.2)
             except Exception as e:
-                errors += 1
                 print(f"  [{i}/{len(urls)}] Exception: {e}")
-        print(f"\n🎉 Done! {success} URLs submitted successfully to Google for instant crawling.")
+                break
+        if not quota_exceeded:
+            print(f"\n🎉 Done! {success} URLs submitted successfully to Google.")
     return True
 
 if __name__ == "__main__":
