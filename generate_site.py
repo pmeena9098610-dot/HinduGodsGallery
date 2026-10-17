@@ -7,9 +7,15 @@ sys.path.insert(0, SCRIPT_DIR)
 from generator_data import ITEMS as BASE_ITEMS, CATEGORIES, BASE_URL
 
 DIRS = [SCRIPT_DIR]
-for extra in [r"C:\Users\Bappa official\OneDrive\Desktop\HinduGodsGallery", r"C:\Users\Bappa official\HinduGodsGallery", r"c:\Users\Bappa official\.gemini\antigravity\playground\primordial-chromosphere"]:
+for extra in [
+    r"C:\Users\Bappa official\Desktop\HinduGodsGallery",
+    r"C:\Users\Bappa official\OneDrive\Desktop\HinduGodsGallery",
+    r"C:\Users\Bappa official\HinduGodsGallery",
+    r"c:\Users\Bappa official\.gemini\antigravity\playground\primordial-chromosphere"
+]:
     if os.path.exists(extra) and extra not in DIRS:
         DIRS.append(extra)
+
 
 def xml_escape(val):
     if not val:
@@ -2167,14 +2173,12 @@ def generate_sitemap(all_items, all_cats):
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-        '  <!-- Homepage -->',
         '  <url>',
         f'    <loc>{BASE_URL}</loc>',
         f'    <lastmod>{today_iso}</lastmod>',
         '    <changefreq>daily</changefreq>',
         '    <priority>1.0</priority>',
         '  </url>',
-        '  <!-- Category Pages -->',
     ]
 
     for cat in all_cats:
@@ -2185,7 +2189,6 @@ def generate_sitemap(all_items, all_cats):
         xml_lines.append('    <priority>0.9</priority>')
         xml_lines.append('  </url>')
 
-    xml_lines.append('  <!-- Spiritual Text & Viral Hub Pages -->')
     for sp in ['hanuman-chalisa.html', 'shiv-aarti.html', 'ganesh-aarti.html', 'lakshmi-aarti.html', 'durga-aarti.html', 'ram-stuti.html', 'shubh-prabhat.html', 'festivals-2026.html']:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{sp}</loc>')
@@ -2194,7 +2197,6 @@ def generate_sitemap(all_items, all_cats):
         xml_lines.append('    <priority>0.9</priority>')
         xml_lines.append('  </url>')
 
-    xml_lines.append('  <!-- Dedicated Photo Pages -->')
     for it in all_items:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{it["slug"]}</loc>')
@@ -2203,7 +2205,6 @@ def generate_sitemap(all_items, all_cats):
         xml_lines.append('    <priority>0.8</priority>')
         xml_lines.append('  </url>')
 
-    xml_lines.append('  <!-- Static Policy & Trust Pages (AdSense Compliance) -->')
     for sp in ['about.html', 'contact.html', 'privacy-policy.html', 'terms.html', 'disclaimer.html']:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{BASE_URL}{sp}</loc>')
@@ -2221,8 +2222,7 @@ def generate_image_sitemap(all_items):
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
-        '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
-        '  <!-- Dedicated Google Image Sitemap (Local Verified Assets Only) -->'
+        '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'
     ]
     for it in all_items:
         img_raw = str(it.get("img", ""))
@@ -2243,6 +2243,22 @@ def generate_image_sitemap(all_items):
             xml_lines.append('  </url>')
     xml_lines.append('</urlset>')
     return "\n".join(xml_lines)
+
+def generate_sitemap_index():
+    """Generates sitemap index linking standard and image sitemaps."""
+    today_iso = date.today().isoformat()
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>{BASE_URL}sitemap.xml</loc>
+    <lastmod>{today_iso}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>{BASE_URL}sitemap-images.xml</loc>
+    <lastmod>{today_iso}</lastmod>
+  </sitemap>
+</sitemapindex>"""
+
 
 def generate_about_page():
     """About Us page — required for AdSense approval and E-E-A-T."""
@@ -2668,6 +2684,7 @@ print("Generated index.html with Panchang & 108 Jap Mala widgets!")
 # 4. Generate Sitemap & RSS
 sitemap_content = generate_sitemap(ITEMS, CATEGORIES)
 generated_files["sitemap.xml"] = sitemap_content
+generated_files["sitemap_index.xml"] = generate_sitemap_index()
 generated_files["sitemap-images.xml"] = generate_image_sitemap(ITEMS)
 generated_files["feed.xml"] = generate_rss_feed(ITEMS)
 
@@ -2687,15 +2704,19 @@ for viral_page in ["shubh-prabhat.html", "festivals-2026.html", "lakshmi-aarti.h
             generated_files[viral_page] = v_fp.read()
 print("Loaded and distributed all 5 Viral Hub Pages (Shubh Prabhat, Festivals 2026, Lakshmi Aarti, Durga Aarti, Ram Stuti)!")
 print("Generated feed.xml for Google Discover!")
-print(f"Generated sitemap.xml with dynamic lastmod & enriched image tags!")
+print(f"Generated sitemap.xml & sitemap_index.xml with dynamic lastmod & enriched image tags!")
 
-# 5. Write all files to all target directories
+# 7. Write all files to all target directories
 for d in DIRS:
     os.makedirs(d, exist_ok=True)
+    # Ensure .nojekyll is present to bypass Jekyll
+    with open(os.path.join(d, ".nojekyll"), "w", encoding="utf-8") as nj_fp:
+        nj_fp.write("# Bypass Jekyll processing\n")
     for fname, data in generated_files.items():
         fpath = os.path.join(d, fname)
         with open(fpath, "w", encoding="utf-8") as fp:
             fp.write(data)
     print(f"Saved {len(generated_files)} files to {d}")
+
 
 print("Ultra Site Generation COMPLETE!")
