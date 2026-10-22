@@ -134,41 +134,19 @@ def main():
             del_ok, del_sc, _ = delete_sitemap_via_api(creds, path)
             print(f"     Deleted: {'✅ Success' if del_ok else f'❌ Error {del_sc}'}")
 
-    print("\n📤 Submitting Clean Sitemaps via Search Console API...")
+    print("\n📤 Submitting Canonical Sitemaps via Search Console API...")
+    SITEMAP_IMG_URL = f"{SITE_URL}sitemap-images.xml"
     ok_idx, code_idx, _ = submit_sitemap_via_api(creds, SITEMAP_INDEX_URL)
-    print(f"  - sitemap_index.xml: {'✅ Success (HTTP 204/200)' if ok_idx else f'❌ Error {code_idx}'}")
+    print(f"  - sitemap_index.xml: {'✅ Success (HTTP 204)' if ok_idx else f'❌ Error {code_idx}'}")
     
     ok1, code1, _ = submit_sitemap_via_api(creds, SITEMAP_URL)
-    print(f"  - sitemap.xml: {'✅ Success (HTTP 204/200)' if ok1 else f'❌ Error {code1}'}")
+    print(f"  - sitemap.xml: {'✅ Success (HTTP 204)' if ok1 else f'❌ Error {code1}'}")
     
-    # Submitting URLs via Indexing API
-    if os.path.exists(SITEMAP_PATH):
-        tree = ET.parse(SITEMAP_PATH)
-        urls = [loc.text.strip() for loc in tree.getroot().findall("{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc") if loc is not None]
-        print(f"\n🚀 Submitting URLs to Google Indexing API (Daily Quota: 200)...")
-        success = 0
-        quota_exceeded = False
-        for i, u in enumerate(urls, 1):
-            try:
-                if creds.expired:
-                    creds.refresh(Request())
-                ok, sc, msg = submit_indexing_api(creds, u)
-                if ok:
-                    success += 1
-                elif sc == 429:
-                    print(f"  ℹ️ Google Indexing API Daily Quota reached (200 requests/day). All URLs already queued for today!")
-                    quota_exceeded = True
-                    break
-                else:
-                    print(f"  [{i}/{len(urls)}] Notice: HTTP {sc} for {u}")
-                if i % 25 == 0:
-                    print(f"  [{i}/{len(urls)}] Progress: {success} OK")
-                time.sleep(0.2)
-            except Exception as e:
-                print(f"  [{i}/{len(urls)}] Exception: {e}")
-                break
-        if not quota_exceeded:
-            print(f"\n🎉 Done! {success} URLs submitted successfully to Google.")
+    ok_img, code_img, _ = submit_sitemap_via_api(creds, SITEMAP_IMG_URL)
+    print(f"  - sitemap-images.xml: {'✅ Success (HTTP 204)' if ok_img else f'❌ Error {code_img}'}")
+    
+    print("\nℹ️ Adhering to Google Official Policy: Google Indexing API is strictly reserved for JobPosting/BroadcastEvent.")
+    print("   Standard content discovery and image indexing are fully driven by canonical Sitemaps and IndexNow protocols.\n")
     return True
 
 if __name__ == "__main__":

@@ -251,9 +251,8 @@ def main():
     today_str = date.today().isoformat()
     logging.info(f"📅 Target Date: {today_str}")
 
-    # Generate 10 new divine cute AI images
-    entries = generate_daily_batch(today_str, num_entries=10)
-    all_data = update_database(entries, today_str)
+    # Pure architectural update: Refresh Panchang, update lastmod, maintain 100% unique pages
+    logging.info("Maintaining canonical master gallery and refreshing daily sitemaps...")
 
     # Rebuild all static site pages, rich sitemap.xml & feed.xml
     try:
@@ -285,8 +284,7 @@ def main():
     except Exception as ge:
         logging.warning(f"Notice on Google API Manager: {ge}")
 
-    total_images = sum(len(items) for items in all_data.values())
-    logging.info(f"🎉 Complete! Total images in gallery database: {total_images}")
+    logging.info("🎉 Complete! Canonical sitemaps & gallery refreshed successfully without duplicate records.")
     logging.info("=" * 65)
 
 if __name__ == '__main__':
