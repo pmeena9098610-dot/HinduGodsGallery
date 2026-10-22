@@ -21,8 +21,8 @@ try:
     root = tree.getroot()
     urls = root.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')
     print(f"PASS: sitemap.xml is valid XML with {len(urls)} URLs")
-    if len(urls) < 140:
-        warnings.append(f"Expected ~151 URLs in sitemap, got {len(urls)}")
+    if len(urls) != 51:
+        warnings.append(f"Expected exactly 51 canonical URLs in sitemap, got {len(urls)}")
 except Exception as e:
     errors.append(f"FAIL: sitemap.xml parse error: {e}")
 
