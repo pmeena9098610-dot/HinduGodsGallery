@@ -983,19 +983,19 @@
         <div class="panchang-grid">
             <div class="panchang-item">
                 <span class="label">आज का दिन (Day)</span>
-                <strong>शनिवार (Saturday)</strong>
+                <strong id="panchangDayDisplay">शनिवार (Saturday)</strong>
             </div>
             <div class="panchang-item">
                 <span class="label">आज के आराध्य देव</span>
-                <strong><a href="category-hanuman.html" style="color:var(--maroon); text-decoration:none;">शनि देव व हनुमान जी</a></strong>
+                <strong id="panchangDeityDisplay"><a href="category-hanuman.html" style="color:var(--maroon); text-decoration:none;">शनि देव व हनुमान जी</a></strong>
             </div>
             <div class="panchang-item">
                 <span class="label">आज का पावन मंत्र</span>
-                <strong>ॐ शं शनैश्चराय नमः</strong>
+                <strong id="panchangMantraDisplay">ॐ शं शनैश्चराय नमः</strong>
             </div>
             <div class="panchang-item">
-                <span class="label">अभिजित मुहूर्त (शुभ समय)</span>
-                <strong style="color:#2E7D32;">11:48 AM - 12:38 PM (अत्यंत शुभ)</strong>
+                <span class="label">आज की तिथि (Date)</span>
+                <strong id="panchangDateDisplay">पुण्य तिथि</strong>
             </div>
         </div>
         <div class="suvichar-box">
@@ -1863,8 +1863,15 @@ function shareCustomWhatsApp(godTitle, url, mantra) {
               "✨ *पावन मंत्र:* " + (mantra || 'ॐ नमो भगवते वासुदेवाय नमः') + "\n\n" +
               "📲 4K दर्शन और फ्री डाउनलोड करें:\n" + url + "\n\n" +
               "🚩 *आपका दिन मंगलमय और सुखमय हो!* 🙏";
-    var waUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var d = new Date();
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var dStr = d.toLocaleDateString('hi-IN', options);
+    var dateEl = document.getElementById('panchangDateDisplay');
+    if (dateEl) dateEl.textContent = dStr;
+
+    var daysHi = ["रविवार (Sunday)", "सोमवार (Monday)", "मंगलवार (Tuesday)", "बुधवार (Wednesday)", "गुरूवार (Thursday)", "शुक्रवार (Friday)", "शनिवार (Saturday)"];
+    var dayEl = document.getElementById('panchangDayDisplay');
+    if (dayEl) dayEl.textContent = daysHi[d.getDay()];
 }
 </script>
 

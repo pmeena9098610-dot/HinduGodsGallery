@@ -1396,8 +1396,15 @@ function shareCustomWhatsApp(godTitle, url, mantra) {
               "✨ *पावन मंत्र:* " + (mantra || 'ॐ नमो भगवते वासुदेवाय नमः') + "\n\n" +
               "📲 4K दर्शन और फ्री डाउनलोड करें:\n" + url + "\n\n" +
               "🚩 *आपका दिन मंगलमय और सुखमय हो!* 🙏";
-    var waUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var d = new Date();
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var dStr = d.toLocaleDateString('hi-IN', options);
+    var dateEl = document.getElementById('panchangDateDisplay');
+    if (dateEl) dateEl.textContent = dStr;
+
+    var daysHi = ["रविवार (Sunday)", "सोमवार (Monday)", "मंगलवार (Tuesday)", "बुधवार (Wednesday)", "गुरूवार (Thursday)", "शुक्रवार (Friday)", "शनिवार (Saturday)"];
+    var dayEl = document.getElementById('panchangDayDisplay');
+    if (dayEl) dayEl.textContent = daysHi[d.getDay()];
 }
 </script>
 

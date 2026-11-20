@@ -1466,8 +1466,15 @@ function shareCustomWhatsApp(godTitle, url, mantra) {
               "✨ *पावन मंत्र:* " + (mantra || 'ॐ नमो भगवते वासुदेवाय नमः') + "\\n\\n" +
               "📲 4K दर्शन और फ्री डाउनलोड करें:\\n" + url + "\\n\\n" +
               "🚩 *आपका दिन मंगलमय और सुखमय हो!* 🙏";
-    var waUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var d = new Date();
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var dStr = d.toLocaleDateString('hi-IN', options);
+    var dateEl = document.getElementById('panchangDateDisplay');
+    if (dateEl) dateEl.textContent = dStr;
+
+    var daysHi = ["रविवार (Sunday)", "सोमवार (Monday)", "मंगलवार (Tuesday)", "बुधवार (Wednesday)", "गुरूवार (Thursday)", "शुक्रवार (Friday)", "शनिवार (Saturday)"];
+    var dayEl = document.getElementById('panchangDayDisplay');
+    if (dayEl) dayEl.textContent = daysHi[d.getDay()];
 }
 </script>
 """
@@ -2166,19 +2173,19 @@ def generate_index_page(all_items):
         <div class="panchang-grid">
             <div class="panchang-item">
                 <span class="label">आज का दिन (Day)</span>
-                <strong>{day_name_hi}</strong>
+                <strong id="panchangDayDisplay">{day_name_hi}</strong>
             </div>
             <div class="panchang-item">
                 <span class="label">आज के आराध्य देव</span>
-                <strong><a href="{today_deity['link']}" style="color:var(--maroon); text-decoration:none;">{today_deity['god']}</a></strong>
+                <strong id="panchangDeityDisplay"><a href="{today_deity['link']}" style="color:var(--maroon); text-decoration:none;">{today_deity['god']}</a></strong>
             </div>
             <div class="panchang-item">
                 <span class="label">आज का पावन मंत्र</span>
-                <strong>{today_deity['mantra']}</strong>
+                <strong id="panchangMantraDisplay">{today_deity['mantra']}</strong>
             </div>
             <div class="panchang-item">
-                <span class="label">अभिजित मुहूर्त (शुभ समय)</span>
-                <strong style="color:#2E7D32;">11:48 AM - 12:38 PM (अत्यंत शुभ)</strong>
+                <span class="label">आज की तिथि (Date)</span>
+                <strong id="panchangDateDisplay">पुण्य तिथि</strong>
             </div>
         </div>
         <div class="suvichar-box">
