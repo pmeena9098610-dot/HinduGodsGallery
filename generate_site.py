@@ -220,70 +220,79 @@ def _build_rich_article(titleHi, title_en, category, desc_hi, desc_en, ai_prompt
     return "\n".join(article_parts)
 
 def load_fused_items():
-    """Fuses curated items with any newly generated items from images_data.json"""
+    """Returns strictly the 25 curated Master Deity items to eliminate doorway duplicate penalty and keep sitemap 100% canonical."""
     import copy
-    all_items = copy.deepcopy(BASE_ITEMS)
-    existing_ids = {it["id"] for it in all_items}
+    return copy.deepcopy(BASE_ITEMS)
 
+def generate_legacy_redirect_stubs():
+    """Generates 166 zero-404 redirect stubs for legacy photo URLs without polluting the XML sitemap."""
+    stubs = {}
     json_path = os.path.join(SCRIPT_DIR, "images_data.json")
-    if os.path.exists(json_path):
-        try:
-            with open(json_path, "r", encoding="utf-8-sig") as fp:
-                data = json.load(fp)
-            
-            entries = []
-            if isinstance(data, dict):
-                for d_key, d_list in data.items():
-                    if isinstance(d_list, list):
-                        entries.extend(d_list)
-            elif isinstance(data, list):
-                entries.extend(data)
+    if not os.path.exists(json_path):
+        return stubs
 
-            for entry in entries:
-                eid = entry.get("id")
-                if eid and eid not in existing_ids:
-                    img_raw = entry.get("image") or entry.get("image_url", "")
-                    if img_raw.endswith(".jpg") or img_raw.endswith(".webp"):
-                        img_base = os.path.splitext(img_raw)[0]
-                    else:
-                        img_base = img_raw
+    base_ids = {it["id"] for it in BASE_ITEMS}
 
-                    title = entry.get("title") or entry.get("name_en", "Daily Hindu God 4K Wallpaper")
-                    titleHi = entry.get("titleHi") or entry.get("name_hi", "दैनिक हिन्दू भगवान 4K फोटो")
-                    cat = (entry.get("category") or "cute").split(",")[0].lower()
-                    desc_hi = entry.get("description_hi") or ""
-                    desc_en = entry.get("description_en") or ""
-                    ai_prompt = entry.get("ai_prompt") or ""
-                    item_date = entry.get("date", "")
-                    style_tag = entry.get("style", "")
+    cat_master_map = {
+        "shiva": "photo-shiva-kailash.html",
+        "krishna": "photo-cute-radha-krishna.html",
+        "ganesha": "photo-ganesha-throne.html",
+        "hanuman": "photo-hanuman-sanjeevani.html",
+        "durga": "photo-durga-lion.html",
+        "lakshmi": "photo-lakshmi-gold.html",
+        "ram": "photo-shri-ram-darbar-ayodhya.html",
+        "saraswati": "photo-saraswati-veena.html",
+        "vishnu": "photo-lord-vishnu-sheshnag.html",
+        "cute": "photo-cute-radha-krishna.html",
+        "trending": "photo-shiva-kailash.html",
+        "festival": "photo-navratri-durga-special.html"
+    }
 
-                    mantra, mantraMeaning = _get_deity_mantra(cat)
-                    article = _build_rich_article(titleHi, title, cat, desc_hi, desc_en, ai_prompt, item_date, style_tag)
-                    short_desc = desc_hi or desc_en or f"{titleHi} — भगवान का पावन और अलौकिक 4K स्वरूप। यह दिव्य छवि आपके मन को शांति और भक्ति की अनुभूति कराएगी।"
+    try:
+        with open(json_path, "r", encoding="utf-8-sig") as fp:
+            data = json.load(fp)
+        entries = []
+        if isinstance(data, dict):
+            for k, v in data.items():
+                if isinstance(v, list):
+                    entries.extend(v)
+        elif isinstance(data, list):
+            entries.extend(data)
 
-                    new_item = {
-                        "id": eid,
-                        "slug": f"photo-{eid}.html",
-                        "title": title,
-                        "titleHi": titleHi,
-                        "category": cat,
-                        "categoryName": cat.capitalize() + " Gallery",
-                        "categorySlug": f"category-{cat}.html",
-                        "god": cat,
-                        "img": img_base,
-                        "badge": "Daily Divine 4K",
-                        "shortDesc": short_desc,
-                        "mantra": mantra,
-                        "mantraMeaning": mantraMeaning,
-                        "article": article,
-                        "tags": entry.get("tags") or [title.lower(), "hindu god 4k", "whatsapp status god photo"]
-                    }
-                    all_items.append(new_item)
-                    existing_ids.add(eid)
-        except Exception as e:
-            print(f"Notice during images_data.json merge: {e}")
+        for entry in entries:
+            eid = entry.get("id")
+            if eid and eid not in base_ids:
+                slug = f"photo-{eid}.html"
+                cat = (entry.get("category") or "shiva").split(",")[0].lower().strip()
+                target_page = cat_master_map.get(cat, "photo-shiva-kailash.html")
+                title_hi = entry.get("titleHi") or entry.get("title") or "दैनिक हिन्दू भगवान दर्शन"
 
-    return all_items
+                stub_html = f"""<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title_hi} | Redirecting to Official 4K Darshan</title>
+    <link rel="canonical" href="{BASE_URL}{target_page}">
+    <meta http-equiv="refresh" content="0; url={target_page}">
+    <meta name="robots" content="noindex, follow">
+    <style>
+        body {{ font-family: 'Poppins', sans-serif; text-align: center; padding: 60px 20px; background: #fffdf7; color: #780016; }}
+        a {{ color: #ff7700; font-weight: bold; text-decoration: none; font-size: 1.1rem; }}
+        a:hover {{ text-decoration: underline; }}
+    </style>
+</head>
+<body>
+    <h2>🕉️ पावन दर्शन पृष्ठ पर पुनर्निर्देशित किया जा रहा है...</h2>
+    <p>यदि आप स्वतः पुनर्निर्देशित नहीं होते हैं, तो कृपया यहाँ क्लिक करें: <a href="{target_page}">आधिकारिक 4K देव दर्शन पृष्ठ</a></p>
+    <script>window.location.replace("{target_page}");</script>
+</body>
+</html>"""
+                stubs[slug] = stub_html
+    except Exception as e:
+        print(f"Notice generating legacy stubs: {e}")
+
+    return stubs
 
 ITEMS = load_fused_items()
 print(f"Loaded {len(ITEMS)} total deity items (fused data pipeline active).")
@@ -2705,6 +2714,12 @@ for viral_page in ["shubh-prabhat.html", "festivals-2026.html", "lakshmi-aarti.h
 print("Loaded and distributed all 5 Viral Hub Pages (Shubh Prabhat, Festivals 2026, Lakshmi Aarti, Durga Aarti, Ram Stuti)!")
 print("Generated feed.xml for Google Discover!")
 print(f"Generated sitemap.xml & sitemap_index.xml with dynamic lastmod & enriched image tags!")
+# 6.5. Generate Legacy Redirect Stubs (Zero-404, Noindex, Clean Redirects, Excluded from Sitemap)
+legacy_stubs = generate_legacy_redirect_stubs()
+for stub_slug, stub_html in legacy_stubs.items():
+    generated_files[stub_slug] = stub_html
+print(f"Generated {len(legacy_stubs)} legacy redirect stubs (zero-404, noindex, excluded from sitemap)!")
+
 
 # 7. Write all files to all target directories
 for d in DIRS:
